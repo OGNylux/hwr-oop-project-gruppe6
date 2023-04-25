@@ -10,13 +10,16 @@ public class ToDoItem {
     private boolean done;
     private Priority priority;
 
-    public ToDoItem (int id, String title, String description, String tag, boolean done, Priority priority) {
+    private LocalDate deadline;
+
+    public ToDoItem (int id, String title, String description, String tag, boolean done, Priority priority, LocalDate deadline) {
         this.id = id;
         this.title = title;
         this.description = description + "\nCreated " + getLocalDate();
         this.tag = tag;
         this.done = done;
         this.priority = priority;
+        this.deadline = deadline;
     }
     void setTitle(String title) {
         this.title = title;
@@ -32,6 +35,9 @@ public class ToDoItem {
     }
     void setTag(String tag) {
         this.tag = tag;
+    }
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
 
     static String getLocalDate() {
@@ -54,5 +60,8 @@ public class ToDoItem {
     }
     public int getId() {
         return id;
+    }
+    public LocalDate getDeadline() {
+        return deadline;
     }
 }
