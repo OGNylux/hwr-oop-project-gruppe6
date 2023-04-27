@@ -71,7 +71,7 @@ class ToDoItemTest {
         ToDoItem item = new ToDoItem(0,"testTitle", "testDesc", "testTag", false, Priority.LOW, LocalDate.now());
         item.setDescription("Description");
         String testDescription = item.getDescription();
-        assertThat(testDescription).isEqualTo("Description");
+        assertThat(testDescription).isEqualTo("Description" + "\nCreated " + ToDoItem.getLocalDate());
     }
     @Test
     void setDoneTest() {
@@ -102,7 +102,7 @@ class ToDoItemTest {
         assertThat(result).isEqualTo("❌ " + item.getTitle() + '\n' +
                 item.getDescription() +  '\n' +
                 "<" + item.getTag() + ">" + ' ' +
-                item.getPriority());
+                item.getPriority() + '\n' + item.getDeadline());
     }
     @Test
     void getCreatedAtTest() {

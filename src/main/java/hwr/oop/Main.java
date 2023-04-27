@@ -3,6 +3,7 @@ package hwr.oop;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 public class Main {
     private static void clearScreen() {
@@ -141,7 +142,9 @@ public class Main {
                 description,
                 tag,
                 false ,
-                priority == 1 ? Priority.LOW : priority == 2 ? Priority.MEDIUM : Priority.HIGH);
+                priority == 1 ? Priority.LOW : priority == 2 ? Priority.MEDIUM : Priority.HIGH,
+                LocalDate.now()
+                );
         System.out.println("Task Created Successfully!");
 
         list.add(toDoItem);
@@ -315,4 +318,8 @@ public class Main {
         }
     }
 }
+
+//Input text -> command
+//Command Enum
+//Parsing in Command Enum
 

@@ -70,7 +70,7 @@ public class ToDoItem {
         return  doneSymbol + title + '\n' +
                 description + '\n' +
                 "<" + tag + ">" + ' ' +
-                priority + '\n';
+                priority + '\n' + deadline;
     }
 
     public String getCreatedAt() {
