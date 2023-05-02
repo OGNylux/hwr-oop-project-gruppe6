@@ -19,7 +19,7 @@ public class ListClassTest {
     @Test
     void addTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem(0,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, LocalDate.now());
+        ToDoItem item = new ToDoItem(0,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, new Project(""), LocalDate.now());
         list.add(item);
         ToDoItem[] itemList = new ToDoItem[1];
         itemList[0] = item;
@@ -29,7 +29,7 @@ public class ListClassTest {
     @Test
     void removeTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem(0,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, LocalDate.now());
+        ToDoItem item = new ToDoItem(0,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, new Project(""), LocalDate.now());
         list.add(item);
         list.remove(0);
         ToDoItem[] itemList = new ToDoItem[0];
@@ -38,9 +38,9 @@ public class ListClassTest {
     @Test
     void sortByPriorityAscTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem(0,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, LocalDate.now());
-        ToDoItem item2 = new ToDoItem(1,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.MEDIUM, LocalDate.now());
-        ToDoItem item3 = new ToDoItem(2,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, LocalDate.now());
+        ToDoItem item = new ToDoItem(0,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, new Project(""), LocalDate.now());
+        ToDoItem item2 = new ToDoItem(1,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.MEDIUM, new Project(""), LocalDate.now());
+        ToDoItem item3 = new ToDoItem(2,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, new Project(""), LocalDate.now());
         list.add(item);
         list.add(item2);
         list.add(item3);
@@ -54,9 +54,9 @@ public class ListClassTest {
     @Test
     void sortByPriorityDescTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem(0,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, LocalDate.now());
-        ToDoItem item2 = new ToDoItem(1,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.MEDIUM, LocalDate.now());
-        ToDoItem item3 = new ToDoItem(2,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, LocalDate.now());
+        ToDoItem item = new ToDoItem(0,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, new Project(""), LocalDate.now());
+        ToDoItem item2 = new ToDoItem(1,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.MEDIUM, new Project(""), LocalDate.now());
+        ToDoItem item3 = new ToDoItem(2,"Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, new Project(""), LocalDate.now());
         list.add(item);
         list.add(item2);
         list.add(item3);
@@ -71,9 +71,9 @@ public class ListClassTest {
     @Test
     void bubbleUpTagTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem(0,"Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", false, Priority.HIGH, LocalDate.now());
-        ToDoItem item2 = new ToDoItem(1,"Calculate Something", "More Math over here", "Math", false, Priority.MEDIUM, LocalDate.now());
-        ToDoItem item3 = new ToDoItem(2,"Be Amazing", "Just Do It", "Personal", false, Priority.LOW, LocalDate.now());
+        ToDoItem item = new ToDoItem(0,"Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", false, Priority.HIGH, new Project(""), LocalDate.now());
+        ToDoItem item2 = new ToDoItem(1,"Calculate Something", "More Math over here", "Math", false, Priority.MEDIUM, new Project(""), LocalDate.now());
+        ToDoItem item3 = new ToDoItem(2,"Be Amazing", "Just Do It", "Personal", false, Priority.LOW, new Project(""), LocalDate.now());
         list.add(item);
         list.add(item2);
         list.add(item3);

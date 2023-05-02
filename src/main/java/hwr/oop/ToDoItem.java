@@ -9,16 +9,18 @@ public class ToDoItem {
     private String tag;
     private boolean done;
     private Priority priority;
+    private Project project;
     private LocalDate deadline;
 
 
-    public ToDoItem (int id, String title, String description, String tag, boolean done, Priority priority, LocalDate deadline) {
+    public ToDoItem (int id, String title, String description, String tag, boolean done, Priority priority, Project project, LocalDate deadline) {
         this.id = id;
         this.title = title;
         this.description = description + "\nCreated " + getLocalDate();
         this.tag = tag;
         this.done = done;
         this.priority = priority;
+        this.project = project;
         this.deadline = deadline;
     }
     void setTitle(String title) {
@@ -35,6 +37,9 @@ public class ToDoItem {
     }
     void setTag(String tag) {
         this.tag = tag;
+    }
+    void setProjectName(String project) {
+        this.project.setTitle(project);
     }
     public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
@@ -59,6 +64,9 @@ public class ToDoItem {
     }
     public int getId() {
         return id;
+    }
+    public String getProjectName() {
+        return project.getTitle();
     }
     public LocalDate getDeadline() {
         return deadline;

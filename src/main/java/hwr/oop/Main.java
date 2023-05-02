@@ -143,9 +143,9 @@ public class Main {
                 tag,
                 false ,
                 priority == 1 ? Priority.LOW : priority == 2 ? Priority.MEDIUM : Priority.HIGH,
-                LocalDate.now()
-                );
-        System.out.println("Task Created Successfully!");
+                new Project(""),
+                LocalDate.now());
+        success("Task Created Successfully!");
 
         list.add(toDoItem);
     }

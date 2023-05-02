@@ -2,18 +2,15 @@ package hwr.oop;
 
 
 public class Project {
-
-   /* private String title;
+    private String title;
 
     public Project(String title) {
-        this.setTitle(Title);
-,    }
-
-    //setter
-    void setTitle(String title) {
         this.title = title;
-    }*/
-
-    //getter
-
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public String getTitle() {
+        return title;
+    }
 }
