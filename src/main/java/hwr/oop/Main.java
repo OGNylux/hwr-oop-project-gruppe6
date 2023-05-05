@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class Main {
     private static final PrintStream out = new PrintStream(System.out);
     private static final String CLEAR_SCREEN = "\033[H\033[2J";
@@ -147,7 +150,8 @@ public class Main {
                 tag,
                 false ,
                 priority == 1 ? Priority.LOW : priority == 2 ? Priority.MEDIUM : Priority.HIGH,
-                new Project(""));
+                new Project(""),
+                LocalDate.now());
         success("Task Created Successfully!");
 
         list.add(toDoItem);
@@ -216,14 +220,15 @@ public class Main {
         } catch (IOException e) {
             out.println("Could not read your input... skipping");
         }
-        // System.out.println("Enter new Due Date or press enter to skip");
-        // String dueDate = ""; // TODO: add date validation and add as attribute!!
-        // try {
-        //     dueDate = reader.readLine(); // TODO: Exception Handling
-        //     if (!dueDate.equals("")) item.setDueDate(dueDate);
-        // } catch (IOException e) {
-        //     System.out.println("Could not read your input... skipping");
-        // }
+        System.out.println("Enter new Deadline or press enter to skip");
+        LocalDate deadline; // TODO: add date validation and add as attribute!!
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
+        try {
+            deadline = LocalDate.parse(reader.readLine(), formatter); // TODO: Exception Handling
+             if (deadline != null) item.setDeadline(deadline);
+         } catch (IOException e) {
+             System.out.println("Could not read your input... skipping");
+         }
         out.println("Enter new Priority or press enter to skip");
         out.println("1 - LOW, 2 - MEDIUM, 3 - HIGH");
         String priority = "-1";
@@ -288,7 +293,7 @@ public class Main {
         }
     }
 
-    private static void handleSort(List list, String[] commandArray) {
+    /*private static void handleSort(List list, String[] commandArray) {
         int nCommands = commandArray.length;
         if (nCommands == 2) {
             sortHelp();
@@ -315,9 +320,9 @@ public class Main {
                 }
             }
         }
-    }
+    }*/
 
-    private static void clear(List list) {
+    public static void clear(List list) {
         list.setListToDos(null);
     }
     public static void exit(List list) {

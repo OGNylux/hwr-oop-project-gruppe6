@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -166,7 +167,7 @@ class MyAppTest {
             System.setOut(new PrintStream(outBuffer));
 
             List toDoList = new List("MyList");
-            toDoList.add(new ToDoItem(0, "Test", "Test", "Test", false, Priority.LOW, new Project("Test")));
+            toDoList.add(new ToDoItem(0, "Test", "Test", "Test", false, Priority.LOW, new Project("Test"), LocalDate.now()));
             Main.edit(toDoList, 0);
             // Check the program output
             String expectedOutput;
@@ -201,8 +202,8 @@ class MyAppTest {
         PrintStream sysOutBackup = System.out;
 
         ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem(0, "Test", "Test", "Test", false, Priority.LOW, new Project("Test"));
-        toDoItems[1] = new ToDoItem(1, "Test2", "Test2", "Test2", false, Priority.LOW, new Project("Test2"));
+        toDoItems[0] = new ToDoItem(0, "Test", "Test", "Test", false, Priority.LOW, new Project("Test"), LocalDate.now());
+        toDoItems[1] = new ToDoItem(1, "Test2", "Test2", "Test2", false, Priority.LOW, new Project("Test2"), LocalDate.now());
 
         List toDoList = new List("MyList");
         toDoList.setListToDos(toDoItems);
@@ -260,8 +261,8 @@ class MyAppTest {
         PrintStream sysOutBackup = System.out;
 
         ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem(0, "Test", "Test", "Test", false, Priority.LOW, new Project("Test"));
-        toDoItems[1] = new ToDoItem(1, "Test2", "Test2", "Test2", false, Priority.LOW, new Project("Test2"));
+        toDoItems[0] = new ToDoItem(0, "Test", "Test", "Test", false, Priority.LOW, new Project("Test"), LocalDate.now());
+        toDoItems[1] = new ToDoItem(1, "Test2", "Test2", "Test2", false, Priority.LOW, new Project("Test2"), LocalDate.now());
 
         List toDoList = new List("MyList");
         toDoList.setListToDos(toDoItems);
@@ -363,7 +364,7 @@ class MyAppTest {
     @Test
     void doneTest() {
         List list = new List("MyList", "listTest.json");
-        list.add(new ToDoItem(0, "Test", "Test", "Test", false, Priority.LOW, new Project("Test")));
+        list.add(new ToDoItem(0, "Test", "Test", "Test", false, Priority.LOW, new Project("Test"), LocalDate.now()));
         assertThat(list.getListToDos()[0].isDone()).isFalse();
         Main.done(list, 0);
         assertThat(list.getListToDos()[0].isDone()).isTrue();
@@ -403,11 +404,11 @@ class MyAppTest {
     void handleSortTest() {
         String[] commandArray = {"gtd", "sort", "prio", "asc"};
         List list = new List("MyList");
-        list.add(new ToDoItem(0, "Apple", "Computers", "Fruit", false, Priority.MEDIUM, new Project("Obstsalat")));
+        list.add(new ToDoItem(0, "Apple", "Computers", "Fruit", false, Priority.MEDIUM, new Project("Obstsalat"), LocalDate.now()));
         list.getListToDos()[0].setCreatedAt(LocalDateTime.of(2020, 1, 1, 0, 0));
-        list.add(new ToDoItem(1, "Cucumber", "Water", "Vegetable", false, Priority.LOW, new Project("Gin&Tonic")));
+        list.add(new ToDoItem(1, "Cucumber", "Water", "Vegetable", false, Priority.LOW, new Project("Gin&Tonic"), LocalDate.now()));
         list.getListToDos()[1].setCreatedAt(LocalDateTime.of(2020, 1, 2, 0, 0));
-        list.add(new ToDoItem(2, "Banana", "Minions", "Fruit", true, Priority.HIGH, new Project("BananaBread")));
+        list.add(new ToDoItem(2, "Banana", "Minions", "Fruit", true, Priority.HIGH, new Project("BananaBread"), LocalDate.now()));
 
         // Priority Test
         list.sortByPriority("asc");
@@ -426,7 +427,7 @@ class MyAppTest {
     void clearTest() {
         PrintStream sysOutBackup = System.out;
         List list = new List("MyList");
-        list.add(new ToDoItem(0, "Apple", "Computers", "Fruit", false, Priority.MEDIUM, new Project("Obstsalat")));
+        list.add(new ToDoItem(0, "Apple", "Computers", "Fruit", false, Priority.MEDIUM, new Project("Obstsalat"), LocalDate.now()));
         try {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
@@ -451,7 +452,7 @@ class MyAppTest {
         PrintStream sysOutBackup = System.out;
         List list = new List("MyList");
         list.setFileName("listTest.json");
-        list.add(new ToDoItem(0, "Apple", "Computers", "Fruit", false, Priority.MEDIUM, new Project("Obstsalat")));
+        list.add(new ToDoItem(0, "Apple", "Computers", "Fruit", false, Priority.MEDIUM, new Project("Obstsalat"), LocalDate.now()));
         try {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));

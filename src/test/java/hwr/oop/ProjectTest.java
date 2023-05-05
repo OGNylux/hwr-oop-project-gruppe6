@@ -8,15 +8,15 @@ public class ProjectTest {
     @Test
     void setTitle() {
         Project project = new Project("");
-        project.setTitle("testtitle");
-        String Testname = project.getTitle();
-        assertThat(Testname).isEqualTo("testtitle");
+        project.setTitle("testTitle");
+        String testName = project.getTitle();
+        assertThat(testName).isEqualTo("testTitle");
     }
 
     @Test
     void getTitle() {
-        Project project = new Project("testtitle");
-        String Testname = project.getTitle();
-        assertThat(Testname).isEqualTo("testtitle");
+        Project project = new Project("testTitle");
+        String testName = project.getTitle();
+        assertThat(testName).isEqualTo("testTitle");
     }
 }

@@ -14,8 +14,9 @@ public class ToDoItem {
     private Priority priority;
     private Project project;
     private String createdAt;
+    private LocalDate deadline;
 
-    public ToDoItem (int id, String title, String description, String tag, boolean done, Priority priority, Project project) {
+    public ToDoItem (int id, String title, String description, String tag, boolean done, Priority priority, Project project, LocalDate deadline) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -24,6 +25,7 @@ public class ToDoItem {
         this.done = done;
         this.priority = priority;
         this.project = project;
+        this.deadline = deadline;
     }
     void setTitle(String title) {
         this.title = title;
@@ -42,6 +44,9 @@ public class ToDoItem {
     }
     void setProjectName(String project) {
         this.project.setTitle(project);
+    }
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
     }
     static @NotNull String getLocalDate() {
         return LocalDate.now().toString();
@@ -67,6 +72,9 @@ public class ToDoItem {
     public String getProjectName() {
         return project.getTitle();
     }
+    public LocalDate getDeadline() {
+        return deadline;
+    }
     public void setCreatedAt(@org.jetbrains.annotations.NotNull LocalDateTime createdAt) {
         this.createdAt = createdAt.toString();
     }
@@ -77,7 +85,9 @@ public class ToDoItem {
         return  doneSymbol + title + '\n' +
                 description + '\n' +
                 "<" + tag + ">" + ' ' +
-                priority + '\n';
+                priority + ' ' +
+                project + ' ' +
+                deadline;
     }
 
     public String getCreatedAt() {
