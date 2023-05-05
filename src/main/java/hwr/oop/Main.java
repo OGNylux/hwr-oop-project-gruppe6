@@ -222,7 +222,7 @@ public class Main {
         }
         System.out.println("Enter new Deadline or press enter to skip");
         LocalDate deadline; // TODO: add date validation and add as attribute!!
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         try {
             deadline = LocalDate.parse(reader.readLine(), formatter); // TODO: Exception Handling
              if (deadline != null) item.setDeadline(deadline);
