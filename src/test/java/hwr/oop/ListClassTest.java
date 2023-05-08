@@ -108,4 +108,28 @@ public class ListClassTest {
         list.sortByCreatedAt("desc");
         assertThat(list.getListToDos()).isEqualTo(sortedExpected);
     }
+
+    @Test
+    void sortByDeadlineAscTest() {
+        Program testProgram = new Program();
+        List list = testProgram.loadList("sortByDeadlineTest");
+        ToDoItem[] sortedExpected = new ToDoItem[3];
+        sortedExpected[0] = list.getListToDos()[0];
+        sortedExpected[1] = list.getListToDos()[2];
+        sortedExpected[2] = list.getListToDos()[1];
+        list.sortByDeadline("asc");
+        assertThat(list.getListToDos()).isEqualTo(sortedExpected);
+    }
+
+    @Test
+    void sortByDeadlineTest() {
+        Program testProgram = new Program();
+        List list = testProgram.loadList("sortByDeadlineTest");
+        ToDoItem[] sortedExpected = new ToDoItem[3];
+        sortedExpected[2] = list.getListToDos()[0];
+        sortedExpected[1] = list.getListToDos()[2];
+        sortedExpected[0] = list.getListToDos()[1];
+        list.sortByDeadline("desc");
+        assertThat(list.getListToDos()).isEqualTo(sortedExpected);
+    }
 }

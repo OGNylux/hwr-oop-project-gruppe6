@@ -136,4 +136,27 @@ public class List {
             }
         }
     }
+    public void sortByDeadline(String order) {
+        if (order.equals("asc"))
+            for (int i = 0; i < this.ListToDos.length; i++) {
+                for (int j = 0; j < this.ListToDos.length-1; j++) {
+                    if (this.ListToDos[j].getDeadline().compareTo(this.ListToDos[j + 1].getDeadline()) > 0) {
+                        ToDoItem temp = this.ListToDos[j];
+                        this.ListToDos[j] = this.ListToDos[j + 1];
+                        this.ListToDos[j + 1] = temp;
+                    }
+                }
+            }
+        else if (order.equals("desc")) {
+            for (int i = 0; i < this.ListToDos.length; i++) {
+                for (int j = 0; j < this.ListToDos.length - 1; j++) {
+                    if (this.ListToDos[j].getDeadline().compareTo(this.ListToDos[j + 1].getDeadline()) < 0) {
+                        ToDoItem temp = this.ListToDos[j];
+                        this.ListToDos[j] = this.ListToDos[j + 1];
+                        this.ListToDos[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
 }

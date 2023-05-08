@@ -86,7 +86,7 @@ public class ToDoItem {
                 description + '\n' +
                 "<" + tag + ">" + ' ' +
                 priority + ' ' +
-                project + ' ' +
+                project.getTitle() + ' ' +
                 deadline;
     }
 
