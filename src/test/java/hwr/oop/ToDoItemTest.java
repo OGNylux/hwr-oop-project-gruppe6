@@ -39,7 +39,7 @@ class ToDoItemTest {
     void isDoneTest() {
         ToDoItem item = new ToDoItem("testTitle", "testDesc", "testTag", false, Priority.LOW,  new Project("test"));
         boolean result = item.isDone();
-        assertThat(result).isEqualTo(false);
+        assertThat(result).isFalse();
     }
 
     @Test
@@ -67,7 +67,7 @@ class ToDoItemTest {
         ToDoItem item = new ToDoItem("testTitle", "testDesc", "testTag", false, Priority.LOW,  new Project("test"));
         item.setDone(true);
         boolean testDone = item.isDone();
-        assertThat(testDone).isEqualTo(true);
+        assertThat(testDone).isTrue();
     }
     @Test
     void setPriorityTest() {

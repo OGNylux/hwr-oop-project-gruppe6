@@ -1,7 +1,5 @@
 package hwr.oop;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -43,7 +41,7 @@ public class ToDoItem {
     void setProjectName(String project) {
         this.project.setTitle(project);
     }
-    static @NotNull String getLocalDate() {
+    static String getLocalDate() {
         return LocalDate.now().toString();
     }
     public String getTitle() {
@@ -64,7 +62,7 @@ public class ToDoItem {
     public String getProjectName() {
         return project.getTitle();
     }
-    public void setCreatedAt(@org.jetbrains.annotations.NotNull LocalDateTime createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt.toString();
     }
 
