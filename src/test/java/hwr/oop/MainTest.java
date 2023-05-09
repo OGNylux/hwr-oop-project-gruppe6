@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.logging.Logger;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class MyAppTest {
+class ConsoleUITest {
     @Test
     void getEnvironmentVariablesTest() {
         Program testEnvProgram = new Program();
@@ -163,7 +164,7 @@ class MyAppTest {
 
             ToDoList toDoList = new ToDoList("MyList");
             toDoList.add(new ToDoItem("Test", "Test", "Test", false, Priority.LOW, new Project("Test")));
-            Main.edit(toDoList, 0);
+            edit(toDoList, 0);
             // Check the program output
             String expectedOutput;
             expectedOutput = "Editing task at index 0:\n" +
@@ -184,6 +185,8 @@ class MyAppTest {
             assertThat(toDoList.getItems()[0].getTag()).isEqualTo("Tag");
             assertThat(env).isNotNull();
 
+        } catch (Main.CouldNotReadInputException e) {
+            throw new RuntimeException(e);
         } finally {
             // Restore standard input and output streams
             System.setIn(sysInBackup);
@@ -287,7 +290,7 @@ class MyAppTest {
         try {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
-            Main.success("greatsuccess");
+            success("greatsuccess");
             String expectedOutput;
             expectedOutput = ConsoleColors.GREEN_BOLD + "greatsuccess" + ConsoleColors.RESET +"\n";
             String actualOutput = outBuffer.toString();
