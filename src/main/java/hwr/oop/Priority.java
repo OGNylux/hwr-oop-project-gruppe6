@@ -17,14 +17,12 @@ public enum Priority {
     }
     public static Priority fromInt(int value) {
         switch (value) {
-            case 0:
-                return LOW;
-            case 1:
-                return MEDIUM;
             case 2:
+                return MEDIUM;
+            case 3:
                 return HIGH;
             default:
-                return null;
+                return LOW;
         }
     }
 }

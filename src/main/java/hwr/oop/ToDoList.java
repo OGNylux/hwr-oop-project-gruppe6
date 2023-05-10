@@ -65,7 +65,13 @@ public class ToDoList {
     }
 
     public void add(ToDoItem toDoItem) {
-        ToDoItem[] newList = new ToDoItem[this.items.length + 1];
+        ToDoItem[] newList;
+        try {
+            newList = new ToDoItem[this.items.length + 1];
+        } catch (NullPointerException e) {
+            newList = new ToDoItem[1];
+            this.items = newList;
+        }
         System.arraycopy(this.items, 0, newList, 0, this.items.length);
         newList[newList.length - 1] = toDoItem;
         this.items = newList;

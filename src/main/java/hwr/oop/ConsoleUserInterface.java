@@ -1,18 +1,17 @@
 package hwr.oop;
 
 import java.io.*;
-import java.util.Scanner;
 
 import static hwr.oop.Main.clear;
 import static hwr.oop.Main.initiateSort;
 
 public class ConsoleUserInterface {
     private final PrintStream out;
-    private final Scanner in;
+    private final InputStream in;
     
     public ConsoleUserInterface(PrintStream out, InputStream in) {
         this.out = out;
-        this.in = new Scanner(in);
+        this.in = in;
     }
     public void say(String message) {
         out.println(message);
@@ -26,7 +25,7 @@ public class ConsoleUserInterface {
     public  int handleBadIndex(String message) {
         error("There is nothing at that index... 🥸");
         out.println("Try again? (y/n)");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String input;
         try {
             input = reader.readLine();
@@ -47,8 +46,8 @@ public class ConsoleUserInterface {
     }
 
     public  ToDoList welcome() throws IOException {
-        String LIST_FILE_NAME;
-        String LIST_NAME;
+        String listFileName;
+        String listName;
         ToDoList toDoList;
 
         out.println("Welcome To Getting Things Done 🚀");
@@ -59,9 +58,8 @@ public class ConsoleUserInterface {
             out.println("Lets set you up first.");
             out.println("Please enter a name for your list");
             out.println("> ");
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(System.in));
-            LIST_NAME = reader.readLine();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            listName = reader.readLine();
             out.println("Please provide a filePath to an existing .json file to Load your list from.");
             out.println("If you don't have one press enter to create specify your path.");
             out.println("> ");
@@ -70,31 +68,31 @@ public class ConsoleUserInterface {
             if (filePath == null || filePath.trim().equals("")) {
                 out.println("Please enter your a path to a file to save your list to.");
                 out.println("> ");
-                LIST_FILE_NAME = reader.readLine();
-                if (LIST_FILE_NAME.contains(".")) {
-                    LIST_FILE_NAME = LIST_FILE_NAME.substring(0, LIST_FILE_NAME.lastIndexOf('.'));
+                listFileName = reader.readLine();
+                if (listFileName.contains(".")) {
+                    listFileName = listFileName.substring(0, listFileName.lastIndexOf('.'));
                 }
-                program.setEnvironmentVariables(LIST_FILE_NAME, LIST_NAME);
-                toDoList = new ToDoList(LIST_NAME, LIST_FILE_NAME);
+                program.setEnvironmentVariables(listFileName, listName);
+                toDoList = new ToDoList(listName, listFileName);
             } else {
                 // Load environment variables
-                LIST_FILE_NAME = filePath;
-                if (LIST_FILE_NAME.contains(".")) {
-                    LIST_FILE_NAME = LIST_FILE_NAME.substring(0, LIST_FILE_NAME.lastIndexOf('.'));
+                listFileName = filePath;
+                if (listFileName.contains(".")) {
+                    listFileName = listFileName.substring(0, listFileName.lastIndexOf('.'));
                 }
-                program.setEnvironmentVariables(LIST_FILE_NAME, LIST_NAME);
-                toDoList = program.loadList(LIST_FILE_NAME);
+                program.setEnvironmentVariables(listFileName, listName);
+                toDoList = program.loadList(listFileName);
             }
         } else {
             // case where environment variables are set
-            LIST_FILE_NAME = env[0];
-            if (LIST_FILE_NAME.contains(".")) {
-                LIST_FILE_NAME = LIST_FILE_NAME.substring(0, LIST_FILE_NAME.lastIndexOf('.'));
+            listFileName = env[0];
+            if (listFileName.contains(".")) {
+                listFileName = listFileName.substring(0, listFileName.lastIndexOf('.'));
             }
-            LIST_NAME = env[1];
-            toDoList = program.loadList(LIST_FILE_NAME);
+            listName = env[1];
+            toDoList = program.loadList(listFileName);
             if (toDoList == null) {
-                toDoList = new ToDoList(LIST_NAME, LIST_FILE_NAME);
+                toDoList = new ToDoList(listName, listFileName);
             }
         }
         return toDoList;
@@ -154,7 +152,7 @@ public class ConsoleUserInterface {
     }
     public void add(ToDoList list) throws CouldNotReadInputException {
         out.println("Create a new task");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String title = getTitleForAdd(reader);
         String description = getDescriptionForAdd(reader);
         Priority priority = getPriorityForAdd(reader);
@@ -167,7 +165,6 @@ public class ConsoleUserInterface {
                 priority,
                 new Project(""));
         success("Task Created Successfully!");
-
         list.add(toDoItem);
     }
     public void list(ToDoList list) { // maybe redundant method
@@ -211,12 +208,11 @@ public class ConsoleUserInterface {
         String title;
         try {
             title = reader.readLine();
-            if (!title.equals("")) item.setTitle(title);
-            else return title;
+            if (!title.equals("")) return title;
+            else return item.getTitle();
         } catch (Exception e) {
             throw new CouldNotReadInputException();
         }
-        return item.getTitle();
     }
 
     public  String getDescriptionForEdit(BufferedReader reader, ToDoItem item) throws CouldNotReadInputException {
@@ -231,16 +227,15 @@ public class ConsoleUserInterface {
         }
     }
 
-    public  Priority getPriorityForEdit(BufferedReader reader, ToDoItem item) {
+    public  Priority getPriorityForEdit(BufferedReader reader, ToDoItem item) throws CouldNotReadInputException {
         out.println("Enter new Priority or press enter to skip");
         out.println("1 - LOW, 2 - MEDIUM, 3 - HIGH");
         String priority = "-1";
         while (!priority.equals("1") && !priority.equals("2") && !priority.equals("3") && !priority.equals("")) {
             try {
-                priority = "";
                 priority = reader.readLine();
             } catch (IOException e) {
-                out.println("Could not read your input... skipping");
+                throw new CouldNotReadInputException();
             }
         }
         if (!priority.equals("")) {
@@ -262,7 +257,7 @@ public class ConsoleUserInterface {
         return item.getTag();
     }
     public void edit(ToDoList list, int index) throws CouldNotReadInputException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         ToDoItem item;
         try {
             item = list.getItems()[index];
@@ -282,6 +277,7 @@ public class ConsoleUserInterface {
         item.setPriority(priority);
         item.setTag(tag);
         out.println("Task Edited Successfully!");
+
     }
     public void sortHelp() {
         out.println("gtd sort [option]");
@@ -297,8 +293,7 @@ public class ConsoleUserInterface {
 
     public void parseCommands(Main main, ToDoList toDoList) throws IOException, CouldNotReadInputException {
         out.print("> ");
-        BufferedReader reader = new BufferedReader(
-                new InputStreamReader(System.in));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         String command = reader.readLine();
         String[] commandArray = command.split(" ");
         if (commandArray[0].equalsIgnoreCase("gtd")) {
@@ -312,6 +307,8 @@ public class ConsoleUserInterface {
                 remove(toDoList, Integer.parseInt(commandArray[2]));
             } else if (commandArray[1].equalsIgnoreCase("done")) {
                 done(toDoList, Integer.parseInt(commandArray[2]));
+            } else if (commandArray[1].equalsIgnoreCase("list")) {
+                list(toDoList);
             } else if (commandArray[1].equalsIgnoreCase("edit")) {
                 try {
                     edit(toDoList, Integer.parseInt(commandArray[2]));

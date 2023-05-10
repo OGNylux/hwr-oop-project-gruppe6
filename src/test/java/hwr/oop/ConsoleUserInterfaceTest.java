@@ -2,13 +2,7 @@ package hwr.oop;
 
 import org.junit.jupiter.api.Test;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-import java.util.logging.StreamHandler;
+import java.io.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,9 +13,7 @@ public class ConsoleUserInterfaceTest {
         // given
         InputStream inputStream = createInputStreamForInput("3\n4\n");
         OutputStream outputStream = new ByteArrayOutputStream();
-        Logger logger = Logger.getLogger(ConsoleUserInterface.class.getName());
-        ConsoleUserInterface consoleUI = new ConsoleUserInterface(logger, inputStream);
-        logger.addHandler(new StreamHandler(outputStream, new SimpleFormatter()));
+        ConsoleUserInterface consoleUI = new ConsoleUserInterface(new PrintStream(outputStream), inputStream);
         // when
         consoleUI.error("ErrorMessage");
         // then
