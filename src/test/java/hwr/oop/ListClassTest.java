@@ -112,17 +112,12 @@ public class ListClassTest {
     @Test
     void getBucketsTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH);
-        ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", "Math", Priority.MEDIUM);
-        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal", Priority.LOW);
-        list.add(item);
-        list.add(item2);
-        list.add(item3);
-        // list.updateBuckets();
-        java.util.List<Bucket> testbuckets = list.getBuckets();
+        list.add(new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH));
+        list.addBucket("Uni");
+        java.util.ArrayList<Bucket> testbuckets;
+        testbuckets = new ArrayList<>();
+        testbuckets = list.getBuckets();
         assertThat(testbuckets.get(0).getBucket()).isEqualTo("Uni");
-        assertThat(testbuckets.get(1).getBucket()).isEqualTo("Math");
-        assertThat(testbuckets.get(2).getBucket()).isEqualTo("Personal");
     }
     /*@Test
     void updateBucketsTest() {

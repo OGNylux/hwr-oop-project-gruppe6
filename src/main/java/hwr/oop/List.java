@@ -14,7 +14,7 @@ public class List {
     private String name;
     private java.util.ArrayList<ToDoItem> listToDos;
     private String fileName;
-    private java.util.List<Bucket> Buckets;
+    private java.util.ArrayList<Bucket> Buckets;
 
     public List(String name) {
         this(name, null);
@@ -39,7 +39,7 @@ public class List {
         return this.listToDos;
     }
 
-    public java.util.List<Bucket> getBuckets() {
+    public java.util.ArrayList<Bucket> getBuckets() {
         return Buckets;
     }
 
