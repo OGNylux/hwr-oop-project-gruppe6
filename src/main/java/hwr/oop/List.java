@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class List {
     private String name;
@@ -113,61 +114,16 @@ public class List {
     }
 
     public void sortByPriority(String order) {
-        if (order.equals("asc")) {
-            for (int i = 0; i < this.listToDos.size(); i++) {
-                for (int j = 0; j < this.listToDos.size() - 1; j++) {
-                    if (this.listToDos.get(j).getPriority().toInt() > this.listToDos.get(j + 1).getPriority().toInt()) {
-                        ToDoItem temp = this.listToDos.get(j);
-                        this.listToDos.set(j, this.listToDos.get(j + 1));
-                        this.listToDos.set(j + 1, temp);
-                    }
-                }
-            }
-        } else if (order.equals("desc")) {
-            for (int i = 0; i < this.listToDos.size(); i++) {
-                for (int j = 0; j < this.listToDos.size() - 1; j++) {
-                    if (this.listToDos.get(j).getPriority().toInt() < this.listToDos.get(j + 1).getPriority().toInt()) {
-                        ToDoItem temp = this.listToDos.get(j);
-                        this.listToDos.set(j, this.listToDos.get(j + 1));
-                        this.listToDos.set(j + 1, temp);
-                    }
-                }
-            }
-        }
+        if (order.equals("asc")) listToDos.sort(Comparator.comparingInt(o -> o.getPriority().toInt()));
+        else if (order.equals("desc")) listToDos.sort(Comparator.comparing(ToDoItem::getPriority, Comparator.reverseOrder()));
     }
 
     public void bubbleUpBucket(String bucket) {
-        for (int i = this.listToDos.size()-1; i >= 0; i--) {
-            for (int j = this.listToDos.size()-1; j > 0; j--) {
-                if (this.listToDos.get(j).getBucket().contains(bucket) && !this.listToDos.get(j - 1).getBucket().contains(bucket)) {
-                    ToDoItem temp = this.listToDos.get(j);
-                    this.listToDos.set(j, this.listToDos.get(j - 1));
-                    this.listToDos.set(j - 1, temp);
-                }
-            }
-        }
+        listToDos.sort(Comparator.comparing(ToDoItem::getBucket));
     }
+
     public void sortByCreatedAt(String order) {
-        if (order.equals("asc"))
-            for (int i = 0; i < this.listToDos.size(); i++) {
-                for (int j = 0; j < this.listToDos.size()-1; j++) {
-                    if (this.listToDos.get(j).getCreatedAt().compareTo(this.listToDos.get(j + 1).getCreatedAt()) > 0) {
-                        ToDoItem temp = this.listToDos.get(j);
-                        this.listToDos.set(j, this.listToDos.get(j + 1));
-                        this.listToDos.set(j + 1, temp);
-                    }
-                }
-            }
-        else if (order.equals("desc")) {
-            for (int i = 0; i < this.listToDos.size(); i++) {
-                for (int j = 0; j < this.listToDos.size() - 1; j++) {
-                    if (this.listToDos.get(j).getCreatedAt().compareTo(this.listToDos.get(j + 1).getCreatedAt()) < 0) {
-                        ToDoItem temp = this.listToDos.get(j);
-                        this.listToDos.set(j, this.listToDos.get(j + 1));
-                        this.listToDos.set(j + 1, temp);
-                    }
-                }
-            }
-        }
+        if (order.equals("asc")) listToDos.sort(Comparator.comparing(ToDoItem::getCreatedAt));
+        else if (order.equals("desc")) listToDos.sort(Comparator.comparing(ToDoItem::getCreatedAt, Comparator.reverseOrder()));
     }
 }
