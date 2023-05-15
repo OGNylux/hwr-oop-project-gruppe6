@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -143,7 +144,7 @@ class MainTest {
                     "Could not save your progress... please specify a file or try again.\n";
             String actualOutput = outBuffer.toString();
             assertEquals(expectedOutput, actualOutput);
-            assertThat(toDoList.getListToDos()[0].getTitle()).isEqualTo("Title");
+            assertThat(toDoList.getListToDos().get(0).getTitle()).isEqualTo("Title");
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
@@ -178,7 +179,7 @@ class MainTest {
                         "\u001B[1;32mTask Created Successfully!\u001B[0m\n";
             String actualOutput = outBuffer.toString();
             assertEquals(expectedOutput, actualOutput);
-            assertThat(toDoList.getListToDos()[0].getTitle()).isEqualTo("Title");
+            assertThat(toDoList.getListToDos().get(0).getTitle()).isEqualTo("Title");
         } catch (Exception e) {
             throw new RuntimeException(e);
         } finally {
@@ -203,7 +204,7 @@ class MainTest {
             System.setOut(new PrintStream(outBuffer));
 
             List toDoList = new List("MyList");
-            toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW, new Project("Test")));
+            toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
             Main.edit(toDoList, 0);
             // Check the program output
             String expectedOutput;
@@ -220,10 +221,10 @@ class MainTest {
                     "Could not save your progress... please specify a file or try again.\n";
             String actualOutput = outBuffer.toString();
             assertEquals(expectedOutput, actualOutput);
-            assertThat(toDoList.getListToDos()[0].getTitle()).isEqualTo("MyList");
-            assertThat(toDoList.getListToDos()[0].getDescription()).isEqualTo("Description");
-            assertThat(toDoList.getListToDos()[0].getPriority()).isEqualTo(Priority.HIGH);
-            assertThat(toDoList.getListToDos()[0].getBucket()).isEqualTo("Tag");
+            assertThat(toDoList.getListToDos().get(0).getTitle()).isEqualTo("MyList");
+            assertThat(toDoList.getListToDos().get(0).getDescription()).isEqualTo("Description");
+            assertThat(toDoList.getListToDos().get(0).getPriority()).isEqualTo(Priority.HIGH);
+            assertThat(toDoList.getListToDos().get(0).getBucket()).isEqualTo("Tag");
             assertThat(env).isNotNull();
 
         } finally {
@@ -248,8 +249,8 @@ class MainTest {
             System.setOut(new PrintStream(outBuffer));
 
             List toDoList = new List("MyList", "editTestFile");
-            toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW, new Project("Test")));
-            toDoList.add(new ToDoItem("Test", "Test", "Test", false, Priority.LOW));
+            toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
+            toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
             Main.edit(toDoList, 0);
             // Check the program output
             String expectedOutput;
@@ -265,10 +266,10 @@ class MainTest {
                     "Task Edited Successfully!\n";
             String actualOutput = outBuffer.toString();
             assertEquals(expectedOutput, actualOutput);
-            assertThat(toDoList.getListToDos()[0].getTitle()).isEqualTo("MyList");
-            assertThat(toDoList.getListToDos()[0].getDescription()).isEqualTo("Description");
-            assertThat(toDoList.getListToDos()[0].getPriority()).isEqualTo(Priority.HIGH);
-            assertThat(toDoList.getListToDos()[0].getBucket()).isEqualTo("Bucket");
+            assertThat(toDoList.getListToDos().get(0).getTitle()).isEqualTo("MyList");
+            assertThat(toDoList.getListToDos().get(0).getDescription()).isEqualTo("Description");
+            assertThat(toDoList.getListToDos().get(0).getPriority()).isEqualTo(Priority.HIGH);
+            assertThat(toDoList.getListToDos().get(0).getBucket()).isEqualTo("Bucket");
             assertThat(env).isNotNull();
 
         } finally {
@@ -283,9 +284,9 @@ class MainTest {
         InputStream sysInBackup = System.in;
         PrintStream sysOutBackup = System.out;
 
-        ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem("Test", "Test", "Test", false, Priority.LOW);
-        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", false, Priority.LOW);
+        java.util.ArrayList<ToDoItem> toDoItems = new ArrayList<>();
+        toDoItems.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
+        toDoItems.add(new ToDoItem("Test2", "Test2", "Test2", Priority.LOW));
 
         List toDoList = new List("MyList");
         toDoList.setListToDos(toDoItems);
@@ -296,8 +297,8 @@ class MainTest {
             Main.list(toDoList);
             String expectedOutput;
             expectedOutput = "MyList:\n" +
-                    toDoList.getListToDos()[0].toString() + "\n" +
-                    toDoList.getListToDos()[1].toString() + "\n";
+                    toDoList.getListToDos().get(0).toString() + "\n" +
+                    toDoList.getListToDos().get(1).toString() + "\n";
             String actualOutput = outBuffer.toString();
             assertEquals(expectedOutput, actualOutput);
 
@@ -335,9 +336,9 @@ class MainTest {
         InputStream sysInBackup = System.in;
         PrintStream sysOutBackup = System.out;
 
-        ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem("Test", "Test", "Test", false, Priority.LOW);
-        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", false, Priority.LOW);
+        java.util.ArrayList<ToDoItem> toDoItems = new ArrayList<>();
+        toDoItems.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
+        toDoItems.add(new ToDoItem("Test2", "Test2", "Test2", Priority.LOW));
 
         List toDoList = new List("MyList");
         toDoList.setListToDos(toDoItems);
@@ -346,7 +347,7 @@ class MainTest {
             System.setIn(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
-            assertThat(toDoList.getListToDos().length).isEqualTo(2);
+            assertThat(toDoList.getListToDos().size()).isEqualTo(2);
             Main.remove(toDoList, 0);
             // Check the program output
             String expectedOutput;
@@ -355,8 +356,8 @@ class MainTest {
                     "Could not save your progress... please specify a file or try again.\n";
             String actualOutput = outBuffer.toString();
             assertEquals(expectedOutput, actualOutput);
-            assertThat(toDoList.getListToDos().length).isEqualTo(1);
-            assertThat(toDoList.getListToDos()[0].getTitle()).isEqualTo("Test2");
+            assertThat(toDoList.getListToDos().size()).isEqualTo(1);
+            assertThat(toDoList.getListToDos().get(0).getTitle()).isEqualTo("Test2");
         } finally {
             // Restore standard input and output streams
             System.setIn(sysInBackup);
@@ -368,9 +369,9 @@ class MainTest {
         InputStream sysInBackup = System.in;
         PrintStream sysOutBackup = System.out;
 
-        ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW);
-        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW);
+        java.util.ArrayList<ToDoItem> toDoItems = new ArrayList<>();
+        toDoItems.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
+        toDoItems.add(new ToDoItem("Test2", "Test2", "Test2", Priority.LOW));
 
         List toDoList = new List("MyList", "removeTestFile");
         toDoList.setListToDos(toDoItems);
@@ -379,15 +380,15 @@ class MainTest {
             System.setIn(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
-            assertThat(toDoList.getListToDos().length).isEqualTo(2);
+            assertThat(toDoList.getListToDos().size()).isEqualTo(2);
             Main.remove(toDoList, 0);
             // Check the program output
             String expectedOutput;
             expectedOutput = "Task Removed Successfully!\n";
             String actualOutput = outBuffer.toString();
             assertEquals(expectedOutput, actualOutput);
-            assertThat(toDoList.getListToDos().length).isEqualTo(1);
-            assertThat(toDoList.getListToDos()[0].getTitle()).isEqualTo("Test2");
+            assertThat(toDoList.getListToDos().size()).isEqualTo(1);
+            assertThat(toDoList.getListToDos().get(0).getTitle()).isEqualTo("Test2");
         } finally {
             // Restore standard input and output streams
             System.setIn(sysInBackup);
@@ -473,9 +474,9 @@ class MainTest {
     void doneTest() {
         List list = new List("MyList", "listTest.json");
         list.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
-        assertThat(list.getListToDos()[0].isDone()).isFalse();
+        assertThat(list.getListToDos().get(0).isDone()).isFalse();
         Main.done(list, 0);
-        assertThat(list.getListToDos()[0].isDone()).isTrue();
+        assertThat(list.getListToDos().get(0).isDone()).isTrue();
     }
 
     @Test
@@ -511,33 +512,33 @@ class MainTest {
         String[] commandArray = {"gtd", "sort", "prio", "asc"};
         List list = new List("MyList");
         list.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
-        list.getListToDos()[0].setCreatedAt(LocalDateTime.of(2020, 1, 1, 0, 0));
+        list.getListToDos().get(0).setCreatedAt(LocalDateTime.of(2020, 1, 1, 0, 0));
         list.add(new ToDoItem("Cucumber", "Water", "Vegetable", Priority.LOW));
-        list.getListToDos()[1].setCreatedAt(LocalDateTime.of(2020, 1, 2, 0, 0));
+        list.getListToDos().get(1).setCreatedAt(LocalDateTime.of(2020, 1, 2, 0, 0));
         list.add(new ToDoItem("Banana", "Minions", "Fruit", Priority.HIGH));
 
         // Priority Test
         list.sortByPriority("asc");
-        assertThat(list.getListToDos()[0].getTitle()).isEqualTo("Cucumber");
+        assertThat(list.getListToDos().get(0).getTitle()).isEqualTo("Cucumber");
         list.sortByPriority("desc");
-        assertThat(list.getListToDos()[0].getTitle()).isEqualTo("Banana");
+        assertThat(list.getListToDos().get(0).getTitle()).isEqualTo("Banana");
         list.sortByCreatedAt("asc");
-        assertThat(list.getListToDos()[0].getTitle()).isEqualTo("Apple");
+        assertThat(list.getListToDos().get(0).getTitle()).isEqualTo("Apple");
         list.sortByCreatedAt("desc");
-        assertThat(list.getListToDos()[0].getTitle()).isEqualTo("Banana");
+        assertThat(list.getListToDos().get(0).getTitle()).isEqualTo("Banana");
         list.bubbleUpBucket(commandArray[3]);
-        assertThat(list.getListToDos()[0].getTitle()).isEqualTo("Banana");
+        assertThat(list.getListToDos().get(0).getTitle()).isEqualTo("Banana");
     }
 
     @Test
     void clearTest() {
         PrintStream sysOutBackup = System.out;
         List list = new List("MyList");
-        list.add(new ToDoItem("Apple", "Computers", "Fruit", false, Priority.MEDIUM));
+        list.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
         try {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
-            assertThat(list.getListToDos().length).isEqualTo(1);
+            assertThat(list.getListToDos().size()).isEqualTo(1);
             Main.clear(list);
             assertThat(list.getListToDos() == null).isTrue();
         } finally {
@@ -550,7 +551,7 @@ class MainTest {
         PrintStream sysOutBackup = System.out;
         List list = new List("MyList");
         list.setFileName("listTest.json");
-        list.add(new ToDoItem("Apple", "Computers", "Fruit", false, Priority.MEDIUM));
+        list.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
         try {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
@@ -561,7 +562,7 @@ class MainTest {
             String actualOutput = outBuffer.toString();
             assertEquals(expectedOutput, actualOutput);
             List testList = new Program().loadList("listTest.json");
-            assertThat(testList.getListToDos()[0].getTitle()).isEqualTo("Apple");
+            assertThat(testList.getListToDos().get(0).getTitle()).isEqualTo("Apple");
         } finally {
             System.setOut(sysOutBackup);
         }

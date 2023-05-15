@@ -158,8 +158,8 @@ public class Main {
     }
     public static void list(List list) { // maybe redundant method
         out.println(list.getName() + ":");
-        ToDoItem[] toDoItems = list.getListToDos();
-        if (toDoItems == null || toDoItems.length == 0) {
+        java.util.ArrayList<ToDoItem> toDoItems = list.getListToDos();
+        if (toDoItems == null || toDoItems.size() == 0) {
             out.println("👀Looks Empty here... Add some tasks!");
             return;
         }
@@ -188,7 +188,7 @@ public class Main {
         int i = 0;
         while (i == 0) {
             try {
-                list.getListToDos()[index].setDone(true);
+                list.getListToDos().get(index).setDone(true);
                 i++;
             } catch (Exception e) {
                  index = handleBadIndex("Please enter the index of the task you want to mark as done.");
@@ -206,11 +206,11 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         ToDoItem item;
         try {
-            item = list.getListToDos()[index];
+            item = list.getListToDos().get(index);
         } catch (Exception e) {
             index = handleBadIndex("Please enter the index of the task you want to edit.");
             if (index == -1) return;
-            else item = list.getListToDos()[index];
+            else item = list.getListToDos().get(index);
         }
         out.println("Editing task at index " + index + ":");
         out.println(item.toString());
@@ -263,7 +263,7 @@ public class Main {
     public static void createBucket(List toDoList, String newBucket){
         java.util.List<Bucket> BucketsCopy = toDoList.getBuckets();
         int help = 0;
-        for (int i = 0; i < toDoList.getListToDos().length; i++) {
+        for (int i = 0; i < toDoList.getListToDos().size(); i++) {
             if(BucketsCopy.get(i).getBucket() == newBucket){
                 out.println("Bucket allready exists!");
                 help++;
@@ -385,19 +385,19 @@ public class Main {
                     clear(toDoList);
                 } else if (commandArray[1].equalsIgnoreCase("promote")) {
                      try {
-                        toDoList.getListToDos()[Integer.parseInt(commandArray[2])].promote();
+                        toDoList.getListToDos().get(Integer.parseInt(commandArray[2])).promote();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         error("Try 'gtd promote [index]'");
                      }
                 } else if (commandArray[1].equalsIgnoreCase("demote")) {
                     try {
-                        toDoList.getListToDos()[Integer.parseInt(commandArray[2])].demote();
+                        toDoList.getListToDos().get(Integer.parseInt(commandArray[2])).demote();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         error("Try 'gtd demote [index]'");
                     }
                 } else if (commandArray[1].equalsIgnoreCase("hold")) {
                     try {
-                        toDoList.getListToDos()[Integer.parseInt(commandArray[2])].hold();
+                        toDoList.getListToDos().get(Integer.parseInt(commandArray[2])).hold();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         error("Try 'gtd hold [index]'");
                     }
