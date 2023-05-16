@@ -48,7 +48,7 @@ public class ListClassTest {
         java.util.ArrayList<ToDoItem> itemList = new ArrayList<>();
         itemList.add(item3);
         itemList.add(item2);
-        itemList.add(item3);
+        itemList.add(item);
         assertThat(list.getListToDos()).isEqualTo(itemList);
     }
     @Test
@@ -62,9 +62,9 @@ public class ListClassTest {
         list.add(item3);
         list.sortByPriority("desc");
         java.util.ArrayList<ToDoItem> itemList = new ArrayList<>();
-        itemList.add(item3);
-        itemList.add(item2);
         itemList.add(item);
+        itemList.add(item2);
+        itemList.add(item3);
         assertThat(list.getListToDos()).isEqualTo(itemList);
     }
 
