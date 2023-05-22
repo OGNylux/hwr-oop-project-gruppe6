@@ -17,7 +17,7 @@ public class ListClassTest {
     @Test
     void addTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, new Project(""));
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, EstimatedTime.LONG, new Project(""));
         list.add(item);
         ToDoItem[] itemList = new ToDoItem[1];
         itemList[0] = item;
@@ -27,7 +27,7 @@ public class ListClassTest {
     @Test
     void removeTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, new Project(""));
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, EstimatedTime.LONG, new Project(""));
         list.add(item);
         list.remove(0);
         ToDoItem[] itemList = new ToDoItem[0];
@@ -36,33 +36,39 @@ public class ListClassTest {
     @Test
     void sortByPriorityAscTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, new Project(""));
-        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.MEDIUM, new Project(""));
-        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, new Project(""));
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, EstimatedTime.SHORT, new Project(""));
+        ToDoItem item2 = new ToDoItem("Finish Math homework","I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.MEDIUM, EstimatedTime.MEDIUM, new Project(""));
+        ToDoItem item3 = new ToDoItem("Finish Math homework","I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, EstimatedTime.LONG, new Project(""));
+        ToDoItem item4 = new ToDoItem("Finish Math homework","I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, EstimatedTime.XLONG, new Project(""));
         list.add(item);
         list.add(item2);
         list.add(item3);
+        list.add(item4);
         list.sortByPriority("asc");
-        ToDoItem[] itemList = new ToDoItem[3];
+        ToDoItem[] itemList = new ToDoItem[4];
         itemList[0] = item3;
         itemList[1] = item2;
         itemList[2] = item;
+        itemList[3] = item4;
         assertThat(list.getListToDos()).isEqualTo(itemList);
     }
     @Test
     void sortByPriorityDescTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, new Project(""));
-        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.MEDIUM, new Project(""));
-        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, new Project(""));
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.HIGH, EstimatedTime.SHORT, new Project(""));
+        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.MEDIUM, EstimatedTime.MEDIUM, new Project(""));
+        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, EstimatedTime.LONG, new Project(""));
+        ToDoItem item4 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, EstimatedTime.XLONG, new Project(""));
         list.add(item);
         list.add(item2);
         list.add(item3);
+        list.add(item4);
         list.sortByPriority("desc");
-        ToDoItem[] itemList = new ToDoItem[3];
+        ToDoItem[] itemList = new ToDoItem[4];
         itemList[0] = item;
         itemList[1] = item2;
         itemList[2] = item3;
+        itemList[3] = item4;
         assertThat(list.getListToDos()).isEqualTo(itemList);
     }
 
@@ -93,6 +99,13 @@ public class ListClassTest {
         sortedExpected[2] = list.getListToDos()[1];
         list.sortByCreatedAt("asc");
         assertThat(list.getListToDos()).isEqualTo(sortedExpected);
+    }
+
+    @Test
+    void startWorkflow(){
+        List list = new List("myList");
+        ToDoItem item = new ToDoItem ("do math tasks", "Finish the latest worksheet", "Uni", false, Priority.HIGH, new Project(""));
+
     }
 
     @Test

@@ -102,6 +102,7 @@ public class Main {
         out.println("  done [Item Index]   -  mark a task as done");
         out.println("  edit [Item Index]   -  edit a task");
         out.println("  sort                -  sort your tasks");
+        out.println("  workflow            -  create workflow");
         out.println("  clear               -  clear all tasks");
         out.println("  exit                -  exit the program");
     }
@@ -137,6 +138,14 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        out.println("Please enter an estimated time that it takes for you to finish this task");
+        out.println("1 - yourTime<5min, 2 - 5min<yourTime<30min, 3 - 30min<yourTime<1hr, 4 - yourTime>1hr");
+        int estimatedTime = -1;
+        try {
+            estimatedTime = Integer.parseInt(reader.readLine());
+        } catch (IOException e){
+            e.printStackTrace();
+        }
         out.println("Add a Tag to group your tasks");
         String tag = "";
         try {
@@ -150,9 +159,9 @@ public class Main {
                 tag,
                 false ,
                 priority == 1 ? Priority.LOW : priority == 2 ? Priority.MEDIUM : Priority.HIGH,
+                estimatedTime == 1 ? EstimatedTime.SHORT : estimatedTime == 2 ? EstimatedTime.MEDIUM : estimatedTime == 3 ? EstimatedTime.LONG : EstimatedTime.XLONG,
                 new Project(""));
         success("Task Created Successfully!");
-
         list.add(toDoItem);
     }
     public static void list(List list) { // maybe redundant method
@@ -289,6 +298,11 @@ public class Main {
                 sortHelp();
             }
         }
+    }
+
+
+    public static void workflow(List list){
+
     }
 
     public static void clear(List list) {

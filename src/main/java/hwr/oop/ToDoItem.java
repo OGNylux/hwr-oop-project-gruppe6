@@ -13,16 +13,18 @@ public class ToDoItem {
     private String tag;
     private boolean done;
     private Priority priority;
+    private EstimatedTime estimatedTime;
     private Project project;
     private String createdAt;
 
-    public ToDoItem (String title, String description, String tag, boolean done, Priority priority, Project project) {
+    public ToDoItem (String title, String description, String tag, boolean done, Priority priority, EstimatedTime estimatedTime, Project project) {
         this.title = WHITE_BOLD_BRIGHT + title + RESET;
         this.description = description;
         this.tag = CYAN_BOLD + tag + RESET;
         this.done = done;
         this.createdAt = LocalDateTime.now().toString();
         this.priority = priority;
+        this.estimatedTime = estimatedTime;
         this.project = project;
     }
     void setTitle(String title) {
@@ -37,6 +39,7 @@ public class ToDoItem {
     void setPriority(Priority priority) {
         this.priority = priority;
     }
+    void setEstimatedTime(EstimatedTime estimatedTime) {this.estimatedTime = estimatedTime;}
     void setTag(String tag) {
         this.tag = tag;
     }
@@ -61,6 +64,7 @@ public class ToDoItem {
     public Priority getPriority() {
         return priority;
     }
+    public EstimatedTime getEstimatedTime(){return estimatedTime; }
     public String getProjectName() {
         return project.getTitle();
     }
