@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -151,7 +152,6 @@ public class Main {
                 bucket,
                 priority == 1 ? Priority.LOW : priority == 2 ? Priority.MEDIUM : Priority.HIGH);
         success("Task Created Successfully!");
-        out.println(toDoItem.toString());
         list.add(toDoItem);
         try {
             list.writeToJSON(list.getFileName());
@@ -265,16 +265,21 @@ public class Main {
 
     public static void createBucket(ToDoList toDoList, String newBucket){
         List<Bucket> bucketsCopy = toDoList.getBuckets();
-        int help = 0;
-        for (int i = 0; i < toDoList.getListToDos().size(); i++) {
-            if(Objects.equals(bucketsCopy.get(i).getBucket(), newBucket)){
-                out.println("Bucket already exists!");
-                help++;
-                break;
+        if (bucketsCopy == null){
+            bucketsCopy = new ArrayList<>();
+            bucketsCopy.add(new Bucket(newBucket));
+        } else {
+            int help = 0;
+            for (int i = 0; i < toDoList.getListToDos().size(); i++) {
+                if(Objects.equals(bucketsCopy.get(i).getBucket(), newBucket)){
+                    out.println("Bucket already exists!");
+                    help++;
+                    break;
+                }
             }
-        }
-        if (help == 0) {
-            toDoList.addBucket(newBucket);
+            if (help == 0) {
+                toDoList.addBucket(newBucket);
+            }
         }
     }
 

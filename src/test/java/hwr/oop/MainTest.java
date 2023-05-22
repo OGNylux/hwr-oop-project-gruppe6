@@ -6,6 +6,7 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -580,7 +581,7 @@ class MainTest {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
             Main.add(list);
-            java.util.List<Bucket> TestBuckets = list.getBuckets();
+            List<Bucket> TestBuckets = list.getBuckets();
 
             assertThat(TestBuckets.get(0)).isEqualTo("Bucket");
         }finally {
