@@ -12,6 +12,7 @@ public class ToDoItem {
     private Priority priority;
     private String createdAt;
     private State state;
+
     public ToDoItem (String title, String description, String bucket, Priority priority) {
         this.title = title;
         this.description = description;
@@ -95,7 +96,7 @@ public class ToDoItem {
         String priorityString = getPriorityString();
         return  stateSymbol + title + '\n' +
                 description + '\n' +
-                "<" + bucket + ">" + ' ' +
+                "<" + bucket.getBucket() + ">" + ' ' +
                 priorityString;
     }
     public String getCreatedAt() {
@@ -145,6 +146,4 @@ public class ToDoItem {
                 break;
         }
     }
-
-
 }

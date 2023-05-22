@@ -3,14 +3,15 @@ package hwr.oop;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ListClassTest {
+public class ToDoListClassTest {
 
     @Test
     void setListName() {
-        List list = new List("wrongName");
+        ToDoList list = new ToDoList("wrongName");
         list.setName("rightName");
         String TestName = list.getName();
         assertThat(TestName).isEqualTo("rightName");
@@ -18,26 +19,26 @@ public class ListClassTest {
 
     @Test
     void addTest() {
-        List list = new List("myList");
+        ToDoList list = new ToDoList("myList");
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.HIGH);
         list.add(item);
-        java.util.ArrayList<ToDoItem> itemList = new ArrayList<>();
+        java.util.List<ToDoItem> itemList = new ArrayList<>();
         itemList.add(item);
         assertThat(list.getListToDos()).isEqualTo(itemList);
     }
 
     @Test
     void removeTest() {
-        List list = new List("myList");
+        ToDoList list = new ToDoList("myList");
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.HIGH);
         list.add(item);
         list.remove(0);
-        java.util.ArrayList<ToDoItem> itemList = new ArrayList<>();
+        java.util.List<ToDoItem> itemList = new ArrayList<>();
         assertThat(list.getListToDos()).isEqualTo(itemList);
     }
     @Test
     void sortByPriorityAscTest() {
-        List list = new List("myList");
+        ToDoList list = new ToDoList("myList");
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.HIGH);
         ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.MEDIUM);
         ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW);
@@ -45,7 +46,7 @@ public class ListClassTest {
         list.add(item2);
         list.add(item3);
         list.sortByPriority("asc");
-        java.util.ArrayList<ToDoItem> itemList = new ArrayList<>();
+        java.util.List<ToDoItem> itemList = new ArrayList<>();
         itemList.add(item3);
         itemList.add(item2);
         itemList.add(item);
@@ -53,7 +54,7 @@ public class ListClassTest {
     }
     @Test
     void sortByPriorityDescTest() {
-        List list = new List("myList");
+        ToDoList list = new ToDoList("myList");
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.HIGH);
         ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.MEDIUM);
         ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW);
@@ -61,7 +62,7 @@ public class ListClassTest {
         list.add(item2);
         list.add(item3);
         list.sortByPriority("desc");
-        java.util.ArrayList<ToDoItem> itemList = new ArrayList<>();
+        java.util.List<ToDoItem> itemList = new ArrayList<>();
         itemList.add(item);
         itemList.add(item2);
         itemList.add(item3);
@@ -70,7 +71,7 @@ public class ListClassTest {
 
     @Test
     void bubbleUpBucketTest() {
-        List list = new List("myList");
+        ToDoList list = new ToDoList("myList");
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH);
         ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", "Math", Priority.MEDIUM);
         ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal", Priority.LOW);
@@ -78,7 +79,7 @@ public class ListClassTest {
         list.add(item2);
         list.add(item3);
         list.bubbleUpBucket("Personal");
-        java.util.ArrayList<ToDoItem> itemList = new ArrayList<>();
+        java.util.List<ToDoItem> itemList = new ArrayList<>();
         itemList.add(item3);
         itemList.add(item);
         itemList.add(item2);
@@ -88,11 +89,11 @@ public class ListClassTest {
     @Test
     void sortByCreatedAtAscTest() {
         Program testProgram = new Program();
-        List list = testProgram.loadList("sortByCreatedAtTest");
-        java.util.ArrayList<ToDoItem> sortedExpected = new ArrayList<>();
-        sortedExpected.set(2, list.getListToDos().get(0));
-        sortedExpected.set(1, list.getListToDos().get(2));
-        sortedExpected.set(0, list.getListToDos().get(1));
+        ToDoList list = testProgram.loadList("sortByCreatedAtTest");
+        List<ToDoItem> sortedExpected = new ArrayList<>();
+        sortedExpected.add(list.getListToDos().get(0));
+        sortedExpected.add(list.getListToDos().get(1));
+        sortedExpected.add(list.getListToDos().get(2));
         list.sortByCreatedAt("asc");
         assertThat(list.getListToDos()).isEqualTo(sortedExpected);
     }
@@ -100,24 +101,23 @@ public class ListClassTest {
     @Test
     void sortByCreatedAtDescTest() {
         Program testProgram = new Program();
-        List list = testProgram.loadList("sortByCreatedAtTest");
-        java.util.ArrayList<ToDoItem> sortedExpected = new ArrayList<>();
-        sortedExpected.set(2, list.getListToDos().get(1));
-        sortedExpected.set(1, list.getListToDos().get(2));
-        sortedExpected.set(0, list.getListToDos().get(0));
+        ToDoList list = testProgram.loadList("sortByCreatedAtTest");
+        List<ToDoItem> sortedExpected = new ArrayList<>();
+        sortedExpected.add(list.getListToDos().get(2));
+        sortedExpected.add(list.getListToDos().get(1));
+        sortedExpected.add(list.getListToDos().get(0));
         list.sortByCreatedAt("desc");
         assertThat(list.getListToDos()).isEqualTo(sortedExpected);
     }
 
     @Test
     void getBucketsTest() {
-        List list = new List("myList");
+        ToDoList list = new ToDoList("myList");
         list.add(new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH));
         list.addBucket("Uni");
-        java.util.ArrayList<Bucket> testbuckets;
-        testbuckets = new ArrayList<>();
-        testbuckets = list.getBuckets();
-        assertThat(testbuckets.get(0).getBucket()).isEqualTo("Uni");
+        List<Bucket> testBuckets;
+        testBuckets = list.getBuckets();
+        assertThat(testBuckets.get(0).getBucket()).isEqualTo("Uni");
     }
     /*@Test
     void updateBucketsTest() {
@@ -138,14 +138,14 @@ public class ListClassTest {
 
     @Test
     void addBucketTest() {
-        List list =  new List("myList");
+        ToDoList list =  new ToDoList("myList");
         list.addBucket("Test");
         assertThat(list.getBuckets().get(0).getBucket()).isEqualTo("Test");
     }
 
     @Test
     void editBucketTest() {
-        List list = new List("myList");
+        ToDoList list = new ToDoList("myList");
         list.addBucket("Test");
         list.editBucket(0, "Boo");
         assertThat(list.getBuckets().get(0).getBucket()).isEqualTo("Boo");

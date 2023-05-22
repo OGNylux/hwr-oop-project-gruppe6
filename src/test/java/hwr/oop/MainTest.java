@@ -47,7 +47,7 @@ class MainTest {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
 
-            List toDoList = Main.welcome();
+            ToDoList toDoList = Main.welcome();
             // Check the program output
             String expectedOutput;
             if (env == null) {
@@ -129,7 +129,7 @@ class MainTest {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
 
-            List toDoList = new List("MyList");
+            ToDoList toDoList = new ToDoList("MyList");
             Main.add(toDoList);
             // Check the program output
             String expectedOutput;
@@ -165,7 +165,7 @@ class MainTest {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
 
-            List toDoList = new List("MyList", "addTestFile");
+            ToDoList toDoList = new ToDoList("MyList", "addTestFile");
             Main.add(toDoList);
             // Check the program output
             String expectedOutput;
@@ -203,7 +203,7 @@ class MainTest {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
 
-            List toDoList = new List("MyList");
+            ToDoList toDoList = new ToDoList("MyList");
             toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
             Main.edit(toDoList, 0);
             // Check the program output
@@ -248,7 +248,7 @@ class MainTest {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
 
-            List toDoList = new List("MyList", "editTestFile");
+            ToDoList toDoList = new ToDoList("MyList", "editTestFile");
             toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
             toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
             Main.edit(toDoList, 0);
@@ -288,7 +288,7 @@ class MainTest {
         toDoItems.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
         toDoItems.add(new ToDoItem("Test2", "Test2", "Test2", Priority.LOW));
 
-        List toDoList = new List("MyList");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.setListToDos(toDoItems);
 
         try {
@@ -313,7 +313,7 @@ class MainTest {
         InputStream sysInBackup = System.in;
         PrintStream sysOutBackup = System.out;
 
-        List toDoList = new List("MyList");
+        ToDoList toDoList = new ToDoList("MyList");
         try {
             String userInput = "MyList\n";
             System.setIn(new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
@@ -340,7 +340,7 @@ class MainTest {
         toDoItems.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
         toDoItems.add(new ToDoItem("Test2", "Test2", "Test2", Priority.LOW));
 
-        List toDoList = new List("MyList");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.setListToDos(toDoItems);
 
         try {
@@ -373,7 +373,7 @@ class MainTest {
         toDoItems.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
         toDoItems.add(new ToDoItem("Test2", "Test2", "Test2", Priority.LOW));
 
-        List toDoList = new List("MyList", "removeTestFile");
+        ToDoList toDoList = new ToDoList("MyList", "removeTestFile");
         toDoList.setListToDos(toDoItems);
 
         try {
@@ -472,7 +472,7 @@ class MainTest {
 
     @Test
     void doneTest() {
-        List list = new List("MyList", "listTest.json");
+        ToDoList list = new ToDoList("MyList", "listTest.json");
         list.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
         assertThat(list.getListToDos().get(0).isDone()).isFalse();
         Main.done(list, 0);
@@ -510,7 +510,7 @@ class MainTest {
     @Test
     void handleSortTest() {
         String[] commandArray = {"gtd", "sort", "prio", "asc"};
-        List list = new List("MyList");
+        ToDoList list = new ToDoList("MyList");
         list.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
         list.getListToDos().get(0).setCreatedAt(LocalDateTime.of(2020, 1, 1, 0, 0));
         list.add(new ToDoItem("Cucumber", "Water", "Vegetable", Priority.LOW));
@@ -533,7 +533,7 @@ class MainTest {
     @Test
     void clearTest() {
         PrintStream sysOutBackup = System.out;
-        List list = new List("MyList");
+        ToDoList list = new ToDoList("MyList");
         list.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
         try {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
@@ -549,7 +549,7 @@ class MainTest {
     @Test
     void exitTest() {
         PrintStream sysOutBackup = System.out;
-        List list = new List("MyList");
+        ToDoList list = new ToDoList("MyList");
         list.setFileName("listTest.json");
         list.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
         try {
@@ -561,7 +561,7 @@ class MainTest {
             expectedOutput = "exiting...\n";
             String actualOutput = outBuffer.toString();
             assertEquals(expectedOutput, actualOutput);
-            List testList = new Program().loadList("listTest.json");
+            ToDoList testList = new Program().loadList("listTest.json");
             assertThat(testList.getListToDos().get(0).getTitle()).isEqualTo("Apple");
         } finally {
             System.setOut(sysOutBackup);
@@ -573,7 +573,7 @@ class MainTest {
         PrintStream sysOutBackup = System.out;
         InputStream sysInBackup = System.in;
 
-        List list = new List("My List");
+        ToDoList list = new ToDoList("My List");
         try {
             String userInput = "Title\nDescription\n12.12.12\n3\nBucket\n";
             System.setIn(new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
@@ -595,7 +595,7 @@ class MainTest {
         PrintStream sysOutBackup = System.out;
         InputStream sysInBackup = System.in;
 
-        List list = new List("My List");
+        ToDoList list = new ToDoList("My List");
         try {
             String userInput = "Title\nDescription\n12.12.12\n3\nBucket\n";
             System.setIn(new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
@@ -626,7 +626,7 @@ class MainTest {
         PrintStream sysOutBackup = System.out;
         InputStream sysInBackup = System.in;
 
-        List list = new List("My List");
+        ToDoList list = new ToDoList("My List");
         try {
             String userInput = "Title\nDescription\n12.12.12\n3\nBucket\n";
             System.setIn(new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));

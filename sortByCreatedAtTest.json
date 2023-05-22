@@ -1,4 +1,1 @@
-{"Name":"myList","ListToDos":[{"id":0,"title":"Finish Math homework","description":"I need to do tasks 5 - 10b.","tag":"Uni",
-  "createdAt": "14.12.12","done":false,"priority":"HIGH"},{"id":1,"title":"Calculate Something","description":"More Math over here","tag":"Math",
-  "createdAt": "12.12.12","done":false,"priority":"MEDIUM"},{"id":2,"title":"Be Amazing","description":"Just Do It.","tag":"Personal",
-  "createdAt": "13.12.12","done":false,"priority":"LOW"}]}
+{"name":"MyList","listToDos":[{"title":"aefw","description":"sews","bucket":{"bucket":"svs"},"priority":"LOW","createdAt":"2023-05-22T10:07:17.619370900","state":"TODO"},{"title":"aefw","description":"sews","bucket":{"bucket":"svs"},"priority":"LOW","createdAt":"2023-05-23T10:07:17.619370800","state":"TODO"},{"title":"123","description":"456","bucket":{"bucket":"Uni"},"priority":"MEDIUM","createdAt":"2023-05-24T10:18:08.924171300","state":"TODO"}],"fileName":"sortByCreatedAtTest.json"}

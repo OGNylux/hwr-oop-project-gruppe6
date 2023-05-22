@@ -8,22 +8,23 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Comparator;
 
-public class List {
+public class ToDoList {
     private String name;
-    private java.util.ArrayList<ToDoItem> listToDos;
+    private List<ToDoItem> listToDos;
     private String fileName;
-    private java.util.ArrayList<Bucket> Buckets;
+    private List<Bucket> buckets;
 
-    public List(String name) {
+    public ToDoList(String name) {
         this(name, null);
     }
-    public List(String name, String fileName) {
+    public ToDoList(String name, String fileName) {
         this.name = name;
         this.listToDos = new ArrayList<>();
         this.fileName = fileName;
-        this.Buckets = new ArrayList<>();
+        this.buckets = new ArrayList<>();
     }
     public void setFileName(String fileName) {
         this.fileName = fileName;
@@ -35,19 +36,19 @@ public class List {
         return this.name;
     }
 
-    public java.util.ArrayList<ToDoItem> getListToDos() {
+    public List<ToDoItem> getListToDos() {
         return this.listToDos;
     }
 
-    public java.util.ArrayList<Bucket> getBuckets() {
-        return Buckets;
+    public List<Bucket> getBuckets() {
+        return buckets;
     }
 
     public void addBucket(String newBucket) {
-        this.Buckets.add(new Bucket(newBucket));
+        this.buckets.add(new Bucket(newBucket));
     }
 
-    public void setListToDos(java.util.ArrayList<ToDoItem> listToDos) {
+    public void setListToDos(List<ToDoItem> listToDos) {
         this.listToDos = listToDos;
     }
     public String getFileName() {
@@ -102,11 +103,11 @@ public class List {
 
 
     public void editBucket (int index, String newBucket) {
-        this.Buckets.set(index, new Bucket(newBucket));
+        this.buckets.set(index, new Bucket(newBucket));
     }
 
     public void add(ToDoItem toDoItem) {
-        this.listToDos.add(toDoItem);
+        listToDos.add(toDoItem);
     }
 
     public void remove(int index) {

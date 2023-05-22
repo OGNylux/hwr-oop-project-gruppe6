@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.List;
+import java.util.Objects;
 
 import static hwr.oop.ConsoleColors.*;
 
@@ -39,10 +41,10 @@ public class Main {
         }
     }
 
-    public static List welcome() throws IOException {
+    public static ToDoList welcome() throws IOException {
         String LIST_FILE_NAME;
         String LIST_NAME;
-        List toDoList;
+        ToDoList toDoList;
 
         out.println("Welcome To Getting Things Done 🚀");
         Program program = new Program();
@@ -68,7 +70,7 @@ public class Main {
                     LIST_FILE_NAME = LIST_FILE_NAME.substring(0, LIST_FILE_NAME.lastIndexOf('.'));
                 }
                 program.setEnvironmentVariables(LIST_FILE_NAME, LIST_NAME);
-                toDoList = new List(LIST_NAME, LIST_FILE_NAME);
+                toDoList = new ToDoList(LIST_NAME, LIST_FILE_NAME);
             } else {
                 // Load environment variables
                 LIST_FILE_NAME = filePath;
@@ -87,7 +89,7 @@ public class Main {
             LIST_NAME = env[1];
             toDoList = program.loadList(LIST_FILE_NAME);
             if (toDoList == null) {
-                toDoList = new List(LIST_NAME, LIST_FILE_NAME);
+                toDoList = new ToDoList(LIST_NAME, LIST_FILE_NAME);
             }
         }
         return toDoList;
@@ -111,7 +113,7 @@ public class Main {
         out.println("  clear                           -  clear all tasks");
         out.println("  exit                            -  exit the program");
     }
-    public static void add(List list) {
+    public static void add(ToDoList list) {
         out.println("Create a new task");
         out.println("Please enter a title for your task");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -149,6 +151,7 @@ public class Main {
                 bucket,
                 priority == 1 ? Priority.LOW : priority == 2 ? Priority.MEDIUM : Priority.HIGH);
         success("Task Created Successfully!");
+        out.println(toDoItem.toString());
         list.add(toDoItem);
         try {
             list.writeToJSON(list.getFileName());
@@ -156,16 +159,16 @@ public class Main {
             out.println("Could not save your progress... please specify a file or try again.");
         }
     }
-    public static void list(List list) { // maybe redundant method
+    public static void list(ToDoList list) { // maybe redundant method
         out.println(list.getName() + ":");
-        java.util.ArrayList<ToDoItem> toDoItems = list.getListToDos();
-        if (toDoItems == null || toDoItems.size() == 0) {
+        List<ToDoItem> toDoItems = list.getListToDos();
+        if (toDoItems == null || toDoItems.isEmpty()) {
             out.println("👀Looks Empty here... Add some tasks!");
             return;
         }
         for(ToDoItem toDoItem:toDoItems) out.println(toDoItem.toString());
     }
-    public static void remove(List list, int index) {
+    public static void remove(ToDoList list, int index) {
         // Exception Handling for index out of bounds and invalid input
         int i = 0;
         while (i == 0) {
@@ -184,7 +187,7 @@ public class Main {
             out.println("Could not save your progress... please specify a file or try again.");
         }
     }
-    public static void done(List list, int index) {
+    public static void done(ToDoList list, int index) {
         int i = 0;
         while (i == 0) {
             try {
@@ -202,7 +205,7 @@ public class Main {
         }
     }
 
-    public static void edit(List list, int index) {
+    public static void edit(ToDoList list, int index) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         ToDoItem item;
         try {
@@ -260,12 +263,12 @@ public class Main {
 
     }
 
-    public static void createBucket(List toDoList, String newBucket){
-        java.util.List<Bucket> BucketsCopy = toDoList.getBuckets();
+    public static void createBucket(ToDoList toDoList, String newBucket){
+        List<Bucket> bucketsCopy = toDoList.getBuckets();
         int help = 0;
         for (int i = 0; i < toDoList.getListToDos().size(); i++) {
-            if(BucketsCopy.get(i).getBucket() == newBucket){
-                out.println("Bucket allready exists!");
+            if(Objects.equals(bucketsCopy.get(i).getBucket(), newBucket)){
+                out.println("Bucket already exists!");
                 help++;
                 break;
             }
@@ -275,12 +278,12 @@ public class Main {
         }
     }
 
-    public static void showBuckets(List ToDoList){
-        out.println(ToDoList.getBuckets());
+    public static void showBuckets(ToDoList toDoList){
+        out.println(toDoList.getBuckets());
     }
 
-    public static void editBucket(List ToDoList, int index, String newBucket) {
-        ToDoList.editBucket(index, newBucket);
+    public static void editBucket(ToDoList toDoList, int index, String newBucket) {
+        toDoList.editBucket(index, newBucket);
     }
 
     public static void sortHelp() {
@@ -295,7 +298,7 @@ public class Main {
         out.println("  help            - print this help");
     }
 
-    public static void handleSort(List list, String[] commandArray) {
+    public static void handleSort(ToDoList list, String[] commandArray) {
         int nCommands = commandArray.length;
         if (nCommands == 2) {
             sortHelp();
@@ -323,10 +326,10 @@ public class Main {
             }
         }
     }
-    public static void clear(List list) {
+    public static void clear(ToDoList list) {
         list.setListToDos(null);
     }
-    public static void exit(List list) {
+    public static void exit(ToDoList list) {
         out.println("exiting...");
         try {
             list.writeToJSON(list.getFileName());
@@ -335,7 +338,7 @@ public class Main {
         }
     }
     public static void main(String[] args) throws IOException {
-        List toDoList = welcome();
+        ToDoList toDoList = welcome();
         int i = 1;
         out.println(BLUE_BOLD + "Please enter a command or type 'gtd help' for more information" + RESET);
         while (i != 0) {

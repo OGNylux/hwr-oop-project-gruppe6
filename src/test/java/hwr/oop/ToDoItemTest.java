@@ -31,7 +31,7 @@ class ToDoItemTest {
     void getBucketTest() {
         ToDoItem item = new ToDoItem("testTitle", "testDesc", "testTag", Priority.LOW);
         String result = item.getBucket();
-        assertThat(result).isEqualTo("[1;36mtestTag[0m");
+        assertThat(result).isEqualTo("testTag");
     }
 
     @Test

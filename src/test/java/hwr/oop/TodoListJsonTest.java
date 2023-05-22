@@ -7,10 +7,10 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ListJsonTest {
+public class TodoListJsonTest {
     @Test
     public void listToJsonTest() {
-        List assertList = new List("myList", "listTest");
+        ToDoList assertList = new ToDoList("myList", "listTest");
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH);
         ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", "Math", Priority.MEDIUM);
         ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal", Priority.LOW);
@@ -28,7 +28,9 @@ public class ListJsonTest {
                 }
             }
             String testDate = item.getCreatedAt();
-            assertThat(jsonIn.toString()).isEqualTo("{\"Name\":\"myList\",\"ListToDos\":[{\"id\":0,\"title\":\"Finish Math homework\",\"description\":\"I need to do tasks 5 - 10b.\\nCreated " + testDate + "\",\"Bucket\":\"Uni\",\"done\":false,\"priority\":\"HIGH\",\"project\":{\"title\":\"\"}},{\"id\":1,\"title\":\"Calculate Something\",\"description\":\"More Math over here\\nCreated " + testDate + "\",\"Bucket\":\"Math\",\"done\":false,\"priority\":\"MEDIUM\",\"project\":{\"title\":\"\"}},{\"id\":2,\"title\":\"Be Amazing\",\"description\":\"Just Do It\\nCreated " + testDate + "\",\"Bucket\":\"Personal\",\"done\":false,\"priority\":\"LOW\",\"project\":{\"title\":\"\"}}],\"fileName\":\"listTest\"}");
+            String testDate2 = item2.getCreatedAt();
+            String testDate3 = item3.getCreatedAt();
+            assertThat(jsonIn.toString()).hasToString("{\"name\":\"myList\",\"listToDos\":[{\"title\":\"Finish Math homework\",\"description\":\"I need to do tasks 5 - 10b.\",\"bucket\":{\"bucket\":\"Uni\"},\"priority\":\"HIGH\",\"createdAt\":\""+ testDate +"\",\"state\":\"TODO\"},{\"title\":\"Calculate Something\",\"description\":\"More Math over here\",\"bucket\":{\"bucket\":\"Math\"},\"priority\":\"MEDIUM\",\"createdAt\":\"" + testDate2 + "\",\"state\":\"TODO\"},{\"title\":\"Be Amazing\",\"description\":\"Just Do It\",\"bucket\":{\"bucket\":\"Personal\"},\"priority\":\"LOW\",\"createdAt\":\"" + testDate3 + "\",\"state\":\"TODO\"}],\"fileName\":\"listTest\",\"buckets\":[]}");
         } catch (IOException e) {
             System.out.println("File not found");
         } catch (NullPointerException e) {
@@ -38,7 +40,7 @@ public class ListJsonTest {
     @Test
     public void jsonToListTest() {
         Program program = new Program();
-        List assertList = program.loadList("listTest.ipynb");
+        ToDoList assertList = program.loadList("listTest.ipynb");
         assertThat(assertList.getName()).isEqualTo("myList");
     }
 }

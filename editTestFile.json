@@ -1,1 +1,1 @@
-{"name":"MyList","listToDos":[{"title":"MyList","description":"Description","tag":"Tag","priority":"HIGH","project":{"title":"Test"},"createdAt":"2023-05-09T09:21:52.434228","state":"TODO"}],"fileName":"editTestFile"}
+{"name":"MyList","listToDos":[{"title":"MyList","description":"Description","bucket":{"bucket":"Tag"},"priority":"HIGH","createdAt":"2023-05-22T11:15:20.857682400","state":"TODO"},{"title":"Test","description":"Test","bucket":{"bucket":"Test"},"priority":"LOW","createdAt":"2023-05-22T11:15:20.857682400","state":"TODO"}],"fileName":"editTestFile","buckets":[]}
