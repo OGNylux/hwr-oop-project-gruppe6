@@ -55,14 +55,14 @@ public class ToDoList {
             this.buckets.add(new Bucket(newBucket));
         } else {
             int help = 0;
-            for (int i = 0; i < bucketsCopy.size(); i++) {
-                if(Objects.equals(bucketsCopy.get(i).getBucket(), newBucket)){
+            for (Bucket bucket : bucketsCopy) {
+                if (Objects.equals(bucket.getBucket(), newBucket)) {
                     help++;
                     break;
                 }
             }
             if (help == 0) {
-                this.buckets.add((new Bucket(newBucket)));
+                this.buckets.add(new Bucket(newBucket));
             }
         }
     }
