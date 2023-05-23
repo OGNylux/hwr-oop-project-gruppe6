@@ -112,23 +112,23 @@ class ToDoItemTest {
     @Test
     void demotionTest() {
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW);
-        item.getState().nextState(); // TODO -> IN PROGRESS
-        item.getState().previousState(); // IN PROGRESS -> TODO
-        assertThat(item.getState()).isEqualTo("TODO");
-        item.getState().nextState(); // TODO -> IN PROGRESS
-        item.getState().nextState(); // IN PROGRESS -> DONE
-        item.getState().previousState(); // DONE -> IN PROGRESS
-        assertThat(item.getState()).isEqualTo("IN_PROGRESS");
+        item.promote(); // TODO -> IN PROGRESS
+        item.demote(); // IN PROGRESS -> TODO
+        assertThat(item.getState()).isEqualTo(State.TODO);
+        item.promote(); // TODO -> IN PROGRESS
+        item.promote(); // IN PROGRESS -> DONE
+        item.demote(); // DONE -> IN PROGRESS
+        assertThat(item.getState()).isEqualTo(State.IN_PROGRESS);
     }
 
     @Test
     void holdTest() {
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW);
-        item.getState().hold(); // TODO -> HOLD
-        assertThat(item.getState()).isEqualTo("TODO");
-        item.getState().nextState(); // HOLD -> IN PROGRESS
-        item.getState().hold();    // IN PROGRESS -> HOLD
-        assertThat(item.getState()).isEqualTo("ON_HOLD");
+        item.hold(); // TODO -> HOLD
+        assertThat(item.getState()).isEqualTo(State.TODO);
+        item.promote(); // HOLD -> IN PROGRESS
+        item.hold();    // IN PROGRESS -> HOLD
+        assertThat(item.getState()).isEqualTo(State.ON_HOLD);
     }
 
     @Test

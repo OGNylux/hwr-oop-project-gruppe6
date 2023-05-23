@@ -82,15 +82,12 @@ public class ToDoItem {
         }
     }
     public void promote() {
-        State nextState = state.nextState();
-        this.state = nextState;
+        this.state = state.nextState();
     }
     public void demote() {
-        State previousState = state.previousState();
         this.state = state.previousState();
     }
     public void hold(){
-        State hold = state.hold();
         this.state = state.hold();
     }
     public boolean isDone() {
