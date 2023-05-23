@@ -117,4 +117,14 @@ public class ToDoList {
         if (order.equals("asc")) listToDos.sort(Comparator.comparing(ToDoItem::getCreatedAt));
         else if (order.equals("desc")) listToDos.sort(Comparator.comparing(ToDoItem::getCreatedAt, Comparator.reverseOrder()));
     }
+
+    public void sortByTitle(String order) {
+        if (order.equals("asc")) listToDos.sort(Comparator.comparing(ToDoItem::getTitle));
+        else if (order.equals("desc")) listToDos.sort(Comparator.comparing(ToDoItem::getTitle, Comparator.reverseOrder()));
+    }
+
+    public void sortByDone(String order) {
+        if (order.equals("asc")) listToDos.sort(Comparator.comparing(ToDoItem::isDone, Comparator.reverseOrder()));
+        else if (order.equals("desc")) listToDos.sort(Comparator.comparing(ToDoItem::isDone));
+    }
 }

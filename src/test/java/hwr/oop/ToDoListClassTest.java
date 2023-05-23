@@ -22,7 +22,7 @@ public class ToDoListClassTest {
         ToDoList list = new ToDoList("myList");
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.HIGH);
         list.add(item);
-        java.util.List<ToDoItem> itemList = new ArrayList<>();
+        List<ToDoItem> itemList = new ArrayList<>();
         itemList.add(item);
         assertThat(list.getListToDos()).isEqualTo(itemList);
     }
@@ -33,7 +33,7 @@ public class ToDoListClassTest {
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.HIGH);
         list.add(item);
         list.remove(0);
-        java.util.List<ToDoItem> itemList = new ArrayList<>();
+        List<ToDoItem> itemList = new ArrayList<>();
         assertThat(list.getListToDos()).isEqualTo(itemList);
     }
 
@@ -47,7 +47,7 @@ public class ToDoListClassTest {
         list.add(item2);
         list.add(item3);
         list.sortByPriority("asc");
-        java.util.List<ToDoItem> itemList = new ArrayList<>();
+        List<ToDoItem> itemList = new ArrayList<>();
         itemList.add(item3);
         itemList.add(item2);
         itemList.add(item);
@@ -64,7 +64,7 @@ public class ToDoListClassTest {
         list.add(item2);
         list.add(item3);
         list.sortByPriority("desc");
-        java.util.List<ToDoItem> itemList = new ArrayList<>();
+        List<ToDoItem> itemList = new ArrayList<>();
         itemList.add(item);
         itemList.add(item2);
         itemList.add(item3);
@@ -81,7 +81,7 @@ public class ToDoListClassTest {
         list.add(item2);
         list.add(item3);
         list.bubbleUpBucket("Personal");
-        java.util.List<ToDoItem> itemList = new ArrayList<>();
+        List<ToDoItem> itemList = new ArrayList<>();
         itemList.add(item3);
         itemList.add(item);
         itemList.add(item2);
@@ -110,6 +110,76 @@ public class ToDoListClassTest {
         sortedExpected.add(list.getListToDos().get(0));
         list.sortByCreatedAt("desc");
         assertThat(list.getListToDos()).isEqualTo(sortedExpected);
+    }
+
+    @Test
+    void sortByTitleAscTest() {
+        ToDoList list = new ToDoList("myList");
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH);
+        ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", "Math", Priority.MEDIUM);
+        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal", Priority.LOW);
+        list.add(item);
+        list.add(item2);
+        list.add(item3);
+        list.sortByTitle("asc");
+        List<ToDoItem> itemList = new ArrayList<>();
+        itemList.add(item3);
+        itemList.add(item2);
+        itemList.add(item);
+        assertThat(list.getListToDos()).isEqualTo(itemList);
+    }
+
+    @Test
+    void sortByTitleDescTest() {
+        ToDoList list = new ToDoList("myList");
+        ToDoItem item = new ToDoItem("Calculate Something", "More Math over here", "Math", Priority.MEDIUM);
+        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH);
+        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal", Priority.LOW);
+        list.add(item);
+        list.add(item2);
+        list.add(item3);
+        list.sortByTitle("desc");
+        List<ToDoItem> itemList = new ArrayList<>();
+        itemList.add(item2);
+        itemList.add(item);
+        itemList.add(item3);
+        assertThat(list.getListToDos()).isEqualTo(itemList);
+    }
+
+    @Test
+    void sortByDoneAscTest() {
+        ToDoList list = new ToDoList("myList");
+        ToDoItem item = new ToDoItem("Calculate Something", "More Math over here", "Math", Priority.MEDIUM);
+        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH);
+        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal", Priority.LOW);
+        list.add(item);
+        list.add(item2);
+        list.add(item3);
+        item2.setDone(true);
+        list.sortByDone("asc");
+        List<ToDoItem> itemList = new ArrayList<>();
+        itemList.add(item2);
+        itemList.add(item);
+        itemList.add(item3);
+        assertThat(list.getListToDos()).isEqualTo(itemList);
+    }
+
+    @Test
+    void sortByDoneDescTest() {
+        ToDoList list = new ToDoList("myList");
+        ToDoItem item = new ToDoItem("Calculate Something", "More Math over here", "Math", Priority.MEDIUM);
+        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH);
+        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal", Priority.LOW);
+        list.add(item);
+        list.add(item2);
+        list.add(item3);
+        item2.setDone(true);
+        list.sortByDone("desc");
+        List<ToDoItem> itemList = new ArrayList<>();
+        itemList.add(item);
+        itemList.add(item3);
+        itemList.add(item2);
+        assertThat(list.getListToDos()).isEqualTo(itemList);
     }
 
     @Test

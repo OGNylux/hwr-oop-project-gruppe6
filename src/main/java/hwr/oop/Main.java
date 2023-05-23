@@ -283,8 +283,8 @@ public class Main {
 
     public static void showBuckets(ToDoList toDoList){
         List<Bucket> copy = toDoList.getBuckets();
-        for (int i = 0; i < copy.size(); i++) {
-            out.println(copy.get(i).getBucket());
+        for (Bucket bucket : copy) {
+            out.println(bucket.getBucket());
         }
     }
 
@@ -299,8 +299,8 @@ public class Main {
         out.println("  createdAt       - sort by creation date");
         out.println("  dueDate         - sort by due date"); // TODO
         out.println("  bucket [bucket] - sort by bucket"); // bucket für tag eingesetzt
-        out.println("  title           - sort by title"); // TODO
-        out.println("  done            - sort by done"); // TODO
+        out.println("  title           - sort by title");
+        out.println("  done            - sort by done");
         out.println("  help            - print this help");
     }
 
