@@ -153,6 +153,7 @@ public class Main {
                 priority == 1 ? Priority.LOW : priority == 2 ? Priority.MEDIUM : Priority.HIGH);
         success("Task Created Successfully!");
         list.add(toDoItem);
+        list.addBucket(bucket);
         try {
             list.writeToJSON(list.getFileName());
         } catch (Exception e) {
@@ -266,13 +267,11 @@ public class Main {
     public static void createBucket(ToDoList toDoList, String newBucket){
         List<Bucket> bucketsCopy = toDoList.getBuckets();
         if (bucketsCopy == null){
-            bucketsCopy = new ArrayList<>();
-            bucketsCopy.add(new Bucket(newBucket));
+            toDoList.addBucket(newBucket);
         } else {
             int help = 0;
             for (int i = 0; i < toDoList.getListToDos().size(); i++) {
                 if(Objects.equals(bucketsCopy.get(i).getBucket(), newBucket)){
-                    out.println("Bucket already exists!");
                     help++;
                     break;
                 }
@@ -284,7 +283,10 @@ public class Main {
     }
 
     public static void showBuckets(ToDoList toDoList){
-        out.println(toDoList.getBuckets());
+        List<Bucket> copy = toDoList.getBuckets();
+        for (int i = 0; i < copy.size(); i++) {
+            out.println(copy.get(i).getBucket());
+        }
     }
 
     public static void editBucket(ToDoList toDoList, int index, String newBucket) {
