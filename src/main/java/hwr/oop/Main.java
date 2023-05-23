@@ -289,7 +289,13 @@ public class Main {
     }
 
     public static void editBucket(ToDoList toDoList, int index, String newBucket) {
+        String odlBucket = toDoList.getBuckets().get(index).getBucket();
         toDoList.editBucket(index, newBucket);
+        for (int i = 0; i < toDoList.getListToDos().size(); i++) {
+            if (Objects.equals(toDoList.getListToDos().get(i).getBucket(), odlBucket)) {
+                toDoList.getListToDos().get(i).setBucket(newBucket);
+            }
+        }
     }
 
     public static void sortHelp() {
