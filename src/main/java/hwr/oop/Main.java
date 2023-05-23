@@ -385,19 +385,19 @@ public class Main {
                     clear(toDoList);
                 } else if (commandArray[1].equalsIgnoreCase("promote")) {
                      try {
-                        toDoList.getListToDos()[Integer.parseInt(commandArray[2])].promote();
+                        toDoList.getListToDos()[Integer.parseInt(commandArray[2])].getState().nextState();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         error("Try 'gtd promote [index]'");
                      }
                 } else if (commandArray[1].equalsIgnoreCase("demote")) {
                     try {
-                        toDoList.getListToDos()[Integer.parseInt(commandArray[2])].demote();
+                        toDoList.getListToDos()[Integer.parseInt(commandArray[2])].getState().previousState();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         error("Try 'gtd demote [index]'");
                     }
                 } else if (commandArray[1].equalsIgnoreCase("hold")) {
                     try {
-                        toDoList.getListToDos()[Integer.parseInt(commandArray[2])].hold();
+                        toDoList.getListToDos()[Integer.parseInt(commandArray[2])].getState().hold();
                     } catch (ArrayIndexOutOfBoundsException e) {
                         error("Try 'gtd hold [index]'");
                     }

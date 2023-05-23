@@ -151,7 +151,7 @@ public class List {
     public void bubbleUpBucket(String bucket) {
         for (int i = this.listToDos.length-1; i >= 0; i--) {
             for (int j = this.listToDos.length-1; j > 0; j--) {
-                if (this.listToDos[j].getBucket().contains(tag) && !this.listToDos[j - 1].getBucket().contains(tag)) {
+                if (this.listToDos[j].getBucket().contains(bucket) && !this.listToDos[j - 1].getBucket().contains(bucket)) {
                     ToDoItem temp = this.listToDos[j];
                     this.listToDos[j] = this.listToDos[j - 1];
                     this.listToDos[j - 1] = temp;

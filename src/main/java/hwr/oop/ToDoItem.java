@@ -47,8 +47,9 @@ public class ToDoItem {
     public String getDescription() {
         return description;
     }
-    public String getState() {
-        return state.toString();
+
+    public State getState() {
+        return state;
     }
     public String getStateEmoji() {
         try {
@@ -80,6 +81,18 @@ public class ToDoItem {
                 return "❓";
         }
     }
+    public void promote() {
+        State nextState = state.nextState();
+        this.state = nextState;
+    }
+    public void demote() {
+        State previousState = state.previousState();
+        this.state = state.previousState();
+    }
+    public void hold(){
+        State hold = state.hold();
+        this.state = state.hold();
+    }
     public boolean isDone() {
         return state == State.DONE;
     }
@@ -101,50 +114,4 @@ public class ToDoItem {
     public String getCreatedAt() {
         return createdAt;
     }
-    public void promote() {
-        switch (state) {
-            case TODO:
-                state = State.IN_PROGRESS;
-                break;
-            case IN_PROGRESS:
-                state = State.DONE;
-                break;
-            case ON_HOLD:
-                state = State.IN_PROGRESS;
-                break;
-            case DONE:
-                break;
-        }
-    }
-    public void demote() {
-        switch (state) {
-            case TODO:
-                break;
-            case IN_PROGRESS:
-                state = State.TODO;
-                break;
-            case ON_HOLD:
-                state = State.TODO;
-                break;
-            case DONE:
-                state = State.IN_PROGRESS;
-                break;
-        }
-    }
-
-    public void hold() {
-        switch (state) {
-            case TODO:
-                break;
-            case IN_PROGRESS:
-                state = State.ON_HOLD;
-                break;
-            case ON_HOLD:
-                break;
-            case DONE:
-                break;
-        }
-    }
-
-
 }

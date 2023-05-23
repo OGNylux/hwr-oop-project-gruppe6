@@ -16,7 +16,7 @@ class ToDoItemTest {
     }
     @Test
     void getTitleTest() {
-        ToDoItem item = new ToDoItem("testTitle", "testDesc", "testbucket", false, Priority.LOW);
+        ToDoItem item = new ToDoItem("testTitle", "testDesc", "testbucket", Priority.LOW);
         String result = item.getTitle();
         assertThat(result).isEqualTo("testTitle");
     }
@@ -102,52 +102,52 @@ class ToDoItemTest {
     }
     @Test
     void promotionTest() {
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW,  new Project("test"));
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW);
         item.promote(); // TODO -> IN PROGRESS
-        assertThat(item.getState()).isEqualTo("IN_PROGRESS");
+        assertThat(item.getState()).isEqualTo(State.IN_PROGRESS);
         item.promote(); // IN PROGRESS -> DONE
-        assertThat(item.getState()).isEqualTo("DONE");
+        assertThat(item.getState()).isEqualTo(State.DONE);
     }
 
     @Test
     void demotionTest() {
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW,  new Project("test"));
-        item.promote(); // TODO -> IN PROGRESS
-        item.demote(); // IN PROGRESS -> TODO
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW);
+        item.getState().nextState(); // TODO -> IN PROGRESS
+        item.getState().previousState(); // IN PROGRESS -> TODO
         assertThat(item.getState()).isEqualTo("TODO");
-        item.promote(); // TODO -> IN PROGRESS
-        item.promote(); // IN PROGRESS -> DONE
-        item.demote(); // DONE -> IN PROGRESS
+        item.getState().nextState(); // TODO -> IN PROGRESS
+        item.getState().nextState(); // IN PROGRESS -> DONE
+        item.getState().previousState(); // DONE -> IN PROGRESS
         assertThat(item.getState()).isEqualTo("IN_PROGRESS");
     }
 
     @Test
     void holdTest() {
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW,  new Project("test"));
-        item.hold(); // TODO -> HOLD
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW);
+        item.getState().hold(); // TODO -> HOLD
         assertThat(item.getState()).isEqualTo("TODO");
-        item.promote(); // HOLD -> IN PROGRESS
-        item.hold();    // IN PROGRESS -> HOLD
+        item.getState().nextState(); // HOLD -> IN PROGRESS
+        item.getState().hold();    // IN PROGRESS -> HOLD
         assertThat(item.getState()).isEqualTo("ON_HOLD");
     }
 
     @Test
     void getPriorityStringTest() {
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW,  new Project("test"));
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW);
         String result = item.getPriorityString();
         assertThat(result).isEqualTo("[1;34mLOW[0m");
     }
 
     @Test
     void getStateEmojiTest() {
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW,  new Project("test"));
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.LOW);
         String result = item.getStateEmoji();
         assertThat(result).isEqualTo("⏭️");
     }
 
     @Test
     void setCreatedAtTest() {
-        ToDoItem item = new ToDoItem("", "", "", Priority.LOW, new Project(""));
+        ToDoItem item = new ToDoItem("", "", "", Priority.LOW);
         String test = "test";
         item.setCreatedAt(LocalDateTime.of(2020, 1, 1, 1, 1));
         String result = item.getCreatedAt();

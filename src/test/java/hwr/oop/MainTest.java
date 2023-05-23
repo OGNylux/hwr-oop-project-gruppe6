@@ -203,7 +203,7 @@ class MainTest {
             System.setOut(new PrintStream(outBuffer));
 
             List toDoList = new List("MyList");
-            toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW, new Project("Test")));
+            toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
             Main.edit(toDoList, 0);
             // Check the program output
             String expectedOutput;
@@ -248,8 +248,8 @@ class MainTest {
             System.setOut(new PrintStream(outBuffer));
 
             List toDoList = new List("MyList", "editTestFile");
-            toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW, new Project("Test")));
-            toDoList.add(new ToDoItem("Test", "Test", "Test", false, Priority.LOW));
+            toDoList.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
+            toDoList.add(new ToDoItem("Test", "Test", "Test",  Priority.LOW));
             Main.edit(toDoList, 0);
             // Check the program output
             String expectedOutput;
@@ -284,8 +284,8 @@ class MainTest {
         PrintStream sysOutBackup = System.out;
 
         ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem("Test", "Test", "Test", false, Priority.LOW);
-        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", false, Priority.LOW);
+        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW);
+        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW);
 
         List toDoList = new List("MyList");
         toDoList.setListToDos(toDoItems);
@@ -336,8 +336,8 @@ class MainTest {
         PrintStream sysOutBackup = System.out;
 
         ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem("Test", "Test", "Test", false, Priority.LOW);
-        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", false, Priority.LOW);
+        toDoItems[0] = new ToDoItem("Test", "Test", "Test",  Priority.LOW);
+        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW);
 
         List toDoList = new List("MyList");
         toDoList.setListToDos(toDoItems);
@@ -533,7 +533,7 @@ class MainTest {
     void clearTest() {
         PrintStream sysOutBackup = System.out;
         List list = new List("MyList");
-        list.add(new ToDoItem("Apple", "Computers", "Fruit", false, Priority.MEDIUM));
+        list.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
         try {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
@@ -550,7 +550,7 @@ class MainTest {
         PrintStream sysOutBackup = System.out;
         List list = new List("MyList");
         list.setFileName("listTest.json");
-        list.add(new ToDoItem("Apple", "Computers", "Fruit", false, Priority.MEDIUM));
+        list.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
         try {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer));
