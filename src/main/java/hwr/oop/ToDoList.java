@@ -20,18 +20,22 @@ public class ToDoList {
     public ToDoList(String name) {
         this(name, null);
     }
+
     public ToDoList(String name, String fileName) {
         this.name = name;
         this.listToDos = new ArrayList<>();
         this.fileName = fileName;
         this.buckets = new ArrayList<>();
     }
+
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getName() {
         return this.name;
     }
@@ -51,6 +55,7 @@ public class ToDoList {
     public void setListToDos(List<ToDoItem> listToDos) {
         this.listToDos = listToDos;
     }
+
     public String getFileName() {
         return this.fileName;
     }
@@ -78,29 +83,6 @@ public class ToDoList {
             e.printStackTrace();
         }
     }
-
-    /*public void updateBuckets(){
-        java.util.ArrayList<Bucket> copyBucket = new ArrayList<>();
-        for (int i = 0; i < ListToDos.length; i++) {
-
-            String element = ListToDos[i].getBucket();
-            int help = 0;
-            for (int j = 0; j < ListToDos.length; j++) {
-                if(Buckets.get(j).getBucket() == element) {
-                    help++;
-                    break;
-                }
-            }
-
-            if(help == 0) {
-                copyBucket.add(new Bucket(element));
-            }
-
-        }
-
-        Buckets = copyBucket;
-    }*/
-
 
     public void editBucket (int index, String newBucket) {
         this.buckets.set(index, new Bucket(newBucket));

@@ -21,36 +21,47 @@ public class ToDoItem {
         this.priority = priority;
         this.state = State.TODO;
     }
+
     void setTitle(String title) {
         this.title = title;
     }
+
     void setDescription(String description) {
         this.description = description;
     }
+
     void setDone(boolean done) {
         this.state = State.DONE;
     }
+
     void setPriority(Priority priority) {
         this.priority = priority;
     }
+
     void setBucket(String bucket) {
         this.bucket.setBucket(bucket);
     }
+
     static String getLocalDate() {
         return LocalDate.now().toString();
     }
+
     public String getTitle() {
         return title;
     }
+
     public String getBucket() {
         return bucket.getBucket();
     }
+
     public String getDescription() {
         return description;
     }
+
     public String getState() {
         return state.toString();
     }
+
     public String getStateEmoji() {
         try {
             switch (state) {
@@ -69,6 +80,7 @@ public class ToDoItem {
             return "❓";
         }
     }
+
     public String getPriorityString() {
         switch (priority) {
             case LOW:
@@ -81,15 +93,19 @@ public class ToDoItem {
                 return "❓";
         }
     }
+
     public boolean isDone() {
         return state == State.DONE;
     }
+
     public Priority getPriority() {
         return priority;
     }
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt.toString();
     }
+
     @Override
     public String toString() {
         String stateSymbol = getStateEmoji() + ' ';
@@ -99,9 +115,11 @@ public class ToDoItem {
                 "<" + bucket.getBucket() + ">" + ' ' +
                 priorityString;
     }
+
     public String getCreatedAt() {
         return createdAt;
     }
+
     public void promote() {
         switch (state) {
             case TODO:
@@ -117,6 +135,7 @@ public class ToDoItem {
                 break;
         }
     }
+
     public void demote() {
         switch (state) {
             case TODO:
