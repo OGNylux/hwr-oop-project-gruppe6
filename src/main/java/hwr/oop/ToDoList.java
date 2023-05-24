@@ -117,15 +117,12 @@ public class ToDoList {
     }
 
     public void bubbleUpBucket(String bucket) {
-        for (int i = this.listToDos.size()-1; i >= 0; i--) {
-            for (int j = this.listToDos.size()-1; j > 0; j--) {
-                if (this.listToDos.get(j).getBucket().contains(bucket) && !this.listToDos.get(j - 1).getBucket().contains(bucket)) {
-                    ToDoItem temp = this.listToDos.get(j);
-                    this.listToDos.set(j, this.listToDos.get(j - 1));
-                    this.listToDos.set(j - 1, temp);
-                }
+        listToDos.sort((o1, o2) -> {
+            if(Objects.equals(o1.getBucket(), o2.getBucket())){
+                return 0;
             }
-        }
+            return Objects.equals(o1.getBucket(), bucket) ? -1 : 1;
+        });
     }
 
     public void sortByCreatedAt(String order) {

@@ -80,11 +80,11 @@ public class ToDoListClassTest {
         list.add(item);
         list.add(item2);
         list.add(item3);
-        list.bubbleUpBucket("Personal");
+        list.bubbleUpBucket("Math");
         List<ToDoItem> itemList = new ArrayList<>();
-        itemList.add(item3);
-        itemList.add(item);
         itemList.add(item2);
+        itemList.add(item);
+        itemList.add(item3);
         assertThat(list.getListToDos()).isEqualTo(itemList);
     }
 
