@@ -285,7 +285,7 @@ class MainTest {
         InputStream sysInBackup = System.in;
         PrintStream sysOutBackup = System.out;
 
-        java.util.ArrayList<ToDoItem> toDoItems = new ArrayList<>();
+        ArrayList<ToDoItem> toDoItems = new ArrayList<>();
         toDoItems.add(new ToDoItem("Test", "Test", "Test", Priority.LOW));
         toDoItems.add(new ToDoItem("Test2", "Test2", "Test2", Priority.LOW));
 
@@ -613,7 +613,7 @@ class MainTest {
             ByteArrayOutputStream outBuffer3 = new ByteArrayOutputStream();
             System.setOut(new PrintStream(outBuffer3));
             Main.add(list);
-            java.util.List<Bucket> TestBuckets = list.getBuckets();
+            List<Bucket> TestBuckets = list.getBuckets();
             assertThat(TestBuckets).isEqualTo(list.getBuckets());
         }finally {
             System.setOut(sysOutBackup);

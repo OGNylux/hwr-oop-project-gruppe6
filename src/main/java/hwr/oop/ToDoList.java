@@ -29,12 +29,22 @@ public class ToDoList {
         this.buckets = new ArrayList<>();
     }
 
+    //setter
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setListToDos(List<ToDoItem> listToDos) {
+        this.listToDos = listToDos;
+    } //needs test?
+
+    //getter
+    public String getFileName() {
+        return this.fileName;
     }
 
     public String getName() {
@@ -49,59 +59,6 @@ public class ToDoList {
         return this.buckets;
     }
 
-    public void addBucket(String newBucket) {
-        List<Bucket> bucketsCopy = this.buckets;
-        if (bucketsCopy == null){
-            this.buckets.add(new Bucket(newBucket));
-        } else {
-            int help = 0;
-            for (Bucket bucket : bucketsCopy) {
-                if (Objects.equals(bucket.getBucket(), newBucket)) {
-                    help++;
-                    break;
-                }
-            }
-            if (help == 0) {
-                this.buckets.add(new Bucket(newBucket));
-            }
-        }
-    }
-
-    public void setListToDos(List<ToDoItem> listToDos) {
-        this.listToDos = listToDos;
-    }
-
-    public String getFileName() {
-        return this.fileName;
-    }
-
-    public void writeToJSON(String fileName) {
-        //remove any file extension if present
-        if (fileName.contains(".")) {
-            fileName = fileName.substring(0, fileName.lastIndexOf('.'));
-        }
-        Gson gson = new GsonBuilder().create();
-        String json = gson.toJson(this);
-
-        try (FileWriter fileWriter = new FileWriter(fileName + ".json")) {
-            fileWriter.write(json);
-        } catch (FileNotFoundException e) {
-            File file = new File(fileName + ".json");
-            try {
-                boolean fileExists = file.createNewFile();
-                if (!fileExists) this.writeToJSON(fileName);
-                else System.out.println("Sorry...File could not be neither found nor created.");
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void editBucket (int index, String newBucket) {
-        this.buckets.set(index, new Bucket(newBucket));
-    }
 
     public void add(ToDoItem toDoItem) {
         listToDos.add(toDoItem);
@@ -109,6 +66,19 @@ public class ToDoList {
 
     public void remove(int index) {
         this.listToDos.remove(index);
+    }
+
+    public void addBucket(String newBucket) {
+        List<Bucket> bucketsCopy = this.buckets;
+        boolean containsBucket = bucketsCopy.stream().anyMatch(o -> newBucket.equals(o.getBucket()));
+
+        if (!containsBucket || bucketsCopy.isEmpty()){
+            this.buckets.add(new Bucket(newBucket));
+        }
+    }
+
+    public void editBucket (int index, String newBucket) {
+        this.buckets.set(index, new Bucket(newBucket));
     }
 
     public void sortByPriority(String order) {
@@ -138,5 +108,29 @@ public class ToDoList {
     public void sortByDone(String order) {
         if (order.equals("asc")) listToDos.sort(Comparator.comparing(ToDoItem::isDone, Comparator.reverseOrder()));
         else if (order.equals("desc")) listToDos.sort(Comparator.comparing(ToDoItem::isDone));
+    }
+
+    public void writeToJSON(String fileName) {
+        //remove any file extension if present
+        if (fileName.contains(".")) {
+            fileName = fileName.substring(0, fileName.lastIndexOf('.'));
+        }
+        Gson gson = new GsonBuilder().create();
+        String json = gson.toJson(this);
+
+        try (FileWriter fileWriter = new FileWriter(fileName + ".json")) {
+            fileWriter.write(json);
+        } catch (FileNotFoundException e) {
+            File file = new File(fileName + ".json");
+            try {
+                boolean fileExists = file.createNewFile();
+                if (!fileExists) this.writeToJSON(fileName);
+                else System.out.println("Sorry...File could not be neither found nor created.");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

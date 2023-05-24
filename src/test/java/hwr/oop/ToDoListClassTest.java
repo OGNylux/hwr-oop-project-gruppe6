@@ -10,11 +10,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ToDoListClassTest {
 
     @Test
-    void setListName() {
+    void setNameTest() {
         ToDoList list = new ToDoList("wrongName");
         list.setName("rightName");
         String TestName = list.getName();
         assertThat(TestName).isEqualTo("rightName");
+    }
+
+    @Test
+    void getBucketsTest() {
+        ToDoList list = new ToDoList("myList");
+        list.add(new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH));
+        list.addBucket("Uni");
+        List<Bucket> testBuckets = list.getBuckets();
+        assertThat(testBuckets.get(0).getBucket()).isEqualTo("Uni");
     }
 
     @Test
@@ -35,6 +44,21 @@ public class ToDoListClassTest {
         list.remove(0);
         List<ToDoItem> itemList = new ArrayList<>();
         assertThat(list.getListToDos()).isEqualTo(itemList);
+    }
+
+    @Test
+    void addBucketTest() {
+        ToDoList list =  new ToDoList("myList");
+        list.addBucket("Test");
+        assertThat(list.getBuckets().get(0).getBucket()).isEqualTo("Test");
+    }
+
+    @Test
+    void editBucketTest() {
+        ToDoList list = new ToDoList("myList");
+        list.addBucket("Test");
+        list.editBucket(0, "Boo");
+        assertThat(list.getBuckets().get(0).getBucket()).isEqualTo("Boo");
     }
 
     @Test
@@ -180,30 +204,5 @@ public class ToDoListClassTest {
         itemList.add(item3);
         itemList.add(item2);
         assertThat(list.getListToDos()).isEqualTo(itemList);
-    }
-
-    @Test
-    void getBucketsTest() {
-        ToDoList list = new ToDoList("myList");
-        list.add(new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", Priority.HIGH));
-        list.addBucket("Uni");
-        List<Bucket> testBuckets;
-        testBuckets = list.getBuckets();
-        assertThat(testBuckets.get(0).getBucket()).isEqualTo("Uni");
-    }
-
-    @Test
-    void addBucketTest() {
-        ToDoList list =  new ToDoList("myList");
-        list.addBucket("Test");
-        assertThat(list.getBuckets().get(0).getBucket()).isEqualTo("Test");
-    }
-
-    @Test
-    void editBucketTest() {
-        ToDoList list = new ToDoList("myList");
-        list.addBucket("Test");
-        list.editBucket(0, "Boo");
-        assertThat(list.getBuckets().get(0).getBucket()).isEqualTo("Boo");
     }
 }

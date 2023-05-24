@@ -265,19 +265,10 @@ public class Main {
 
     public static void createBucket(ToDoList toDoList, String newBucket){
         List<Bucket> bucketsCopy = toDoList.getBuckets();
-        if (bucketsCopy == null){
+        boolean containsBucket = bucketsCopy.stream().anyMatch(o -> newBucket.equals(o.getBucket()));
+
+        if (!containsBucket || bucketsCopy.isEmpty()){
             toDoList.addBucket(newBucket);
-        } else {
-            int help = 0;
-            for (Bucket bucket : bucketsCopy) {
-                if (Objects.equals(bucket.getBucket(), newBucket)) {
-                    help++;
-                    break;
-                }
-            }
-            if (help == 0) {
-                toDoList.addBucket(newBucket);
-            }
         }
     }
 
@@ -289,10 +280,10 @@ public class Main {
     }
 
     public static void editBucket(ToDoList toDoList, int index, String newBucket) {
-        String odlBucket = toDoList.getBuckets().get(index).getBucket();
+        String oldBucket = toDoList.getBuckets().get(index).getBucket();
         toDoList.editBucket(index, newBucket);
         for (int i = 0; i < toDoList.getListToDos().size(); i++) {
-            if (Objects.equals(toDoList.getListToDos().get(i).getBucket(), odlBucket)) {
+            if (Objects.equals(toDoList.getListToDos().get(i).getBucket(), oldBucket)) {
                 toDoList.getListToDos().get(i).setBucket(newBucket);
             }
         }

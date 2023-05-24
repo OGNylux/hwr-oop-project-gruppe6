@@ -22,16 +22,13 @@ public class ToDoItem {
         this.state = State.TODO;
     }
 
+    //setter
     void setTitle(String title) {
         this.title = title;
     }
 
     void setDescription(String description) {
         this.description = description;
-    }
-
-    void setDone(boolean done) {
-        this.state = State.DONE;
     }
 
     void setPriority(Priority priority) {
@@ -41,8 +38,16 @@ public class ToDoItem {
     void setBucket(String bucket) {
         this.bucket.setBucket(bucket);
     }
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt.toString();
+    }
 
-    static String getLocalDate() {
+    void setDone(boolean done) {
+        this.state = State.DONE;
+    }
+
+    //getter
+    static String getLocalDate() {      //redundant?
         return LocalDate.now().toString();
     }
 
@@ -50,16 +55,28 @@ public class ToDoItem {
         return title;
     }
 
-    public String getBucket() {
-        return bucket.getBucket();
-    }
-
     public String getDescription() {
         return description;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public String getBucket() {
+        return bucket.getBucket();
+    }
+
+    public boolean isDone() {
+        return state == State.DONE;
+    }
+
     public String getState() {
         return state.toString();
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
     }
 
     public String getStateEmoji() {
@@ -92,32 +109,6 @@ public class ToDoItem {
             default:
                 return "❓";
         }
-    }
-
-    public boolean isDone() {
-        return state == State.DONE;
-    }
-
-    public Priority getPriority() {
-        return priority;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt.toString();
-    }
-
-    @Override
-    public String toString() {
-        String stateSymbol = getStateEmoji() + ' ';
-        String priorityString = getPriorityString();
-        return  stateSymbol + title + '\n' +
-                description + '\n' +
-                "<" + bucket.getBucket() + ">" + ' ' +
-                priorityString;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
     }
 
     public void promote() {
@@ -164,5 +155,15 @@ public class ToDoItem {
             case DONE:
                 break;
         }
+    }
+
+    @Override
+    public String toString() {
+        String stateSymbol = getStateEmoji() + ' ';
+        String priorityString = getPriorityString();
+        return  stateSymbol + title + '\n' +
+                description + '\n' +
+                "<" + bucket.getBucket() + ">" + ' ' +
+                priorityString;
     }
 }
