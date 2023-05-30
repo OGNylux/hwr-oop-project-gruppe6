@@ -22,7 +22,6 @@ public class ToDoItem {
         this.state = State.TODO;
     }
 
-    //setter
     void setTitle(String title) {
         this.title = title;
     }
@@ -46,7 +45,6 @@ public class ToDoItem {
         this.state = State.DONE;
     }
 
-    //getter
     static String getLocalDate() {      //redundant?
         return LocalDate.now().toString();
     }

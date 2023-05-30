@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class ToDoItemTest {
-    //setter
     @Test
     void setTitleTest() {
         ToDoItem item = new ToDoItem("testTitle", "testDesc", "testTag", Priority.LOW);
@@ -57,7 +56,6 @@ class ToDoItemTest {
         assertThat(testDone).isTrue();
     }
 
-    //getter
     @Test
     void getLocalDateTest() {
         String result = ToDoItem.getLocalDate();

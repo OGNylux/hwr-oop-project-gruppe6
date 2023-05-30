@@ -33,7 +33,7 @@ public class ToDoListClassTest {
         list.add(item);
         List<ToDoItem> itemList = new ArrayList<>();
         itemList.add(item);
-        assertThat(list.getListToDos()).isEqualTo(itemList);
+        assertThat(list.getItems()).isEqualTo(itemList);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ToDoListClassTest {
         list.add(item);
         list.remove(0);
         List<ToDoItem> itemList = new ArrayList<>();
-        assertThat(list.getListToDos()).isEqualTo(itemList);
+        assertThat(list.getItems()).isEqualTo(itemList);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class ToDoListClassTest {
         itemList.add(item3);
         itemList.add(item2);
         itemList.add(item);
-        assertThat(list.getListToDos()).isEqualTo(itemList);
+        assertThat(list.getItems()).isEqualTo(itemList);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class ToDoListClassTest {
         itemList.add(item);
         itemList.add(item2);
         itemList.add(item3);
-        assertThat(list.getListToDos()).isEqualTo(itemList);
+        assertThat(list.getItems()).isEqualTo(itemList);
     }
 
     @Test
@@ -109,7 +109,7 @@ public class ToDoListClassTest {
         itemList.add(item2);
         itemList.add(item);
         itemList.add(item3);
-        assertThat(list.getListToDos()).isEqualTo(itemList);
+        assertThat(list.getItems()).isEqualTo(itemList);
     }
 
     @Test
@@ -117,11 +117,11 @@ public class ToDoListClassTest {
         Program testProgram = new Program();
         ToDoList list = testProgram.loadList("sortByCreatedAtTest");
         List<ToDoItem> sortedExpected = new ArrayList<>();
-        sortedExpected.add(list.getListToDos().get(0));
-        sortedExpected.add(list.getListToDos().get(1));
-        sortedExpected.add(list.getListToDos().get(2));
+        sortedExpected.add(list.getItems().get(0));
+        sortedExpected.add(list.getItems().get(1));
+        sortedExpected.add(list.getItems().get(2));
         list.sortByCreatedAt("asc");
-        assertThat(list.getListToDos()).isEqualTo(sortedExpected);
+        assertThat(list.getItems()).isEqualTo(sortedExpected);
     }
 
     @Test
@@ -129,11 +129,11 @@ public class ToDoListClassTest {
         Program testProgram = new Program();
         ToDoList list = testProgram.loadList("sortByCreatedAtTest");
         List<ToDoItem> sortedExpected = new ArrayList<>();
-        sortedExpected.add(list.getListToDos().get(2));
-        sortedExpected.add(list.getListToDos().get(1));
-        sortedExpected.add(list.getListToDos().get(0));
+        sortedExpected.add(list.getItems().get(2));
+        sortedExpected.add(list.getItems().get(1));
+        sortedExpected.add(list.getItems().get(0));
         list.sortByCreatedAt("desc");
-        assertThat(list.getListToDos()).isEqualTo(sortedExpected);
+        assertThat(list.getItems()).isEqualTo(sortedExpected);
     }
 
     @Test
@@ -150,7 +150,7 @@ public class ToDoListClassTest {
         itemList.add(item3);
         itemList.add(item2);
         itemList.add(item);
-        assertThat(list.getListToDos()).isEqualTo(itemList);
+        assertThat(list.getItems()).isEqualTo(itemList);
     }
 
     @Test
@@ -167,7 +167,7 @@ public class ToDoListClassTest {
         itemList.add(item2);
         itemList.add(item);
         itemList.add(item3);
-        assertThat(list.getListToDos()).isEqualTo(itemList);
+        assertThat(list.getItems()).isEqualTo(itemList);
     }
 
     @Test
@@ -185,7 +185,7 @@ public class ToDoListClassTest {
         itemList.add(item2);
         itemList.add(item);
         itemList.add(item3);
-        assertThat(list.getListToDos()).isEqualTo(itemList);
+        assertThat(list.getItems()).isEqualTo(itemList);
     }
 
     @Test
@@ -203,6 +203,6 @@ public class ToDoListClassTest {
         itemList.add(item);
         itemList.add(item3);
         itemList.add(item2);
-        assertThat(list.getListToDos()).isEqualTo(itemList);
+        assertThat(list.getItems()).isEqualTo(itemList);
     }
 }
