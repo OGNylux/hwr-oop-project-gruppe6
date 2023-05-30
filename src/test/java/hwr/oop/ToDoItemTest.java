@@ -42,7 +42,6 @@ class ToDoItemTest {
     @Test
     void setCreatedAtTest() {
         ToDoItem item = new ToDoItem("", "", "", Priority.LOW);
-        String test = "test";
         item.setCreatedAt(LocalDateTime.of(2020, 1, 1, 1, 1));
         String result = item.getCreatedAt();
         assertThat(result).isEqualTo(LocalDateTime.of(2020, 1, 1, 1, 1).toString());
