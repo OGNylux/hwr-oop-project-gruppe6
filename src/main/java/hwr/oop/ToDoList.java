@@ -110,7 +110,6 @@ public class ToDoList {
     }
 
     public void writeToJSON(String fileName) {
-        //remove any file extension if present
         if (fileName.contains(".")) {
             fileName = fileName.substring(0, fileName.lastIndexOf('.'));
         }
