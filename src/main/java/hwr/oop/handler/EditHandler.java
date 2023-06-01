@@ -2,6 +2,8 @@ package hwr.oop.handler;
 
 import hwr.oop.*;
 
+import java.time.LocalDate;
+
 public interface EditHandler {
     static void handleUserCommand(ToDoList toDoList, ConsoleUserInterface cui, String[] args) {
         if (args.length >= 3) {
@@ -23,10 +25,12 @@ public interface EditHandler {
                         String description = cui.getDescriptionForEdit(item);
                         Priority priority = cui.getPriorityForEdit(item);
                         String bucket = cui.getBucketForEdit(item);
+                        LocalDate dueDate = cui.getDueDateForEdit(item);
                         item.setTitle(title);
                         item.setDescription(description);
                         item.setPriority(priority);
                         item.setBucket(bucket);
+                        item.setDueDate(dueDate);
                         cui.say("Task Edited Successfully!");
                     } catch (Exception e) {
                         cui.print(LogMode.ERROR, "Try gtd edit [index]");

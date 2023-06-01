@@ -12,13 +12,16 @@ public class ToDoItem {
     private Priority priority;
     private String createdAt;
     private State state;
-    public ToDoItem (String title, String description, String bucket, Priority priority) {
+    private LocalDate dueDate;
+
+    public ToDoItem (String title, String description, String bucket, Priority priority, LocalDate dueDate) {
         this.title = title;
         this.description = description;
         this.bucket = new Bucket(bucket);
         this.createdAt = LocalDateTime.now().toString();
         this.priority = priority;
         this.state = State.TODO;
+        this.dueDate = dueDate;
     }
     public void setTitle(String title) {
         this.title = title;
@@ -35,6 +38,9 @@ public class ToDoItem {
     public void setBucket(String bucket) {
         this.bucket.setBucketName(bucket);
     }
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
     static String getLocalDate() {
         return LocalDate.now().toString();
     }
@@ -49,6 +55,9 @@ public class ToDoItem {
     }
     public String getState() {
         return state.toString();
+    }
+    public LocalDate getDueDate() {
+        return dueDate;
     }
     public String getStateEmoji() {
         try {

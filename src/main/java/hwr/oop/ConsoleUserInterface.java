@@ -4,6 +4,8 @@ import hwr.oop.handler.CommandParser;
 import hwr.oop.util.ConsoleColors;
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ConsoleUserInterface {
     private final PrintStream out;
@@ -152,6 +154,17 @@ public class ConsoleUserInterface {
         }
         return Priority.fromInt(Integer.parseInt(priority));
     }
+    public LocalDate getDueDateForAdd() throws CouldNotReadInputException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        out.println("Please enter a due date for your task");
+        try {
+            return LocalDate.parse(reader.readLine(), formatter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return LocalDate.now();
+    }
     public  String getBucketForAdd() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         out.println("Add a Bucket to group your tasks");
@@ -185,7 +198,7 @@ public class ConsoleUserInterface {
             }
         }
     }
-    public  String getTitleForEdit(ToDoItem item) throws CouldNotReadInputException {
+    public String getTitleForEdit(ToDoItem item) throws CouldNotReadInputException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         out.println("Enter new Title or press enter to skip");
         String title;
@@ -198,7 +211,7 @@ public class ConsoleUserInterface {
         }
     }
 
-    public  String getDescriptionForEdit(ToDoItem item) throws CouldNotReadInputException {
+    public String getDescriptionForEdit(ToDoItem item) throws CouldNotReadInputException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         out.println("Enter new Description or press enter to skip");
         String description;
@@ -211,7 +224,7 @@ public class ConsoleUserInterface {
         }
     }
 
-    public  Priority getPriorityForEdit(ToDoItem item) throws CouldNotReadInputException {
+    public Priority getPriorityForEdit(ToDoItem item) throws CouldNotReadInputException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         out.println("Enter new Priority or press enter to skip");
         out.println("1 - LOW, 2 - MEDIUM, 3 - HIGH");
@@ -229,7 +242,7 @@ public class ConsoleUserInterface {
         }
         return item.getPriority();
     }
-    public  String getBucketForEdit(ToDoItem item) {
+    public String getBucketForEdit(ToDoItem item) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         out.println("Enter new Bucket or press enter to skip");
         String bucket;
@@ -241,6 +254,19 @@ public class ConsoleUserInterface {
             out.println("Could not read your input... skipping");
         }
         return item.getBucket();
+    }
+    public LocalDate getDueDateForEdit(ToDoItem item) throws CouldNotReadInputException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+        out.println("Enter new Due Date or press enter to skip");
+        LocalDate dueDate;
+        try {
+            dueDate = LocalDate.parse(reader.readLine(), formatter);
+            if (dueDate != null) return dueDate;
+            else return item.getDueDate();
+        } catch (Exception e) {
+            throw new CouldNotReadInputException();
+        }
     }
     public void sortHelp() {
         out.println("gtd sort [option]");

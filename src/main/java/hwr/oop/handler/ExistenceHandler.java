@@ -2,6 +2,8 @@ package hwr.oop.handler;
 
 import hwr.oop.*;
 
+import java.time.LocalDate;
+
 public interface ExistenceHandler {
     static void handleUserCommand(ToDoList toDoList, ConsoleUserInterface cui, String[] args) {
         if (args.length >= 2) {
@@ -34,11 +36,13 @@ public interface ExistenceHandler {
         String description = cui.getDescriptionForAdd();
         Priority priority = cui.getPriorityForAdd();
         String bucket = cui.getBucketForAdd();
+        LocalDate deadline = cui.getDueDateForAdd();
         ToDoItem toDoItem = new ToDoItem(
                 title,
                 description,
                 bucket,
-                priority
+                priority,
+                deadline
         );
         cui.print(LogMode.SUCCESS, "Task Created Successfully!");
         toDoList.add(toDoItem);

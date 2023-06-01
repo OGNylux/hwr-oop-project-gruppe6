@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -121,7 +122,7 @@ class ConsoleUITest {
         }
     }
     @Test
-    void getTitleForDescriptionTest(){
+    void getTitleForDescriptionTest(){ //getDescriptionForAdd?
         try {
             String userInput = "MyItem\n";
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
@@ -145,7 +146,7 @@ class ConsoleUITest {
         }
     }
     @Test
-    void getBucketForTest(){
+    void getBucketForTest(){ //for add?
         try {
             String userInput = "MyItem\n";
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
@@ -157,13 +158,25 @@ class ConsoleUITest {
         }
     }
     @Test
+    void getDueDateForAddTest(){
+        try {
+            String userInput = "12.11.2023\n";
+            ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
+            ConsoleUserInterface testConsole = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
+            LocalDate dueDate = testConsole.getDueDateForAdd();
+            assertThat(dueDate).isEqualTo("2023-11-12");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Test
     void listTest() {
         InputStream sysInBackup = System.in;
         PrintStream sysOutBackup = System.out;
 
         ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW);
-        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test", Priority.LOW);
+        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW, LocalDate.now());
+        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test", Priority.LOW, LocalDate.now());
 
         ToDoList toDoList = new ToDoList("MyList");
         toDoList.setItems(toDoItems);
@@ -215,8 +228,8 @@ class ConsoleUITest {
         PrintStream sysOutBackup = System.out;
 
         ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW);
-        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW);
+        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW, LocalDate.now());
+        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW, LocalDate.now());
 
         ToDoList toDoList = new ToDoList("MyList");
         toDoList.setItems(toDoItems);
@@ -344,11 +357,11 @@ class ConsoleUITest {
     void handleSortTest() {
         String[] commandArray = {"gtd", "sort", "prio", "asc"};
         ToDoList toDoList = new ToDoList("MyList");
-        toDoList.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
+        toDoList.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM, LocalDate.now()));
         toDoList.getItems()[0].setCreatedAt(LocalDateTime.of(2020, 1, 1, 0, 0));
-        toDoList.add(new ToDoItem("Cucumber", "Water", "Vegetable", Priority.LOW));
+        toDoList.add(new ToDoItem("Cucumber", "Water", "Vegetable", Priority.LOW, LocalDate.now()));
         toDoList.getItems()[1].setCreatedAt(LocalDateTime.of(2020, 1, 2, 0, 0));
-        toDoList.add(new ToDoItem("Banana", "Minions", "Fruit", Priority.HIGH));
+        toDoList.add(new ToDoItem("Banana", "Minions", "Fruit", Priority.HIGH, LocalDate.now()));
 
         // Priority Test
         toDoList.sortByPriority("asc");

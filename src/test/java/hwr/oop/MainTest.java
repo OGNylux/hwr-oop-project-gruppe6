@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -72,8 +73,8 @@ class MainTest {
         PrintStream sysOutBackup = System.out;
 
         ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW);
-        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW);
+        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW, LocalDate.now());
+        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW, LocalDate.now());
 
         ToDoList toDoList = new ToDoList("MyList");
         toDoList.setItems(toDoItems);
@@ -126,8 +127,8 @@ class MainTest {
         PrintStream sysOutBackup = System.out;
 
         ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW);
-        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW);
+        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW, LocalDate.now());
+        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW, LocalDate.now());
 
         ToDoList toDoList = new ToDoList("MyList");
         toDoList.setItems(toDoItems);
@@ -156,8 +157,8 @@ class MainTest {
     @Test
     void removeFileSpecifiedTest() {
         ToDoItem[] toDoItems = new ToDoItem[2];
-        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW);
-        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW);
+        toDoItems[0] = new ToDoItem("Test", "Test", "Test", Priority.LOW, LocalDate.now());
+        toDoItems[1] = new ToDoItem("Test2", "Test2", "Test2", Priority.LOW, LocalDate.now());
         ToDoList toDoList = new ToDoList("MyList", "removeTestFile");
         toDoList.setItems(toDoItems);
         try {
@@ -285,11 +286,11 @@ class MainTest {
     void handleSortTest() {
         String[] commandArray = {"gtd", "sort", "prio", "asc"};
         ToDoList toDoList = new ToDoList("MyList");
-        toDoList.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
+        toDoList.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM, LocalDate.now()));
         toDoList.getItems()[0].setCreatedAt(LocalDateTime.of(2020, 1, 1, 0, 0));
-        toDoList.add(new ToDoItem("Cucumber", "Water", "Vegetable", Priority.LOW));
+        toDoList.add(new ToDoItem("Cucumber", "Water", "Vegetable", Priority.LOW, LocalDate.now()));
         toDoList.getItems()[1].setCreatedAt(LocalDateTime.of(2020, 1, 2, 0, 0));
-        toDoList.add(new ToDoItem("Banana", "Minions", "Fruit", Priority.HIGH));
+        toDoList.add(new ToDoItem("Banana", "Minions", "Fruit", Priority.HIGH, LocalDate.now()));
 
         // Priority Test
         toDoList.sortByPriority("asc");
@@ -308,7 +309,7 @@ class MainTest {
         PrintStream sysOutBackup = System.out;
         ToDoList toDoList = new ToDoList("MyList");
         toDoList.setFileName("listTest.json");
-        toDoList.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM));
+        toDoList.add(new ToDoItem("Apple", "Computers", "Fruit", Priority.MEDIUM, LocalDate.now()));
         try {
             ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
             ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(new ByteArrayOutputStream()), new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));

@@ -2,6 +2,7 @@ package hwr.oop;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,7 +20,7 @@ public class ToDoListTest {
     @Test
     void addTest() {
         ToDoList toDoList = new ToDoList("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.HIGH);
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.HIGH, LocalDate.now());
         toDoList.add(item);
         ToDoItem[] itemList = new ToDoItem[1];
         itemList[0] = item;
@@ -29,7 +30,7 @@ public class ToDoListTest {
     @Test
     void removeTest() {
         ToDoList toDoList = new ToDoList("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.HIGH);
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", Priority.HIGH, LocalDate.now());
         toDoList.add(item);
         toDoList.remove(0);
         ToDoItem[] itemList = new ToDoItem[0];
@@ -38,9 +39,9 @@ public class ToDoListTest {
     @Test
     void sortByPriorityAscTest() {
         ToDoList toDoList = new ToDoList("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.HIGH);
-        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.MEDIUM);
-        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.LOW);
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.HIGH, LocalDate.now());
+        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.MEDIUM, LocalDate.now());
+        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.LOW, LocalDate.now());
         toDoList.add(item);
         toDoList.add(item2);
         toDoList.add(item3);
@@ -54,9 +55,9 @@ public class ToDoListTest {
     @Test
     void sortByPriorityDescTest() {
         ToDoList toDoList = new ToDoList("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.HIGH);
-        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.MEDIUM);
-        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.LOW);
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.HIGH, LocalDate.now());
+        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.MEDIUM, LocalDate.now());
+        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.LOW, LocalDate.now());
         toDoList.add(item);
         toDoList.add(item2);
         toDoList.add(item3);
@@ -71,9 +72,9 @@ public class ToDoListTest {
     @Test
     void bubbleUpBucketTest() {
         ToDoList toDoList = new ToDoList("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni",  Priority.HIGH);
-        ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", "Math",  Priority.MEDIUM);
-        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal",  Priority.LOW);
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni",  Priority.HIGH, LocalDate.now());
+        ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", "Math",  Priority.MEDIUM, LocalDate.now());
+        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal",  Priority.LOW, LocalDate.now());
         toDoList.add(item);
         toDoList.add(item2);
         toDoList.add(item3);
@@ -108,13 +109,45 @@ public class ToDoListTest {
         toDoList.sortByCreatedAt("desc");
         assertThat(toDoList.getItems()).isEqualTo(sortedExpected);
     }
+    @Test
+    void sortByDueDateAscTest() {
+        ToDoList toDoList = new ToDoList("myList");
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.HIGH, LocalDate.now().plusDays(1));
+        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.MEDIUM, LocalDate.now().plusDays(2));
+        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.LOW, LocalDate.now());
+        toDoList.add(item);
+        toDoList.add(item2);
+        toDoList.add(item3);
+        toDoList.sortByDueDate("asc");
+        ToDoItem[] itemList = new ToDoItem[3];
+        itemList[0] = item3;
+        itemList[1] = item;
+        itemList[2] = item2;
+        assertThat(toDoList.getItems()).isEqualTo(itemList);
+    }
+    @Test
+    void sortByDueDateDescTest() {
+        ToDoList toDoList = new ToDoList("myList");
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.HIGH, LocalDate.now().plusDays(1));
+        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.MEDIUM, LocalDate.now().plusDays(2));
+        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni",  Priority.LOW, LocalDate.now());
+        toDoList.add(item);
+        toDoList.add(item2);
+        toDoList.add(item3);
+        toDoList.sortByDueDate("desc");
+        ToDoItem[] itemList = new ToDoItem[3];
+        itemList[0] = item2;
+        itemList[1] = item;
+        itemList[2] = item3;
+        assertThat(toDoList.getItems()).isEqualTo(itemList);
+    }
 
     @Test
     void getBucketsTest() {
         ToDoList toDoList = new ToDoList("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni",  Priority.HIGH);
-        ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", "Math",  Priority.MEDIUM);
-        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal",  Priority.LOW);
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni",  Priority.HIGH, LocalDate.now());
+        ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", "Math",  Priority.MEDIUM, LocalDate.now());
+        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal",  Priority.LOW, LocalDate.now());
         toDoList.add(item);
         toDoList.add(item2);
         toDoList.add(item3);

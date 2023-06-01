@@ -19,7 +19,7 @@ public class Main {
         out.println("Options:");
         out.println("  priority        - sort by priority");
         out.println("  createdAt       - sort by creation date");
-        out.println("  dueDate         - sort by due date"); // TODO
+        out.println("  dueDate         - sort by due date");
         out.println("  bucket [bucket] - sort by bucket"); // bucket für tag eingesetzt
         out.println("  title           - sort by title"); // TODO
         out.println("  done            - sort by done"); // TODO

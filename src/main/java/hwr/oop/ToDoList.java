@@ -184,4 +184,29 @@ public class ToDoList {
             }
         }
     }
+    //old sorting algorithm
+    //will be replaced with branch ArraysAsList
+    public void sortByDueDate(String order) {
+        if (order.equals("asc"))
+            for (int i = 0; i < this.items.length; i++) {
+                for (int j = 0; j < this.items.length - 1; j++) {
+                    if (this.items[j].getDueDate().compareTo(this.items[j + 1].getDueDate()) > 0) {
+                        ToDoItem temp = this.items[j];
+                        this.items[j] = this.items[j + 1];
+                        this.items[j + 1] = temp;
+                    }
+                }
+            }
+        else if (order.equals("desc")) {
+            for (int i = 0; i < this.items.length; i++) {
+                for (int j = 0; j < this.items.length - 1; j++) {
+                    if (this.items[j].getDueDate().compareTo(this.items[j + 1].getDueDate()) < 0) {
+                        ToDoItem temp = this.items[j];
+                        this.items[j] = this.items[j + 1];
+                        this.items[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
 }
