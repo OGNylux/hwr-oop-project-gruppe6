@@ -154,7 +154,7 @@ public class ConsoleUserInterface {
         }
         return Priority.fromInt(Integer.parseInt(priority));
     }
-    public LocalDate getDueDateForAdd() throws CouldNotReadInputException {
+    public LocalDate getDueDateForAdd() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         out.println("Please enter a due date for your task");
