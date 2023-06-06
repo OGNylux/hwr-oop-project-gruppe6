@@ -6,10 +6,24 @@ import hwr.oop.util.ConsoleColors;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 
 public class ConsoleUserInterface {
     private final PrintStream out;
     private final InputStream in;
+
+    private final DateTimeFormatter formatter = new DateTimeFormatterBuilder()
+            .appendOptional(DateTimeFormatter.ofPattern("dd.MM.yyyy"))
+            .appendOptional(DateTimeFormatter.ofPattern("d.MM.yyyy"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd.M.yyyy"))
+            .appendOptional(DateTimeFormatter.ofPattern("d.M.yyyy"))
+
+            .appendOptional(DateTimeFormatter.ofPattern("dd.MM.yy"))
+            .appendOptional(DateTimeFormatter.ofPattern("d.MM.yy"))
+            .appendOptional(DateTimeFormatter.ofPattern("dd.M.yy"))
+            .appendOptional(DateTimeFormatter.ofPattern("d.M.yy"))
+            .toFormatter();
+
     public ConsoleUserInterface(PrintStream out, InputStream in) {
         this.out = out;
         this.in = in;
@@ -156,7 +170,6 @@ public class ConsoleUserInterface {
     }
     public LocalDate getDueDateForAdd() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         out.println("Please enter a due date for your task");
         try {
             return LocalDate.parse(reader.readLine(), formatter);
@@ -257,7 +270,6 @@ public class ConsoleUserInterface {
     }
     public LocalDate getDueDateForEdit(ToDoItem item) throws CouldNotReadInputException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         out.println("Enter new Due Date or press enter to skip");
         LocalDate dueDate;
         try {

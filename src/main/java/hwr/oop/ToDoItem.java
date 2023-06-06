@@ -105,7 +105,7 @@ public class ToDoItem {
         return  stateSymbol + title + '\n' +
                 description + '\n' +
                 "<" +  CYAN_BOLD + bucket.getBucketName() + RESET + ">" +
-                ' ' + priorityString;
+                ' ' + priorityString + ' ' + dueDate;
     }
     public String getCreatedAt() {
         return createdAt;

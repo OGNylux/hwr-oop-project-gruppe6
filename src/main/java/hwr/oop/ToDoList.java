@@ -2,12 +2,14 @@ package hwr.oop;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import hwr.oop.util.LocalDateTypeAdapter;
 import hwr.oop.util.Util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -60,7 +62,9 @@ public class ToDoList {
         if (fileName.contains(".")) {
             fileName = fileName.substring(0, fileName.lastIndexOf('.'));
         }
-        Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+                .create();
         String json = gson.toJson(this);
 
         try (FileWriter fileWriter = new FileWriter(fileName + ".json")) {

@@ -92,7 +92,7 @@ class ToDoItemTest {
         assertThat(result).isEqualTo(state + " " + item.getTitle() + '\n' +
                 item.getDescription() +  '\n' +
                 "<" +"[1;36mUni[0m" + ">" + ' ' +
-                priority);
+                priority + ' ' + item.getDueDate());
     }
     @Test
     void getCreatedAtTest() {

@@ -1,13 +1,19 @@
 package hwr.oop;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import hwr.oop.util.LocalDateTypeAdapter;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.time.LocalDate;
 
 public class Program {
     public ToDoList loadToDoList(String fileName) {
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateTypeAdapter())
+                .create();
         String json;
         if (fileName.contains(".")) {
             fileName = fileName.substring(0, fileName.lastIndexOf('.'));
