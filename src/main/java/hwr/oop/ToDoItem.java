@@ -13,7 +13,7 @@ public class ToDoItem {
     private String tag;
     private boolean done;
     private Priority priority;
-    private EstimatedTime estimatedTime;
+    private static EstimatedTime estimatedTime;
     private Project project;
     private String createdAt;
 
@@ -64,7 +64,7 @@ public class ToDoItem {
     public Priority getPriority() {
         return priority;
     }
-    public EstimatedTime getEstimatedTime(){return estimatedTime; }
+    public static EstimatedTime getEstimatedTime(){return estimatedTime; }
     public String getProjectName() {
         return project.getTitle();
     }

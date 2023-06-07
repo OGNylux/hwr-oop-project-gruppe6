@@ -11,6 +11,7 @@ import static hwr.oop.ConsoleColors.RESET;
 public class Main {
     private static final PrintStream out = new PrintStream(System.out);
     private static final String CLEAR_SCREEN = "\033[H\033[2J";
+    private static final String Message_EstimatedTime = "1 - yourTime<5min, 2 - 5min<yourTime<30min, 3 - 30min<yourTime<1hr, 4 - yourTime>1hr";
     public static void error(String message) {
         System.out.println(ConsoleColors.RED_BOLD + message + ConsoleColors.RESET);
     }
@@ -139,7 +140,7 @@ public class Main {
             e.printStackTrace();
         }
         out.println("Please enter an estimated time that it takes for you to finish this task");
-        out.println("1 - yourTime<5min, 2 - 5min<yourTime<30min, 3 - 30min<yourTime<1hr, 4 - yourTime>1hr");
+        out.println(Message_EstimatedTime);
         int estimatedTime = -1;
         try {
             estimatedTime = Integer.parseInt(reader.readLine());
@@ -158,8 +159,8 @@ public class Main {
                 description,
                 tag,
                 false ,
-                priority == 1 ? Priority.LOW : priority == 2 ? Priority.MEDIUM : Priority.HIGH,
-                estimatedTime == 1 ? EstimatedTime.SHORT : estimatedTime == 2 ? EstimatedTime.MEDIUM : estimatedTime == 3 ? EstimatedTime.LONG : EstimatedTime.XLONG,
+                priority == 1 ? Priority.LOW : priority == 2 ? Priority.MEDIUM : Priority.HIGH ,
+                estimatedTime == 1 ? EstimatedTime.SHORT : estimatedTime == 2 ? EstimatedTime.MEDIUM : estimatedTime == 3 ? EstimatedTime.LONG : EstimatedTime.XLONG ,
                 new Project(""));
         success("Task Created Successfully!");
         list.add(toDoItem);
@@ -249,6 +250,19 @@ public class Main {
         }
         if (!priority.equals(""))
             item.setPriority(priority.equals("1") ? Priority.LOW : priority.equals("2") ? Priority.MEDIUM : Priority.HIGH);
+        out.println("Enter new estimated Time that will take you to finish your task or press enter to skip");
+        out.println(Main.Message_EstimatedTime);
+        String estimatedTime = "-1";
+        while (!estimatedTime.equals("1") && !estimatedTime.equals("2") && !estimatedTime.equals("3") && !estimatedTime.equals("4") && !estimatedTime.equals("")){
+            try {
+                estimatedTime = "";
+                estimatedTime = reader.readLine();
+            } catch (IOException e) {
+                out.println("Could not read your input... skipping");
+            }
+        }
+        if (!estimatedTime.equals(""))
+            item.setEstimatedTime(estimatedTime.equals("1") ? EstimatedTime.SHORT : estimatedTime.equals("2") ? EstimatedTime.MEDIUM : estimatedTime.equals("3") ? EstimatedTime.LONG :  EstimatedTime.XLONG);
         out.println("Enter new Tag or press enter to skip");
         String tag;
         try {
@@ -263,6 +277,7 @@ public class Main {
         out.println("gtd sort [option]");
         out.println("Options:");
         out.println("  priority - sort by priority");
+        out.println("  estimatedTime - sort by estimated Time per task");
         out.println("  createdAt- sort by creation date");
         out.println("  dueDate  - sort by due date"); // TODO
         out.println("  tag [tag]- sort by tag");
@@ -294,15 +309,26 @@ public class Main {
                 }
             } else if (commandArray[2].toLowerCase().contains("tag")) {
                 list.bubbleUpTag(commandArray[3]);
+            }
+            else if (commandArray[2].toLowerCase().contains("work")){
+                if (commandArray[3].equals("asc")) {
+                    list.sortByEstimatedTime("asc");
+                } else {
+                    list.sortByEstimatedTime("desc");
+                }
+            }
             } else {
                 sortHelp();
-            }
         }
     }
 
 
-    public static void workflow(List list){
 
+    public static void workflow( ){
+        out.println("Please enter your available Time for this workflow");
+        out.println(Main.Message_EstimatedTime);
+        BufferedReader availableTime = new BufferedReader(new InputStreamReader(System.in));
+        Workflow.createWorkflow(availableTime);
     }
 
     public static void clear(List list) {

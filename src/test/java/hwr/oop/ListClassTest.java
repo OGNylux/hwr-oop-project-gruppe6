@@ -73,11 +73,47 @@ public class ListClassTest {
     }
 
     @Test
+    void sortByEstimatedTimeDescTest(){
+        List list = new List("mylist");
+        ToDoItem item = new ToDoItem("Finish OOP Project", "implement workflow feature", "Uni", false, Priority.MEDIUM, EstimatedTime.SHORT, new Project(""));
+        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.MEDIUM, EstimatedTime.MEDIUM, new Project(""));
+        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, EstimatedTime.LONG, new Project(""));
+        ToDoItem item4 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, EstimatedTime.XLONG, new Project(""));
+        list.add(item);
+        list.add(item2);
+        list.add(item3);
+        list.add(item4);
+        list.sortByEstimatedTime("desc");
+        ToDoItem[] itemList = new ToDoItem[4];
+        itemList[0] = item4;
+        itemList[1] = item3;
+        itemList[2] = item2;
+        itemList[3] = item;
+    }
+    @Test
+    void sortByEstimatedTimeAscTest(){
+        List list = new List("mylist");
+        ToDoItem item = new ToDoItem("Finish OOP Project", "implement worflow feature", "Uni", false, Priority.MEDIUM, EstimatedTime.SHORT, new Project(""));
+        ToDoItem item2 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.MEDIUM, EstimatedTime.MEDIUM, new Project(""));
+        ToDoItem item3 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, EstimatedTime.LONG, new Project(""));
+        ToDoItem item4 = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", "Uni", false, Priority.LOW, EstimatedTime.XLONG, new Project(""));
+        list.add(item);
+        list.add(item2);
+        list.add(item3);
+        list.add(item4);
+        list.sortByEstimatedTime("desc");
+        ToDoItem[] itemList = new ToDoItem[4];
+        itemList[0] = item;
+        itemList[1] = item2;
+        itemList[2] = item3;
+        itemList[3] = item4;
+    }
+    @Test
     void bubbleUpTagTest() {
         List list = new List("myList");
-        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", false, Priority.HIGH, new Project(""));
-        ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", "Math", false, Priority.MEDIUM, new Project(""));
-        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal", false, Priority.LOW, new Project(""));
+        ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", "Uni", false, Priority.HIGH, EstimatedTime.SHORT, new Project(""));
+        ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", "Math", false, Priority.MEDIUM, EstimatedTime.MEDIUM, new Project(""));
+        ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", "Personal", false, Priority.LOW, EstimatedTime.LONG, new Project(""));
         list.add(item);
         list.add(item2);
         list.add(item3);
@@ -101,10 +137,10 @@ public class ListClassTest {
         assertThat(list.getListToDos()).isEqualTo(sortedExpected);
     }
 
-    @Test
+    @Test // not needed anymore
     void startWorkflow(){
         List list = new List("myList");
-        ToDoItem item = new ToDoItem ("do math tasks", "Finish the latest worksheet", "Uni", false, Priority.HIGH, new Project(""));
+        ToDoItem item = new ToDoItem ("do math tasks", "Finish the latest worksheet", "Uni", false, Priority.HIGH, EstimatedTime.MEDIUM, new Project(""));
 
     }
 

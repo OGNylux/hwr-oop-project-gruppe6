@@ -167,7 +167,7 @@ class MyAppTest {
             System.setOut(new PrintStream(outBuffer));
 
             List toDoList = new List("MyList");
-            toDoList.add(new ToDoItem("Test", "Test", "Test", false, Priority.LOW, estimatedTime.LONG , new Project("Test")));
+            toDoList.add(new ToDoItem("Test", "Test", "Test", false, Priority.LOW, EstimatedTime.LONG , new Project("Test")));
             Main.edit(toDoList, 0);
             // Check the program output
             String expectedOutput;
@@ -179,6 +179,7 @@ class MyAppTest {
                     "Enter new Description or press enter to skip\n" +
                     "Enter new Priority or press enter to skip\n" +
                     "1 - LOW, 2 - MEDIUM, 3 - HIGH\n" +
+                    "1 - yourTime<5min, 2 - 5min<yourTime<30min, 3 - 30min<yourTime<1hr, 4 - yourTime>1hr\n"+
                     "Enter new Tag or press enter to skip\n" +
                     "Task Edited Successfully!\n";
             String actualOutput = outBuffer.toString();
@@ -186,6 +187,7 @@ class MyAppTest {
             assertThat(toDoList.getListToDos()[0].getTitle()).isEqualTo("MyList");
             assertThat(toDoList.getListToDos()[0].getDescription()).isEqualTo("Description");
             assertThat(toDoList.getListToDos()[0].getPriority()).isEqualTo(Priority.HIGH);
+            assertThat(toDoList.getListToDos()[0].getEstimatedTime()).isEqualTo(EstimatedTime.LONG);
             assertThat(toDoList.getListToDos()[0].getTag()).isEqualTo("Tag");
             assertThat(env).isNotNull();
 
@@ -385,6 +387,7 @@ class MyAppTest {
                     "gtd sort [option]\n" +
                     "Options:\n" +
                     "  priority - sort by priority\n" +
+                    "  estimatedTime - sort by estimated Time per task\n" +
                     "  createdAt- sort by creation date\n" +
                     "  dueDate  - sort by due date\n" +
                     "  tag [tag]- sort by tag\n" +
@@ -401,7 +404,7 @@ class MyAppTest {
     }
 
     @Test
-    void handleSortTest() {
+    void handleSortTest() { //TODO
         String[] commandArray = {"gtd", "sort", "prio", "asc"};
         List list = new List("MyList");
         list.add(new ToDoItem("Apple", "Computers", "Fruit", false, Priority.MEDIUM, EstimatedTime.LONG, new Project("Obstsalat")));
@@ -421,6 +424,22 @@ class MyAppTest {
         assertThat(list.getListToDos()[0].getTitle()).isEqualTo("Banana");
         list.bubbleUpTag(commandArray[3]);
         assertThat(list.getListToDos()[0].getTitle()).isEqualTo("Banana");
+    }
+
+    @Test
+    void workflowTest(){
+        System.setIn(new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
+        ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outBuffer));
+
+        Main.workflow();
+
+        String output1 = new String("Please enter your available Time for this workflow");
+        String output2 = new String("1 - yourTime<5min, 2 - 5min<yourTime<30min, 3 - 30min<yourTime<1hr, 4 - yourTime>1hr");
+        String actualOutput1 = outBuffer.toString();
+        String actualOutput2 = outBuffer.toString();
+        assertEquals(output1, actualOutput1);
+        assertEquals(output2, actualOutput2);
     }
 
     @Test

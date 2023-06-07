@@ -10,6 +10,7 @@ import java.io.IOException;
 public class List {
     private String Name;
     private ToDoItem[] ListToDos;
+    private EstimatedTime[] EstimatedTimes;
     private String fileName;
 
     public List(String name) {
@@ -33,6 +34,8 @@ public class List {
     public ToDoItem[] getListToDos() {
         return this.ListToDos;
     }
+
+    public EstimatedTime[] getEstimatedTime(){ return this.EstimatedTimes; }
 
     public void setListToDos(ToDoItem[] listToDos) {
         this.ListToDos = listToDos;
@@ -93,6 +96,30 @@ public class List {
             for (int i = 0; i < this.ListToDos.length; i++) {
                 for (int j = 0; j < this.ListToDos.length - 1; j++) {
                     if (this.ListToDos[j].getPriority().toInt() < this.ListToDos[j + 1].getPriority().toInt()) {
+                        ToDoItem temp = this.ListToDos[j];
+                        this.ListToDos[j] = this.ListToDos[j + 1];
+                        this.ListToDos[j + 1] = temp;
+                    }
+                }
+            }
+        }
+    }
+
+    public void sortByEstimatedTime(String order) {
+        if (order.equals("asc")){
+            for (int i = 0; i < this.ListToDos.length; i++) {
+                for (int j = 0; j < this.ListToDos.length - 1; j++) {
+                    if (this.ListToDos[j].getEstimatedTime().toInt() > this.ListToDos[j + 1].getEstimatedTime().toInt()) {
+                        ToDoItem temp = this.ListToDos[j];
+                        this.ListToDos[j] = this.ListToDos[j + 1];
+                        this.ListToDos[j + 1] = temp;
+                    }
+                }
+            }
+        } else if (order.equals("desc")) {
+            for (int i = 0; i < this.getListToDos().length; i++) {
+                for (int j = 0; j < this.ListToDos.length - 1; j++) {
+                    if (this.ListToDos[j].getEstimatedTime().toInt() < this.ListToDos[j + 1].getEstimatedTime().toInt()) {
                         ToDoItem temp = this.ListToDos[j];
                         this.ListToDos[j] = this.ListToDos[j + 1];
                         this.ListToDos[j + 1] = temp;
