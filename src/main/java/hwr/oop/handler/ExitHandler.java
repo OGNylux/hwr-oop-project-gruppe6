@@ -15,7 +15,7 @@ public class ExitHandler implements HandlerCommandsInterface{
             if (args[1].equals("exit") || args[1].equals("q")) {
                 try {
                     exit(toDoList, cui);
-                } catch (ExitProgrammException e) {
+                } catch (ExitProgramException e) {
                     cui.print(LogMode.NONE, e.getMessage());
                     return 1;
                 }
@@ -28,18 +28,18 @@ public class ExitHandler implements HandlerCommandsInterface{
         return 0;
     }
   
-    public void exit(ToDoList toDoList, ConsoleUserInterface cui) throws PersistenceFileNotFoundException, ExitProgrammException {
+    public void exit(ToDoList toDoList, ConsoleUserInterface cui) throws PersistenceFileNotFoundException, ExitProgramException {
         cui.print(LogMode.NONE,"Exiting ...");
         try {
             persistenceAdapter.saveData(toDoList);
         } catch (Exception e) {
             cui.print(LogMode.ERROR, "Could not save data.");
         }
-        throw new ExitProgrammException();
+        throw new ExitProgramException();
     }
 
-    public static class ExitProgrammException extends Exception {
-        public ExitProgrammException() {
+    public static class ExitProgramException extends Exception {
+        public ExitProgramException() {
             super("Goodbye!");
         }
     }

@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class EditDialogTest {
     public static final ToDoItem toDoItem = new ToDoItem("MyItem", "MyItem",  new Bucket("MyItem"), Priority.HIGH, LocalDate.now(), EstimatedTime.SHORT);
-    public static final ToDoList toDoList = new ToDoList("MyList", "test.json");
+    public static final ToDoList toDoList = new ToDoList("MyList");
     @Test
     void getTitleForEditTest(){
         try {

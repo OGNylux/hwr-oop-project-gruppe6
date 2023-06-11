@@ -25,7 +25,7 @@ class ListJsonTest {
             throw new RuntimeException(e);
         }
 
-        ToDoList assertToDoList = new ToDoList("MyList", "data.json");
+        ToDoList assertToDoList = new ToDoList("MyList");
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b.", new Bucket("Uni"), Priority.HIGH, LocalDate.of(2024,1,1), EstimatedTime.SHORT);
         ToDoItem item2 = new ToDoItem("Calculate Something", "More Math over here", new Bucket("Math"), Priority.MEDIUM, LocalDate.of(2024,1,1), EstimatedTime.SHORT);
         ToDoItem item3 = new ToDoItem("Be Amazing", "Just Do It", new Bucket("Personal"), Priority.LOW, LocalDate.of(2024,1,1), EstimatedTime.SHORT);
@@ -42,7 +42,7 @@ class ListJsonTest {
                     jsonIn.append((char) character);
                 }
             }
-            assertThat(jsonIn).hasToString("{\"name\":\"MyList\",\"items\":[{\"title\":\"Finish Math homework\",\"description\":\"I need to do tasks 5 - 10b.\",\"bucket\":{\"bucketName\":\"Uni\"},\"priority\":\"HIGH\",\"createdAt\":\"2023-06-11\",\"state\":\"TODO\",\"dueDate\":\"2024-01-01\",\"estimatedTime\":\"SHORT\"},{\"title\":\"Calculate Something\",\"description\":\"More Math over here\",\"bucket\":{\"bucketName\":\"Math\"},\"priority\":\"MEDIUM\",\"createdAt\":\"2023-06-11\",\"state\":\"TODO\",\"dueDate\":\"2024-01-01\",\"estimatedTime\":\"SHORT\"},{\"title\":\"Be Amazing\",\"description\":\"Just Do It\",\"bucket\":{\"bucketName\":\"Personal\"},\"priority\":\"LOW\",\"createdAt\":\"2023-06-11\",\"state\":\"TODO\",\"dueDate\":\"2024-01-01\",\"estimatedTime\":\"SHORT\"}],\"fileName\":\"data.json\",\"buckets\":[]}");
+            assertThat(jsonIn).hasToString("{\"name\":\"MyList\",\"items\":[{\"title\":\"Finish Math homework\",\"description\":\"I need to do tasks 5 - 10b.\",\"bucket\":{\"bucketName\":\"Uni\"},\"priority\":\"HIGH\",\"createdAt\":\"2023-06-11\",\"state\":\"TODO\",\"dueDate\":\"2024-01-01\",\"estimatedTime\":\"SHORT\"},{\"title\":\"Calculate Something\",\"description\":\"More Math over here\",\"bucket\":{\"bucketName\":\"Math\"},\"priority\":\"MEDIUM\",\"createdAt\":\"2023-06-11\",\"state\":\"TODO\",\"dueDate\":\"2024-01-01\",\"estimatedTime\":\"SHORT\"},{\"title\":\"Be Amazing\",\"description\":\"Just Do It\",\"bucket\":{\"bucketName\":\"Personal\"},\"priority\":\"LOW\",\"createdAt\":\"2023-06-11\",\"state\":\"TODO\",\"dueDate\":\"2024-01-01\",\"estimatedTime\":\"SHORT\"}],\"buckets\":[]}");
         } catch (IOException e) {
             assertThat(e.getMessage()).isEqualTo("Sorry...File could not be neither found nor created.");
         } catch (NullPointerException e) {

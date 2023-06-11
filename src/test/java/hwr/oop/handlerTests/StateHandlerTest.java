@@ -21,7 +21,7 @@ class StateHandlerTest {
     }
     @Test
     void doneTest() {
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         assertThat(toDoList.getItems().get(0).isDone()).isFalse();
         ConsoleUserInterface testConsole = new ConsoleUserInterface(System.out, new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
@@ -30,7 +30,7 @@ class StateHandlerTest {
     }
     @Test
     void doneTestBadIndex() {
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         ConsoleUserInterface testConsole = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream("n\n".getBytes(StandardCharsets.UTF_8)));
@@ -42,7 +42,7 @@ class StateHandlerTest {
     }
     @Test
     void handleUserCommandTestInsufficientArgs(){
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         assertThat(toDoList.getItems().get(0).isDone()).isFalse();
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
@@ -53,7 +53,7 @@ class StateHandlerTest {
     }
     @Test
     void handleUserCommandTestUnknownCommand(){
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         assertThat(toDoList.getItems().get(0).isDone()).isFalse();
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
@@ -64,7 +64,7 @@ class StateHandlerTest {
     }
     @Test
     void handleUserCommandTestTooManyArgs(){
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         assertThat(toDoList.getItems().get(0).isDone()).isFalse();
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
@@ -75,7 +75,7 @@ class StateHandlerTest {
     }
     @Test
     void promoteTest() {
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         assertThat(toDoList.getItems().get(0).isDone()).isFalse();
         ConsoleUserInterface testConsole = new ConsoleUserInterface(System.out, new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
@@ -84,7 +84,7 @@ class StateHandlerTest {
     }
     @Test
     void promoteTestBadIndex() {
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         ConsoleUserInterface testConsole = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream("n\n".getBytes(StandardCharsets.UTF_8)));
@@ -96,7 +96,7 @@ class StateHandlerTest {
     }
     @Test
     void demoteTest() {
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         assertThat(toDoList.getItems().get(0).isDone()).isFalse();
         ConsoleUserInterface testConsole = new ConsoleUserInterface(System.out, new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
@@ -107,7 +107,7 @@ class StateHandlerTest {
     }
     @Test
     void demoteTestBadIndex() {
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         ConsoleUserInterface testConsole = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream("n\n".getBytes(StandardCharsets.UTF_8)));
@@ -119,7 +119,7 @@ class StateHandlerTest {
     }
     @Test
     void holdTest() {
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         assertThat(toDoList.getItems().get(0).isDone()).isFalse();
         ConsoleUserInterface testConsole = new ConsoleUserInterface(System.out, new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
@@ -129,7 +129,7 @@ class StateHandlerTest {
     }
     @Test
     void holdTestBadIndex() {
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         ConsoleUserInterface testConsole = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream("n\n".getBytes(StandardCharsets.UTF_8)));
@@ -141,7 +141,7 @@ class StateHandlerTest {
     }
     @Test
     void holdToDoTest() {
-        ToDoList toDoList = new ToDoList("MyList", "listTest.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Test", "Test",  new Bucket("Test"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         assertThat(toDoList.getItems().get(0).isDone()).isFalse();
         ConsoleUserInterface testConsole = new ConsoleUserInterface(System.out, new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
