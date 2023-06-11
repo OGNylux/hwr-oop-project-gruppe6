@@ -1,1 +1,1 @@
-{"name":"MyList","items":[],"fileName":"test.json","buckets":[]}
+{"name":"MyList","items":[{"title":"1","description":"2","bucket":{"bucketName":"4"},"priority":"HIGH","createdAt":"2023-06-11","state":"TODO","dueDate":"2012-05-05","estimatedTime":"MEDIUM"}],"buckets":[{"bucketName":"4"}]}

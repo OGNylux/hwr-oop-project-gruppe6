@@ -25,7 +25,7 @@ class CommandParserTest {
     @Test
     void handleWrongCommandTest() throws CommandParser.CouldNotCallHandlerException {
         String[] args = {"", "wrongCommand"};
-        ToDoList toDoList = new ToDoList("MyList", "testFile.json");
+        ToDoList toDoList = new ToDoList("MyList");
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
         String expected = "Here is a list of all commands:\n" +

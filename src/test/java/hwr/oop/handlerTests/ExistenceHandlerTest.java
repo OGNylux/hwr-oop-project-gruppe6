@@ -25,7 +25,7 @@ class ExistenceHandlerTest {
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         String userInput = "Task\nDescription\n3\nBucket\n1.1.2020\n";
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
-        ToDoList toDoList = new ToDoList("MyList", "test.json");
+        ToDoList toDoList = new ToDoList("MyList");
         String[] args = {"gtd", "add", "Task", "Description", "3", "Bucket", "1.1.2020"};
         new ExistenceHandler().handleUserCommand(toDoList, cui, args);
         assertThat(outBuffer.toString().replace("\r", "")).hasToString("\u001B[1;31mInvalid number of arguments\u001B[0m\n");
@@ -36,7 +36,7 @@ class ExistenceHandlerTest {
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         String userInput = "Task\nDescription\n3\nBucket\n1.1.2020\n";
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
-        ToDoList toDoList = new ToDoList("MyList", "test.json");
+        ToDoList toDoList = new ToDoList("MyList");
         String[] args = {"gtd", "addition"};
         new ExistenceHandler().handleUserCommand(toDoList, cui, args);
         assertThat(outBuffer.toString().replace("\r", "")).hasToString("\u001B[1;31mUnknown command\u001B[0m\n");
@@ -47,7 +47,7 @@ class ExistenceHandlerTest {
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         String userInput = "Task\nDescription\n3\nBucket\n1.1.2020\n3\n";
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
-        ToDoList toDoList = new ToDoList("MyList", "test.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.setItems(null);
         try {
             new ExistenceHandler().add(toDoList, cui);
@@ -60,7 +60,7 @@ class ExistenceHandlerTest {
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         String userInput = "Task\nDescription\n3\nBucket\n1.1.2020\n4\n";
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
-        ToDoList toDoList = new ToDoList("MyList", "test.json");
+        ToDoList toDoList = new ToDoList("MyList");
         String[] args = {"gtd", "add"};
         new ExistenceHandler().handleUserCommand(toDoList, cui, args);
         assertThat(outBuffer.toString().replace("\r", "")).hasToString("Create a new task\n" +
@@ -79,7 +79,7 @@ class ExistenceHandlerTest {
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         String userInput = "Task\nDescription\n3\nBucket\n1.1.2020\n";
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
-        ToDoList toDoList = new ToDoList("MyList", "test.json");
+        ToDoList toDoList = new ToDoList("MyList");
         String[] args = {"gtd", "add"};
         new ExistenceHandler().handleUserCommand(toDoList, cui, args);
         assertThat(outBuffer.toString().replace("\r", "")).hasToString("Create a new task\n" +
@@ -97,7 +97,7 @@ class ExistenceHandlerTest {
     void handleUserCommandRemoveTest() {
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream("y\n0\n".getBytes(StandardCharsets.UTF_8)));
-        ToDoList toDoList = new ToDoList("MyList", "test.json");
+        ToDoList toDoList = new ToDoList("MyList");
         toDoList.add(new ToDoItem("Task 1", "Description 1", new Bucket("Bucket 1"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT));
         String[] args = {"gtd", "remove", "1"};
         new ExistenceHandler().handleUserCommand(toDoList, cui, args);

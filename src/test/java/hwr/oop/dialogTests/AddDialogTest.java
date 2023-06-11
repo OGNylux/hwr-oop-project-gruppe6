@@ -16,7 +16,7 @@ import java.nio.charset.StandardCharsets;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class AddDialogTest {
-    public static final ToDoList toDoList = new ToDoList("MyList", "test.json");
+    public static final ToDoList toDoList = new ToDoList("MyList");
     @Test
     void getTitleForAddTest(){
         try {

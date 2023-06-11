@@ -7,16 +7,11 @@ import java.util.*;
 public class ToDoList {
     private String name;
     private List<ToDoItem> items;
-    private final String fileName;
     private final HashSet<Bucket> buckets;
 
     public ToDoList(String name) {
-        this(name, null);
-    }
-    public ToDoList(String name, String fileName) {
         this.name = name;
         items = new ArrayList<>();
-        this.fileName = fileName;
         buckets = new HashSet<>();
     }
     public void setName(String name) {
@@ -46,9 +41,6 @@ public class ToDoList {
     }
     public void setItems(List<ToDoItem> items) {
         this.items = items;
-    }
-    public String getFileName() {
-        return this.fileName;
     }
 
     public static void linkToCorrectBucket(ToDoList toDoList) {

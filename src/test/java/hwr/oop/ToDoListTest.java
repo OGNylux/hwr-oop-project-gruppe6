@@ -47,13 +47,6 @@ class ToDoListTest {
     }
 
     @Test
-    void getFileNameTest() {
-        String testname = "Test";
-        ToDoList list = new ToDoList("ABC", testname);
-        assertThat(list.getFileName()).isEqualTo(testname);
-    }
-
-    @Test
     void addTest() {
         ToDoList list = new ToDoList("myList");
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", new Bucket("Uni"), Priority.HIGH, LocalDate.now(), EstimatedTime.SHORT);
@@ -67,10 +60,10 @@ class ToDoListTest {
     void getItemsTest() {
         ToDoList list = new ToDoList("myList");
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", new Bucket("Uni"), Priority.HIGH, LocalDate.now(), EstimatedTime.SHORT);
-        ArrayList<ToDoItem> itemlist = new ArrayList<>();
+        ArrayList<ToDoItem> itemList = new ArrayList<>();
         list.add(item);
-        itemlist.add(item);
-        assertThat(list.getItems()).isEqualTo(itemlist);
+        itemList.add(item);
+        assertThat(list.getItems()).isEqualTo(itemList);
     }
 
     @Test

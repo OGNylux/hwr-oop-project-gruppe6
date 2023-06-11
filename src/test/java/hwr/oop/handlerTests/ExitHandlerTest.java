@@ -21,7 +21,7 @@ class ExitHandlerTest {
     void handleUserCommandCallExit(){
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), System.in);
-        ToDoList toDoList = new ToDoList("MyList", "test.json");
+        ToDoList toDoList = new ToDoList("MyList");
         String[] args = {"gtd", "exit"};
         try {
             new ExitHandler().handleUserCommand(toDoList, cui, args);
@@ -33,7 +33,7 @@ class ExitHandlerTest {
     void handleUserCommandTooManyArgsTest(){
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), System.in);
-        ToDoList toDoList = new ToDoList("MyList", "test.json");
+        ToDoList toDoList = new ToDoList("MyList");
         String[] args = {"gtd", "exit", "Uni"};
         try {
             new ExitHandler().handleUserCommand(toDoList, cui, args);
@@ -46,7 +46,7 @@ class ExitHandlerTest {
     void handleUserCommandFailedTest() {
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), System.in);
-        ToDoList toDoList = new ToDoList("MyList", "test.json");
+        ToDoList toDoList = new ToDoList("MyList");
         String[] args = {"gtd", "ex"};
         try {
             new ExitHandler().handleUserCommand(toDoList, cui, args);
@@ -60,14 +60,14 @@ class ExitHandlerTest {
     @Test
     void exitTest() {
         try {
-            new ExitHandler().exit(new ToDoList("MyList", "test.json"), new ConsoleUserInterface(System.out, System.in));
-        } catch (ExitHandler.ExitProgrammException e) {
+            new ExitHandler().exit(new ToDoList("MyList"), new ConsoleUserInterface(System.out, System.in));
+        } catch (ExitHandler.ExitProgramException e) {
             assertThat(e.getMessage()).isEqualTo("Goodbye!");
         }
     }
     @Test
     void testExitProgramException() {
-        ExitHandler.ExitProgrammException exitProgrammException = new ExitHandler.ExitProgrammException();
-        assertThat(exitProgrammException.getMessage()).isEqualTo("Goodbye!");
+        ExitHandler.ExitProgramException exitProgramException = new ExitHandler.ExitProgramException();
+        assertThat(exitProgramException.getMessage()).isEqualTo("Goodbye!");
     }
 }
