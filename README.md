@@ -5,10 +5,10 @@ This repository contains a student project created for an ongoing lecture on obj
 
 ## Project Overview
 ### Table of Contents
-1. [Project Description](#ProjectDescription)
-2. [Features](#featurelist)
-3. [Additional Dependencies](#aditionaldependencies)
-4. [Running Locally](#runninglocally)
+1. Project Description
+2. Features
+3. Additional Dependencies
+4. Running Locally
 
 ### Project Description
 This project is a implementation of a TODO List according to the principles of Getting Things done (GTD).
@@ -19,6 +19,8 @@ The automated ranking will also take into account what activities the user has d
 ### Features
 The application allows you to prioritize the tasks you create.
 Arrange your to-dos according to their specifics and use the hierarchical order that this tool offers you. Provide your task lists with their topic in order to keep track of your tasks and check them off.
+
+**Please be aware that some of the features might not be fully implemented. As this is a student project with a deadline at which accomplishing a Programm that follows the OOD principles closely was more important**
 #### Feature List
 
 [TODO]: # (For each feature implemented, add a row to the table!)
