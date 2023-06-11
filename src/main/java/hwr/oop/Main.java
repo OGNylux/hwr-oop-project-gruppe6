@@ -10,7 +10,7 @@ import java.io.PrintStream;
 
 public class Main {
     private static final PrintStream out = new PrintStream(System.out);
-    public static void main(String[] args) throws GetCommandDialog.CouldNotreadCommandException {
+    public static void main(String[] args) throws GetCommandDialog.CouldNotReadCommandException {
         ConsoleUserInterface cui = new ConsoleUserInterface(out, System.in);
         CommandParser commandParser = new CommandParser(cui);
         PersistenceAdapter persistenceAdapter = new PersistenceAdapter();
@@ -24,7 +24,7 @@ public class Main {
             } catch (CommandParser.CouldNotCallHandlerException e) {
                 cui.print(LogMode.NONE, "Could not call handler");
             } catch (Exception e) {
-                throw new GetCommandDialog.CouldNotreadCommandException("Could not read command");
+                throw new GetCommandDialog.CouldNotReadCommandException("Could not read command");
             }
         }
     }

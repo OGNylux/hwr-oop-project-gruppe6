@@ -7,8 +7,6 @@ import hwr.oop.dialog.HandleBadIndexDialog;
 
 public class StateHandler implements HandlerCommandsInterface {
     private static final String BAD_INDEX_MESSAGE = "Please enter the index of the item you want to change the state of:";
-    public StateHandler() {
-    }
     @Override
     public int handleUserCommand(ToDoList toDoList, ConsoleUserInterface cui, String[] args) {
         if (args.length >= 2 && args.length <= 3) {

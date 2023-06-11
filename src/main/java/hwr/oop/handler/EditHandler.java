@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class EditHandler implements HandlerCommandsInterface {
-    public EditHandler() {
-    }
     @Override
     public int handleUserCommand(ToDoList toDoList, ConsoleUserInterface cui, String[] args) {
         if (args.length == 3 && (args[1].equals("edit") || args[1].equals("e"))) {

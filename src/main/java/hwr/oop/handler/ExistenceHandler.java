@@ -7,8 +7,6 @@ import hwr.oop.dialog.AddDialog;
 import hwr.oop.dialog.HandleBadIndexDialog;
 
 public class ExistenceHandler implements HandlerCommandsInterface {
-    public ExistenceHandler() {
-    }
     @Override
     public int handleUserCommand(ToDoList toDoList, ConsoleUserInterface cui, String[] args) {
         if (args.length == 2 || args.length == 3) {

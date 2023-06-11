@@ -5,8 +5,6 @@ import hwr.oop.ConsoleUserInterface.LogMode;
 import hwr.oop.ToDoList;
 
 public class SortHandler implements HandlerCommandsInterface{
-    public SortHandler() {
-    }
     @Override
     public int handleUserCommand(ToDoList toDoList, ConsoleUserInterface cui, String[] args) {
         initiateSort(cui, toDoList, args);

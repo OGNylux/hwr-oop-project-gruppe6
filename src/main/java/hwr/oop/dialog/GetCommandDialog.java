@@ -24,21 +24,21 @@ public class GetCommandDialog {
         this.reader = new BufferedReader(new InputStreamReader(cui.getInputStream()));
         this.commandParser = commandParser;
     }
-    public int start() throws CouldNotreadCommandException, CommandParser.CouldNotCallHandlerException {
+    public int start() throws CouldNotReadCommandException, CommandParser.CouldNotCallHandlerException {
         this.cui.print(LogMode.NONE,BLUE_BOLD + "Please enter a command or type 'gtd help' for more information" + RESET);
         this.cui.getOutputStream().print("> ");
         return getCommand(this.toDoList);
     }
-    public int getCommand(ToDoList toDoList) throws CommandParser.CouldNotCallHandlerException, CouldNotreadCommandException {
+    public int getCommand(ToDoList toDoList) throws CommandParser.CouldNotCallHandlerException, CouldNotReadCommandException {
         String command = readCommand();
         String[] commandArray = command.split(" ");
         return callHandler(toDoList, commandArray);
     }
-    public String readCommand() throws CouldNotreadCommandException {
+    public String readCommand() throws CouldNotReadCommandException {
         try {
             return this.reader.readLine();
         } catch (IOException e) {
-            throw new CouldNotreadCommandException("Could not read command");
+            throw new CouldNotReadCommandException("Could not read command");
         }
     }
     public int callHandler(ToDoList toDoList, String[] commandArray) throws CommandParser.CouldNotCallHandlerException {
@@ -48,8 +48,8 @@ public class GetCommandDialog {
             throw new CommandParser.CouldNotCallHandlerException();
         }
     }
-    public static class CouldNotreadCommandException extends Exception {
-        public CouldNotreadCommandException(String message) {
+    public static class CouldNotReadCommandException extends Exception {
+        public CouldNotReadCommandException(String message) {
             super(message);
         }
     }

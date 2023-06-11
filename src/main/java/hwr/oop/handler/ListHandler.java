@@ -8,8 +8,6 @@ import hwr.oop.ToDoList;
 import java.util.List;
 
 public class ListHandler implements HandlerCommandsInterface{
-    public ListHandler() {
-    }
     @Override
     public int handleUserCommand(ToDoList toDoList, ConsoleUserInterface cui, String[] args) {
         if (args.length == 2 && (args[1].equals("list") || args[1].equals("ls")) ) {
