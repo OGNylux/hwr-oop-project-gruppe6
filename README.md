@@ -3,10 +3,12 @@
 
 This repository contains a student project created for an ongoing lecture on object-oriented programming with Java at HWR Berlin (summer term 2023).
 
-## Overview
-## Table of Contents
-
-
+## Project Overview
+### Table of Contents
+1. [Project Description](#ProjectDescription)
+2. [Features](#featurelist)
+3. [Additional Dependencies](#aditionaldependencies)
+4. [Running Locally](#runninglocally)
 
 ### Project Description
 This project is a implementation of a TODO List according to the principles of Getting Things done (GTD).
@@ -17,7 +19,7 @@ The automated ranking will also take into account what activities the user has d
 ### Features
 The application allows you to prioritize the tasks you create.
 Arrange your to-dos according to their specifics and use the hierarchical order that this tool offers you. Provide your task lists with their topic in order to keep track of your tasks and check them off.
-## Feature List
+#### Feature List
 
 [TODO]: # (For each feature implemented, add a row to the table!)
 
@@ -25,12 +27,14 @@ Arrange your to-dos according to their specifics and use the hierarchical order 
 |--------|---------------------------------------------|----------------------------------------------------|
 | 1      | Save Lists to JSON                          | JsonToListTest                                     |
 | 2      | Load Lists from JSON                        | ListToJsonTest                                     |
-| 3      | Edit, Remove, Add Item, Done -> to TodoList | MainTest.java                                      |
+| 3      | Edit, Remove and Add Item -> to TodoList    | MainTest.java                                      |
 | 4      | Save Exit TodoList                          | MainTest.java                                      |
-| 5      | Sort  Todos                                 | MainTest.java, ListClassTest.java                  |
-| 6      | List Todos                                  | MainTest.java, ListClassTest.java (toString() method) |
-| 7      | State Management                            | MainTest.java                                      |
-| 8      | Management Priority Tests                   | PriorityTest.java                                  |
+| 5      | Sort  Users Todos                           | MainTest.java, ListClassTest.java                  |
+| 6      | List All Todos                              | MainTest.java, ListClassTest.java (toString() method) |
+| 7      | ToDoList State Management                   | MainTest.java                                      |
+| 8      | ToDoItem Time Estimation                    | AddDialog.java & EditDialog.java                   |
+| 9      | CRUD on Buckets                             | BucketTest.java                                  |
+| 10     | Management Priority Tests                   | PriorityTest.java                                  |
 
 ## Additional Dependencies
 
@@ -38,11 +42,7 @@ Arrange your to-dos according to their specifics and use the hierarchical order 
 
 | Number | Dependency Name | Dependency Description | Why is it necessary? |
 |--------|-----------------|------------------------|----------------------|
-| 1      | GSON | Googles Json Library for JAVA | Loading and Saving Lists |
-| 2      | /               | /                      | /                    |
-| 3      | /               | /                      | /                    |
-| 4      | /               | /                      | /                    |
-| 5      | /               | /                      | /                    |
+| 1      | GSON | Googles Json Library for JAVA | Loading and Saving Lists To JSON Format |
 
 ## Running Locally
 
@@ -53,5 +53,5 @@ cd <repo-folder>
 ```
 2. run the main
 ```
-cd src/main && java -jar main.jar
+javac Main.java && java Main
 ```
