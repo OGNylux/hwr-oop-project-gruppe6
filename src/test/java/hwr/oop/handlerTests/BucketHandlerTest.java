@@ -1,7 +1,7 @@
 package hwr.oop.handlerTests;
 
 import hwr.oop.Bucket;
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
 import hwr.oop.ToDoList;
 import hwr.oop.handler.BucketHandler;
 import hwr.oop.util.Util;

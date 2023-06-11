@@ -1,7 +1,7 @@
 package hwr.oop.handlerTests;
 
 import hwr.oop.*;
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
 import hwr.oop.handler.ListHandler;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,6 @@
 package hwr.oop.dialogTests;
 
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
 import hwr.oop.dialog.HandleBadIndexDialog;
 import hwr.oop.util.ConsoleColors;
 import org.junit.jupiter.api.Test;

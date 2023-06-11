@@ -1,6 +1,6 @@
 package hwr.oop.handler;
 
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
 import hwr.oop.ToDoList;
 
 import java.util.Arrays;

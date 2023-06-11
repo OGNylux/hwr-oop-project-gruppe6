@@ -1,4 +1,4 @@
-package hwr.oop.ConsoleUserInterface;
+package hwr.oop.consoleuserinterface;
 
 import hwr.oop.util.ConsoleColors;
 

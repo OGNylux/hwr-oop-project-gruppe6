@@ -1,7 +1,7 @@
 package hwr.oop.dialogTests;
 
 import hwr.oop.*;
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
 import hwr.oop.dialog.EditDialog;
 import org.junit.jupiter.api.Test;
 

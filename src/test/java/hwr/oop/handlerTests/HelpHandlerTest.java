@@ -1,6 +1,6 @@
 package hwr.oop.handlerTests;
 
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
 import hwr.oop.ToDoList;
 import hwr.oop.handler.HelpHandler;
 import org.junit.jupiter.api.Test;

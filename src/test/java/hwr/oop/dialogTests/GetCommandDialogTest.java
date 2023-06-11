@@ -1,10 +1,9 @@
 package hwr.oop.dialogTests;
 
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
 import hwr.oop.ToDoList;
 import hwr.oop.dialog.GetCommandDialog;
 import hwr.oop.handler.CommandParser;
-import hwr.oop.persistence.PersistenceFileNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;

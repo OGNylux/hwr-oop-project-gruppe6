@@ -1,6 +1,6 @@
 package hwr.oop.handlerTests;
 
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
 import hwr.oop.ToDoList;
 import hwr.oop.handler.CommandParser;
 import org.junit.jupiter.api.Test;
@@ -51,8 +51,6 @@ class CommandParserTest {
     @Test
     void handleCouldNotCallHandlerTest(){
         String[] args = {"", "help"};
-        ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
-        ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
         try {
             new CommandParser(null).handle(null, args);
         } catch (CommandParser.CouldNotCallHandlerException e) {
@@ -62,8 +60,6 @@ class CommandParserTest {
     @Test
     void handleCouldNotCallHandlerWrongCommandTest(){
         String[] args = {"", "wrongCommand"};
-        ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
-        ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream("".getBytes(StandardCharsets.UTF_8)));
         try {
             new CommandParser(null).handle(null, args);
         } catch (CommandParser.CouldNotCallHandlerException e) {

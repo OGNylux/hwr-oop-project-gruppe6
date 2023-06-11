@@ -1,7 +1,7 @@
 package hwr.oop.dialogTests;
 
 import hwr.oop.Bucket;
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
 import hwr.oop.EstimatedTime;
 import hwr.oop.Priority;
 import hwr.oop.ToDoList;

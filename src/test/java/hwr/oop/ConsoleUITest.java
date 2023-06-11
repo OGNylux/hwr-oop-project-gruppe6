@@ -1,7 +1,7 @@
 package hwr.oop;
 
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
-import hwr.oop.ConsoleUserInterface.LogMode;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.LogMode;
 import hwr.oop.handler.BucketHandler;
 import hwr.oop.handler.ExistenceHandler;
 import hwr.oop.handler.SortHandler;

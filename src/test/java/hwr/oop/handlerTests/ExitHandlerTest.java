@@ -1,6 +1,6 @@
 package hwr.oop.handlerTests;
 
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
 import hwr.oop.ToDoList;
 import hwr.oop.handler.ExitHandler;
 import hwr.oop.persistence.PersistenceFileNotFoundException;
@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ExitHandlerTest {
     @Test
-    void ExitHandlerTest(){
+    void exitHandlerTest(){
         ExitHandler exitHandler = new ExitHandler();
         assertThat(exitHandler).isNotNull();
     }

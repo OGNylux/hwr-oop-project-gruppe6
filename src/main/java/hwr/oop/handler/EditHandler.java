@@ -1,8 +1,8 @@
 package hwr.oop.handler;
 
 import hwr.oop.*;
-import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
-import hwr.oop.ConsoleUserInterface.LogMode;
+import hwr.oop.consoleuserinterface.ConsoleUserInterface;
+import hwr.oop.consoleuserinterface.LogMode;
 import hwr.oop.dialog.EditDialog;
 import hwr.oop.dialog.HandleBadIndexDialog;
 
