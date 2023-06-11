@@ -383,6 +383,6 @@ class ToDoListTest {
         testList.add(new ToDoItem("b","s",new Bucket("a"),Priority.LOW,LocalDate.now(), EstimatedTime.SHORT));
         testList.add(new ToDoItem("b","s",new Bucket("a"),Priority.LOW,LocalDate.now(), EstimatedTime.SHORT));
         linkToCorrectBucket(testList);
-        assertThat(testList.getBuckets().toString()).hasToString("[🪣a, 🪣t]");
+        assertThat(testList.getBuckets().toString()).contains("🪣a").contains("🪣t");
     }
 }

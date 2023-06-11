@@ -44,7 +44,7 @@ class EditHandlerTest {
         String expected = "Editing task at index 0:\n" +
                 "⏭️ Title\n" +
                 "Description\n" +
-                "<\u001B[1;36mBucket\u001B[0m> \u001B[1;33mMEDIUM\u001B[0m 2020-01-01\n" +
+                "<\u001B[1;36mBucket\u001B[0m> \u001B[1;33mMEDIUM\u001B[0m 2020-01-01 SHORT\n" +
                 "Enter new Title or press enter to skip\n" +
                 "Enter new Description or press enter to skip\n" +
                 "Enter new Priority or press enter to skip\n" +
@@ -104,7 +104,7 @@ class EditHandlerTest {
                 "Editing task at index 0:\n" +
                 "⏭️ Title\n" +
                 "Description\n" +
-                "<\u001B[1;36mBucket\u001B[0m> \u001B[1;33mMEDIUM\u001B[0m 2023-01-01\n" +
+                "<\u001B[1;36mBucket\u001B[0m> \u001B[1;33mMEDIUM\u001B[0m 2023-01-01 SHORT\n" +
                 "Enter new Title or press enter to skip\n";
             String actual = outBuffer.toString().replace("\r", "");
             assertThat(actual).contains(expected);
