@@ -136,7 +136,8 @@ class ToDoItemTest {
         assertThat(result).isEqualTo(state + " " + item.getTitle() + '\n' +
                 item.getDescription() +  '\n' +
                 "<" +"[1;36mUni[0m" + ">" + ' ' +
-                priority + ' ' + item.getDueDate());
+                priority + ' ' + item.getDueDate() + ' ' +
+                item.getEstimatedTime());
     }
     @Test
     void getCreatedAtTest() {
@@ -207,14 +208,14 @@ class ToDoItemTest {
     void getEstimatedTimeStringTest() {
         ToDoItem item = new ToDoItem("Finish Math homework", "I need to do tasks 5 - 10b. Look up on pages 36 and 42 in Analysis I. ", new Bucket("Uni"), Priority.LOW, LocalDate.now(), EstimatedTime.SHORT);
         String result = item.getEstimatedTime().toString();
-        assertThat(result).isEqualTo("[1;34mSHORT[0m");
+        assertThat(result).isEqualTo("SHORT");
     }
 
     @Test
     void getEstimatedTimeStringHIGHTest() {
         ToDoItem item = new ToDoItem("t","t",new Bucket("t"),Priority.HIGH,LocalDate.now(), EstimatedTime.SHORT);
         String result = item.getEstimatedTime().toString();
-        assertThat(result).isEqualTo(RED_BOLD + "SHORT" + RESET);
+        assertThat(result).isEqualTo("SHORT");
     }
 
     @Test

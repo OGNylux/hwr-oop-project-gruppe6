@@ -10,7 +10,6 @@ import static hwr.oop.util.ConsoleColors.*;
 public class ToDoItem {
     private String title;
     private String description;
-
     private Bucket bucket;
     private Priority priority;
     @JsonAdapter(LocalDateTypeAdapter.class)
@@ -19,6 +18,7 @@ public class ToDoItem {
     @JsonAdapter(LocalDateTypeAdapter.class)
     private LocalDate dueDate;
     private EstimatedTime estimatedTime;
+
     public ToDoItem (String title, String description, Bucket bucket, Priority priority, LocalDate dueDate, EstimatedTime estimatedTime) {
         this.title = title;
         this.description = description;
@@ -85,7 +85,8 @@ public class ToDoItem {
         return  state.getStateEmoji() + ' ' + title + '\n' +
                 description + '\n' +
                 "<" +  CYAN_BOLD + bucket.getBucketName() + RESET + ">" +
-                ' ' + priority.toString() + ' ' + dueDate;
+                ' ' + priority.toString() + ' ' + dueDate + ' ' +
+                estimatedTime;
     }
 
     public void promote() {

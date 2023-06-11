@@ -58,6 +58,25 @@ class ExistenceHandlerTest {
     @Test
     void handleUserCommandAddTest() {
         ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
+        String userInput = "Task\nDescription\n3\nBucket\n1.1.2020\n4\n";
+        ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
+        ToDoList toDoList = new ToDoList("MyList", "test.json");
+        String[] args = {"gtd", "add"};
+        new ExistenceHandler().handleUserCommand(toDoList, cui, args);
+        assertThat(outBuffer.toString().replace("\r", "")).hasToString("Create a new task\n" +
+                "Please enter a title for your task\n" +
+                "Please enter a description for your task\n" +
+                "Please select a priority for your task\n" +
+                "1 - LOW, 2 - MEDIUM, 3 - HIGH\n" +
+                "Add a Bucket to group your tasks\n" +
+                "Please enter a due date for your task\n" +
+                "Please select an estimated time for your task\n" +
+                "1 - taskTime<5min, 2 - 5min<taskTime<30min, 3 - 30min<taskTime<1hr, 4 - taskTime>1hr\n" +
+                "\u001B[1;32mTask Created Successfully!\uD83C\uDF89\u001B[0m\n");
+    }
+    @Test
+    void handleUserCommandCouldNotAddExceptionTest(){
+        ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
         String userInput = "Task\nDescription\n3\nBucket\n1.1.2020\n";
         ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
         ToDoList toDoList = new ToDoList("MyList", "test.json");
@@ -70,23 +89,8 @@ class ExistenceHandlerTest {
                 "1 - LOW, 2 - MEDIUM, 3 - HIGH\n" +
                 "Add a Bucket to group your tasks\n" +
                 "Please enter a due date for your task\n" +
-                "\u001B[1;32mTask Created Successfully!\uD83C\uDF89\u001B[0m\n");
-    }
-    @Test
-    void handleUserCommandCouldNotAddExceptionTest(){
-        ByteArrayOutputStream outBuffer = new ByteArrayOutputStream();
-        String userInput = "Task\nDescription\n3\nBucket\n";
-        ConsoleUserInterface cui = new ConsoleUserInterface(new PrintStream(outBuffer), new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
-        ToDoList toDoList = new ToDoList("MyList", "test.json");
-        String[] args = {"gtd", "add"};
-        new ExistenceHandler().handleUserCommand(toDoList, cui, args);
-        assertThat(outBuffer.toString().replace("\r", "")).hasToString("Create a new task\n" +
-                "Please enter a title for your task\n" +
-                "Please enter a description for your task\n" +
-                "Please select a priority for your task\n" +
-                "1 - LOW, 2 - MEDIUM, 3 - HIGH\n" +
-                "Add a Bucket to group your tasks\n" +
-                "Please enter a due date for your task\n" +
+                "Please select an estimated time for your task\n" +
+                "1 - taskTime<5min, 2 - 5min<taskTime<30min, 3 - 30min<taskTime<1hr, 4 - taskTime>1hr\n" +
                 "\u001B[1;33mType gtd help to get help on commands.\u001B[0m\n");
     }
     @Test

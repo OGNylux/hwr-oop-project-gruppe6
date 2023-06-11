@@ -153,7 +153,7 @@ public class EditDialogTest {
         ConsoleUserInterface testConsole = new ConsoleUserInterface(new PrintStream(outBuffer),
                 new ByteArrayInputStream(userInput.getBytes(StandardCharsets.UTF_8)));
         ToDoItem newItem = new EditDialog(testConsole, toDoList).start(toDoItem, 0);
-        assertThat(newItem).hasToString(new ToDoItem("MyItem", "Desc", new Bucket("MyBucket"), Priority.LOW, LocalDate.of(2020,1,1), EstimatedTime.SHORT).toString());
+        assertThat(newItem).hasToString(new ToDoItem("MyItem", "Desc", new Bucket("MyBucket"), Priority.LOW, LocalDate.of(2020,1,1), EstimatedTime.MEDIUM).toString());
 
     }
     @Test
