@@ -14,7 +14,7 @@ class MainTest {
         System.setOut(new java.io.PrintStream(outBuffer));
         try {
             Main.main(new String[0]);
-        } catch (GetCommandDialog.CouldNotreadCommandException e) {
+        } catch (GetCommandDialog.CouldNotReadCommandException e) {
             assertThat(e.getMessage()).isEqualTo("Could not read command");
         }
         assertThat(outBuffer.toString().replace("\r", "")).hasToString("\u001B[1;34mPlease enter a command or type 'gtd help' for more information\u001B[0m\n" +

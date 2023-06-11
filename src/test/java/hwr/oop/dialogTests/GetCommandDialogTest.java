@@ -4,12 +4,14 @@ import hwr.oop.ConsoleUserInterface.ConsoleUserInterface;
 import hwr.oop.ToDoList;
 import hwr.oop.dialog.GetCommandDialog;
 import hwr.oop.handler.CommandParser;
+import hwr.oop.persistence.PersistenceFileNotFoundException;
 import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GetCommandDialogTest {
@@ -57,7 +59,8 @@ class GetCommandDialogTest {
     }
     @Test
     void testCouldNotReadCommandException() {
-        GetCommandDialog.CouldNotreadCommandException couldNotreadCommandException = new GetCommandDialog.CouldNotreadCommandException("test");
-        assertEquals("test", couldNotreadCommandException.getMessage());
+        GetCommandDialog.CouldNotReadCommandException couldNotReadCommandException = new GetCommandDialog.CouldNotReadCommandException("test");
+        assertThat(couldNotReadCommandException.getMessage()).isEqualTo("test");
+        assertThat(couldNotReadCommandException).isInstanceOf(Exception.class).isInstanceOf(GetCommandDialog.CouldNotReadCommandException.class);
     }
 }

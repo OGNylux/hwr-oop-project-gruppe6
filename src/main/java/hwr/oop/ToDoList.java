@@ -76,7 +76,7 @@ public class ToDoList {
             index++;
         }
     }
-    public void renameBucket (int index, String newBucket) {
+    public void renameBucket(int index, String newBucket) {
         try {
             String help = Objects.requireNonNull(Util.getElementAtIndex(this.buckets, index)).getBucketName();
             for (Bucket Bucket : this.buckets) {

@@ -9,8 +9,6 @@ import hwr.oop.dialog.HandleBadIndexDialog;
 import java.util.Set;
 
 public class BucketHandler implements HandlerCommandsInterface {
-    public BucketHandler() {
-    }
     @Override
     public int handleUserCommand(ToDoList toDoList, ConsoleUserInterface cui, String[] args) {
         if (args.length >= 2) {
